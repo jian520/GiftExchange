@@ -4,14 +4,16 @@ import { Container, Button, H3, Text } from "native-base";
 
 import styles from "./styles";
 
-const launchscreenBg = require("../../../assets/launchscreen-bg.png");
-const launchscreenLogo = require("../../../assets/logo-kitchen-sink.png");
+// const launchscreenBg = require("../../../assets/launchscreen-bg.png");
+// const launchscreenLogo = require("../../../assets/logo-kitchen-sink.png");
 
-class Home extends Component {
+export default class Home extends Component {
   render() {
     return (
       <Container>
         <StatusBar barStyle="light-content" />
+
+          /**
         <ImageBackground source={launchscreenBg} style={styles.imageContainer}>
           <View style={styles.logoContainer}>
             <ImageBackground source={launchscreenLogo} style={styles.logo} />
@@ -36,10 +38,10 @@ class Home extends Component {
               <Text>Lets Go!</Text>
             </Button>
           </View>
-        </ImageBackground>
+        </ImageBackground>*/
       </Container>
     );
   }
 }
 
-export default Home;
+
