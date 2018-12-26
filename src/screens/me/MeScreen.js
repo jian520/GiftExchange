@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-// import { Text, StyleSheet, View } from 'react-native'
+  import { DeviceEventEmitter } from 'react-native'
 
 
 import {
@@ -16,6 +16,7 @@ import {
 } from "native-base";
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import styles from "./styles";
+import {NavigationActions, StackActions} from "react-navigation";
 
 export default class MeScreen extends Component {
     // static navigationOptions = {
@@ -32,9 +33,19 @@ export default class MeScreen extends Component {
     //
     //
     // }
+    logout() {
 
+        DeviceEventEmitter.emit('jian', 'ok' );
+       // this.props.navigation.reset([NavigationActions.navigate({ routeName: 'Login' })], 0);
+
+
+    }
 
     render() {
+
+        const { navigation } = this.props;
+
+
         return (
             <Container style={styles.container}>
                 <Header>
@@ -48,7 +59,9 @@ export default class MeScreen extends Component {
 
                 <Content padder>
 
-                        <Text>Me controller</Text>
+                    <Button onPress={() =>    this.logout()  }>
+                        <Text>logout</Text>
+                    </Button>
 
                 </Content>
             </Container>
