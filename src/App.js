@@ -2,7 +2,12 @@ import React, {PureComponent, PropTypes} from 'react';
 import {StatusBar, DeviceEventEmitter} from 'react-native';
 
 import {Root} from "native-base";
-import {createStackNavigator, createBottomTabNavigator, createAppContainer} from 'react-navigation'
+import {
+    createStackNavigator,
+    createSwitchNavigator,
+    createBottomTabNavigator,
+    createAppContainer
+} from 'react-navigation'
 
 
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -11,59 +16,12 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import StartScreen from "./screens/start/";
 
 
-
 import HomeScreen from "./screens/home/HomeScreen";
 import TestScreen from "./screens/home/TestScreen";
 
 import MeScreen from './screens/me/MeScreen'
 
-
-
-
-
-
-
-
-// create a component
-export class MainRoot extends PureComponent {
-    constructor() {
-        super()
-
-        StatusBar.setBarStyle('light-content')
-    }
-
-    componentDidMount() {
-        //    SplashScreen.hide()
-
-    }
-
-    render() {
-        return (
-            <Main/>
-        );
-    }
-}
-
-
-
-
-
-export class StartRoot extends PureComponent {
-
-
-    render() {
-
-
-
-        return (
-            <Start/>
-        );
-    }
-}
-
-
-
-
+ 
 
 const HomeTab = createStackNavigator({
         Home: {
@@ -95,7 +53,6 @@ const MeTab = createStackNavigator({
 
     }
 );
-
 
 
 const Tabs = createBottomTabNavigator(
@@ -138,7 +95,7 @@ const Tabs = createBottomTabNavigator(
     }
 );
 
-const MainNavigator = createStackNavigator({
+const AppStack = createStackNavigator({
         Tabs: {
             screen: Tabs,
         },
@@ -155,11 +112,9 @@ const MainNavigator = createStackNavigator({
 );
 
 
-
-
-const StartNavigator = createStackNavigator({
+const StartStack = createStackNavigator({
         Start: {screen: StartScreen},
-        Main: {screen:  MainRoot},
+        App: {screen: AppStack},
     },
     {
         initialRouteName: "Start",
@@ -171,16 +126,29 @@ const StartNavigator = createStackNavigator({
     }
 );
 
-const Main = createAppContainer(MainNavigator)
-const Start = createAppContainer(StartNavigator)
+
+const AppContainer = createAppContainer(createSwitchNavigator(
+    {
+
+        App: AppStack,
+        Start: StartStack,
+    },
+    {
+        initialRouteName: 'App',
+    }
+));
+const StartContainer = createAppContainer(createSwitchNavigator(
+    {
+        Start: StartStack,
+        App: AppStack,
+
+    },
+    {
+        initialRouteName: 'Start',
+    }
+));
 
 
-
-
-
-
-//
-// export default App
 
 
 class StartAndTabRoot extends PureComponent {
@@ -211,6 +179,7 @@ class StartAndTabRoot extends PureComponent {
         //     });
 
     }
+
     componentWillUnmount() {
         // 移除
         this.subscription.remove();
@@ -232,22 +201,17 @@ class StartAndTabRoot extends PureComponent {
 
     render() {
 
-        if(this.state.isLogin) {
+        if (this.state.isLogin) {
             return (
-                <MainRoot />
+                <AppContainer/>
             );
         }
 
         return (
-            <StartRoot />
+            <StartContainer/>
         );
     }
 }
-
-
-
-
-
 
 
 export default () =>
