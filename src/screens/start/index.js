@@ -46,8 +46,9 @@ export default class Start extends Component {
 
   render() {
     return (
-        <Container style={styles.container}>
-            <Header>
+
+        <Container style={[styles.container]}>
+            <Header >
                 <Left />
 
                 <Body>
@@ -58,6 +59,8 @@ export default class Start extends Component {
 
 
             <Content padder>
+                <Text>GifExchang</Text>
+                <Text>让你轻松找到新朋友</Text>
                 <Button onPress={() =>  this.start()   }>
                     <Text>push</Text>
                 </Button>

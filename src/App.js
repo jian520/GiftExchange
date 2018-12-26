@@ -163,8 +163,10 @@ const StartNavigator = createStackNavigator({
     },
     {
         initialRouteName: "Start",
-        headerMode: "none"
-
+        headerMode: "none",
+        navigationOptions:{
+            header:null
+        },
 
     }
 );
