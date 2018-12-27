@@ -14,14 +14,13 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 
 
 import StartScreen from "./screens/start/";
-
+import LoginScreen from "./screens/login/LoginScreen"
 
 import HomeScreen from "./screens/home/HomeScreen";
 import TestScreen from "./screens/home/TestScreen";
 
 import MeScreen from './screens/me/MeScreen'
 
- 
 
 const HomeTab = createStackNavigator({
         Home: {
@@ -37,6 +36,7 @@ const HomeTab = createStackNavigator({
 
     }
 );
+
 
 
 const MeTab = createStackNavigator({
@@ -95,6 +95,7 @@ const Tabs = createBottomTabNavigator(
     }
 );
 
+
 const AppStack = createStackNavigator({
         Tabs: {
             screen: Tabs,
@@ -131,7 +132,7 @@ const AppContainer = createAppContainer(createSwitchNavigator(
     {
 
         App: AppStack,
-        Start: StartStack,
+         Start: StartStack,
     },
     {
         initialRouteName: 'App',
@@ -147,8 +148,6 @@ const StartContainer = createAppContainer(createSwitchNavigator(
         initialRouteName: 'Start',
     }
 ));
-
-
 
 
 class StartAndTabRoot extends PureComponent {
@@ -178,11 +177,39 @@ class StartAndTabRoot extends PureComponent {
         //         }
         //     });
 
+
+
+
+        DeviceEventEmitter.addListener('jian', (value)=>{
+            //这里面是要调用的方法，比如：刷新
+            //value:是下面页面在 通知 时 ，所传递过来的参数
+
+
+            console.log(value)
+
+            this.setState({
+                isLogin: false,
+            });
+            this.setState({  isLogin: false },()=>{
+                this.forceUpdate();
+            });
+
+
+
+
+        });
+
+
     }
+
+
 
     componentWillUnmount() {
         // 移除
-        this.subscription.remove();
+
+
+        DeviceEventEmitter.remove();
+
     }
 
     componentWillMount() {

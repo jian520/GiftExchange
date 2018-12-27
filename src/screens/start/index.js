@@ -49,9 +49,9 @@ export default class Start extends Component {
         // this.props.navigation.dispatch(resetAction)
         //
 
-   //   this.props.navigation.reset([NavigationActions.navigate({ routeName: 'App' })], 0);
-
-       this.props.navigation.replace('App')
+      this.props.navigation.reset([NavigationActions.navigate({ routeName: 'App' })], 0);
+       //
+       // this.props.navigation.replace('App')
        // this.props.navigation.navigate('App');
     }
 
