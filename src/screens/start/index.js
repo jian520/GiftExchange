@@ -25,6 +25,7 @@ import StartHeader from "./StartHeader";
 import {px2sp} from "../../commonComponents/CommonUtil";
 import JumpButton from "./JumpButton";
 import Color from "../../commonComponents/Color";
+import PushButton from "../../commonComponents/PushButton";
 
 
 
@@ -77,16 +78,10 @@ export default class Start extends Component {
                   <StartContentView titleA='Step 1:挑选一份礼物代表你的心意'  placeholder={'请输入想说的'} value={this.keyWord}
                                     onChangeText={(text) => this.keyWord = text} />
 
-
-
-                <View style={{marginTop:50 }}>
-                    <Button  style={{alignSelf:"center",backgroundColor:Color.carColor,height:60,borderRadius:30,width:60}} onPress={() =>  this.start()   }>
-                        <Text style={{alignSelf:'center'}}> > </Text>
-                    </Button>
-                </View>
+                    <PushButton onClick={() =>this.props.navigation.push("StartA") }/>
 
             </Content>
-            <JumpButton btnTitle='跳转'/>
+            <JumpButton btnTitle='跳转' onClick={this.start.bind(this)}/>
         </Container>
     );
   }

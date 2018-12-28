@@ -4,7 +4,7 @@ import React, {PureComponent} from 'react';
 import {
     StyleSheet,
     Text,
-
+    TouchableOpacity,
 } from 'react-native';
 import PropTypes from 'prop-types'
 import Column from "../../commonComponents/Column";
@@ -22,8 +22,11 @@ export default class JumpButton extends PureComponent {
 
     static propTypes = {
         btnTitle:PropTypes.string,
-
+        onClick:PropTypes.func //接收数据
     };
+
+
+
     render() {
 
         const style ={
@@ -42,10 +45,15 @@ export default class JumpButton extends PureComponent {
         };
 
 
+
+
         return (
-            <Column style={StyleSheet.flatten([style,this.props.style])}>
-                <Text style={textStyle}>{this.props.btnTitle}</Text>
-            </Column>
+            <TouchableOpacity onPress={this.props.onClick}>
+                <Column style={StyleSheet.flatten([style,this.props.style])} >
+                    <Text style={textStyle}>{this.props.btnTitle}</Text>
+                </Column>
+            </TouchableOpacity>
+
         );
     }
 }

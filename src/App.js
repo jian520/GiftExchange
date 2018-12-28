@@ -18,7 +18,10 @@ import LoginScreen from "./screens/login/LoginScreen"
 
 import HomeScreen from "./screens/home/HomeScreen";
 import TestScreen from "./screens/home/TestScreen";
-
+import StartA from "./screens/start/StartA";
+import StartB from "./screens/start/StartB";
+import StartC from "./screens/start/StartC";
+import StartD from "./screens/start/StartD";
 import MeScreen from './screens/me/MeScreen'
 
 
@@ -103,7 +106,10 @@ const AppStack = createStackNavigator({
 
         Test: {screen: TestScreen},
         Profile: {screen: MeScreen},
-
+        StartA: {screen: StartA},
+        StartB:{screen:StartB},
+        StartC:{screen:StartC},
+        StartD:{screen:StartD}
     },
     {
 
@@ -115,6 +121,7 @@ const AppStack = createStackNavigator({
 
 const StartStack = createStackNavigator({
         Start: {screen: StartScreen},
+
         App: {screen: AppStack},
     },
     {

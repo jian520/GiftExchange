@@ -50,7 +50,7 @@ export default class StartContentView extends PureComponent {
         secureTextEntry: false,
         keyboardType: 'default',
         placeholder: null,
-        placeholderTextColor: Color.gray3,
+        placeholderTextColor: Color.white,
         value: null,
         numberOfLines: 1
     };
