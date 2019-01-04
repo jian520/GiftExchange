@@ -9,7 +9,7 @@ import {
 import PropTypes from 'prop-types'
 import Column from "../../commonComponents/Column";
 
-import {px2sp,marginTB} from "../../commonComponents/CommonUtil";
+import {px2sp, marginTB, isIphoneX} from "../../commonComponents/CommonUtil";
 import Color from "../../commonComponents/Color";
 
 /**
@@ -27,7 +27,7 @@ export default class StartHeader extends PureComponent {
     render() {
 
         const style ={
-            marginTop:px2sp(180),
+            marginTop:isIphoneX() ? 88+30 : 64 + 30,
             alignItems: "center",
 
         };
