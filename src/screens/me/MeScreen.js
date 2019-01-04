@@ -35,9 +35,9 @@ export default class MeScreen extends Component {
     // }
     logout() {
 
-        DeviceEventEmitter.emit('jian', 'ok' );
+     //   DeviceEventEmitter.emit('jian', 'ok' );
        // this.props.navigation.reset([NavigationActions.navigate({ routeName: 'Login' })], 0);
-
+        this.props.navigation.push('Setting')
 
     }
 
