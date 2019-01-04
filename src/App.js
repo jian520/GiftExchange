@@ -15,9 +15,10 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import StartScreen from "./screens/start/";
 import LoginScreen from "./screens/login/LoginScreen"
+import RegScreen from "./screens/reg/regSetpA"
 
 import HomeScreen from "./screens/home/HomeScreen";
-import TestScreen from "./screens/home/TestScreen";
+
 import StartA from "./screens/start/StartA";
 import StartB from "./screens/start/StartB";
 import StartC from "./screens/start/StartC";
@@ -129,6 +130,7 @@ const StartStack = createStackNavigator({
         StartD: {screen: StartD},
         WelcomeHome: {screen: WelcomeHome},
         Login: {screen: LoginScreen},
+        Reg: {screen: RegScreen},
 
         App: {screen: AppStack},
     },

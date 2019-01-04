@@ -36,7 +36,12 @@ export default class WelcomeHome extends Component {
 
 
     }
+    doReg() {
 
+        this.props.navigation.push("Reg")
+
+
+    }
 
 
     render() {
@@ -65,7 +70,7 @@ export default class WelcomeHome extends Component {
 
                 <Column style={{alignItems: 'center',
                     justifyContent: 'center', ...marginTB(200,20)}}>
-                <Button
+                <Button  onPress={() => this.doReg()}
                         style={{
                             width:150,
                             ...marginTB(10,15),
