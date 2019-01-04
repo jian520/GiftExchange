@@ -75,7 +75,7 @@ export default class Setting extends Component {
         // })
         // this.props.navigation.dispatch(resetAction)
 
-        this.props.navigation.reset([NavigationActions.navigate({routeName: 'Login'})], 0);
+        this.props.navigation.reset([NavigationActions.navigate({routeName: 'WelcomeHome'})], 0);
 
 
 

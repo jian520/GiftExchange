@@ -23,11 +23,10 @@ import StartB from "./screens/start/StartB";
 import StartC from "./screens/start/StartC";
 import StartD from "./screens/start/StartD";
 
-import WelcomeHome from  './screens/start/WelcomeHome';
+import WelcomeHome from './screens/start/WelcomeHome';
 
 import MeScreen from './screens/me/MeScreen'
 import SettingScreen from './screens/setting'
-
 
 
 const HomeTab = createStackNavigator({
@@ -109,7 +108,7 @@ const AppStack = createStackNavigator({
         },
 
 
-    Login: {screen: LoginScreen},
+        WelcomeHome: {screen: WelcomeHome},
         Setting: {screen: SettingScreen},
         Profile: {screen: MeScreen},
 
@@ -128,7 +127,9 @@ const StartStack = createStackNavigator({
         StartB: {screen: StartB},
         StartC: {screen: StartC},
         StartD: {screen: StartD},
-       WelcomeHome:{screen:WelcomeHome},
+        WelcomeHome: {screen: WelcomeHome},
+        Login: {screen: LoginScreen},
+
         App: {screen: AppStack},
     },
     {

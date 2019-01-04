@@ -97,6 +97,12 @@ export default class LoginScreen extends Component {
     }
 
     doLogin() {
+
+        this.props.navigation.reset([NavigationActions.navigate({routeName: 'App'})], 0);
+
+        return ;
+
+
         Keyboard.dismiss()
         console.log('doLogin')
 

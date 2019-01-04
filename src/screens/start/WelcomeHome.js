@@ -1,4 +1,4 @@
-import React, {PureComponent} from "react";
+import React, {Component} from "react";
 import {
     Image,
 
@@ -17,11 +17,12 @@ import BaseImg from "../../commonComponents/BaseImg";
 import Row from "../../commonComponents/Row";
 import Color from "../../commonComponents/Color";
 import Column from "../../commonComponents/Column";
+import JumpButton from "./StartD";
 
 
 
 
-export default class WelcomeHome extends PureComponent {
+export default class WelcomeHome extends Component {
 // 构造
     constructor(props) {
         super(props);
@@ -29,6 +30,12 @@ export default class WelcomeHome extends PureComponent {
 
     }
 
+    doLogin() {
+
+        this.props.navigation.push("Login")
+
+
+    }
 
 
 
@@ -68,13 +75,14 @@ export default class WelcomeHome extends PureComponent {
                            }}>
                     <Text style={{color:Color.red,...paddingTB(5,5),marginLeft: 30}}>註冊用戶</Text>
                 </Button>
-                <Button  style={{
+                <Button  onPress={() => this.doLogin()}
+                        style={{
                             width:150,
                             backgroundColor:Color.white,
                             alignSelf:"center",
                             height:35,
                       ...marginTB(15,15),
-                        }}>
+                        }}     >
                     <Text style={{color:Color.red,...paddingTB(5,5),marginLeft:50}}>登入</Text>
                 </Button>
                 </Column>

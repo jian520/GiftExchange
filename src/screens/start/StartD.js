@@ -52,7 +52,8 @@ export default class StartD extends Component {
                     </H3>
 
                 </Content>
-                <JumpButton btnTitle='繼續' onClick={this.start.bind(this)} style={{position: 'absolute',
+                <JumpButton btnTitle='繼續' onClick={this.start.bind(this)}
+                            style={{position: 'absolute',
                     bottom: isIphoneX() ? 49:15,
                     backgroundColor: Color.carColor,
                     width: 100,
