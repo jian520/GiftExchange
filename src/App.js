@@ -41,7 +41,6 @@ const HomeTab = createStackNavigator({
 );
 
 
-
 const MeTab = createStackNavigator({
         Me: {
             screen: MeScreen,
@@ -106,10 +105,7 @@ const AppStack = createStackNavigator({
 
         Test: {screen: TestScreen},
         Profile: {screen: MeScreen},
-        StartA: {screen: StartA},
-        StartB:{screen:StartB},
-        StartC:{screen:StartC},
-        StartD:{screen:StartD}
+
     },
     {
 
@@ -121,14 +117,17 @@ const AppStack = createStackNavigator({
 
 const StartStack = createStackNavigator({
         Start: {screen: StartScreen},
-
+        StartA: {screen: StartA},
+        StartB: {screen: StartB},
+        StartC: {screen: StartC},
+        StartD: {screen: StartD},
         App: {screen: AppStack},
     },
     {
         initialRouteName: "Start",
         headerMode: "none",
-        navigationOptions:{
-            header:null
+        navigationOptions: {
+            header: null
         },
 
     }
@@ -139,7 +138,7 @@ const AppContainer = createAppContainer(createSwitchNavigator(
     {
 
         App: AppStack,
-         Start: StartStack,
+        Start: StartStack,
     },
     {
         initialRouteName: 'App',
@@ -185,9 +184,7 @@ class StartAndTabRoot extends PureComponent {
         //     });
 
 
-
-
-        DeviceEventEmitter.addListener('jian', (value)=>{
+        DeviceEventEmitter.addListener('jian', (value) => {
             //这里面是要调用的方法，比如：刷新
             //value:是下面页面在 通知 时 ，所传递过来的参数
 
@@ -197,18 +194,15 @@ class StartAndTabRoot extends PureComponent {
             this.setState({
                 isLogin: false,
             });
-            this.setState({  isLogin: false },()=>{
+            this.setState({isLogin: false}, () => {
                 this.forceUpdate();
             });
-
-
 
 
         });
 
 
     }
-
 
 
     componentWillUnmount() {

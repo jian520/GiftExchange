@@ -1,5 +1,3 @@
-
-
 import React, {PureComponent} from 'react';
 import {
     StyleSheet,
@@ -22,7 +20,7 @@ import Divider from "../../commonComponents/Divider";
 
 export default class StartContentView extends PureComponent {
 
-    static propTypes= {
+    static propTypes = {
         ...TextInput.propTypes,
         id: PropTypes.func,
         label: PropTypes.string,
@@ -41,7 +39,7 @@ export default class StartContentView extends PureComponent {
         onEndEditing: PropTypes.func,
         onChangeText: PropTypes.func, //接收数据
         numberOfLines: PropTypes.number,
-        titleA:PropTypes.string,
+        titleA: PropTypes.string,
     }
 
     static defaultProps = {
@@ -60,50 +58,48 @@ export default class StartContentView extends PureComponent {
         super(props);
         // 初始状态
         this.state = {
-            text:this.props.value
+            text: this.props.value
         };
     }
 
-    _onChang = (text) =>{
+    _onChang = (text) => {
         this.setState({text});
         this.props.onChangeText(text)
     }
 
 
-
-
     render() {
 
-        const style ={
-            flex: 0 ,
+        const style = {
+            flex: 0,
             marginTop: 50,
             backgroundColor: Color.carColor,
-            borderRadius:px2sp(20)
+            borderRadius: px2sp(20)
 
         };
-        const titleStyle ={
-            color:Color.white,
-            fontSize:px2sp(35),
-            textAlign:'center',
-            ...marginTB(5,5),
+        const titleStyle = {
+            color: Color.white,
+            fontSize: px2sp(35),
+            textAlign: 'center',
+            ...marginTB(5, 5),
         };
-        const inputStyle ={
+        const inputStyle = {
 
             fontSize: px2sp(28),
-            color:Color.black,
-            height:150,
-            padding:15,
+            color: Color.black,
+            height: 150,
+            padding: 15,
 
 
         };
 
         return (
             <Card style={style}>
-                <View style={{ padding: 15}}>
+                <View style={{padding: 15}}>
                     <H3 style={titleStyle}>{this.props.titleA}</H3>
                 </View>
 
-                <Divider style={{height:px2dp(1),backgroundColor:Color.background}}/>
+                <Divider style={{height: px2dp(1), backgroundColor: Color.background}}/>
                 <View style={{marginTop: 15}}>
                     <TextInput
                         ref={this.props.id}

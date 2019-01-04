@@ -2,11 +2,7 @@
 
 import React, {PureComponent} from 'react';
 import {
-    StyleSheet,
-    Text,
-    TouchableOpacity,
-    View,
-    Image
+       Image
 } from 'react-native';
 import PropTypes from 'prop-types'
 
@@ -14,6 +10,7 @@ import Color from "./Color";
 import {Button, Content} from "native-base";
 import Column from "./Column";
 import {wh} from "./CommonUtil";
+import BaseImg from "./BaseImg";
 
 
 
@@ -31,7 +28,13 @@ export default class PushButton extends PureComponent {
          return (
                  <Column style={{marginTop:50 }}>
                     <Button  style={{alignSelf:"center",backgroundColor:Color.carColor,height:60,borderRadius:30,width:60}} onPress={this.props.onClick}>
-                        {/*<Image source={require('Images/icon_arrow_right_white.png')} style={{...wh(20)}}/>*/}
+                        <Image style={{
+                            ...wh(30, 30),
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            marginLeft: 22,
+                          }}
+                          source={BaseImg.StartImg.arrowRight}/>
 
                     </Button>
                 </Column>

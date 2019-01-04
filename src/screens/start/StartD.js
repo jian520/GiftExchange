@@ -1,15 +1,12 @@
-import React, { Component } from "react";
-import { View } from "react-native";
+import React, {Component} from "react";
+import {View} from "react-native";
 import {
     Container,
 
     Content,
-    Button,
-
-    Text,
+     H3,
 
 } from "native-base";
-
 
 
 import styles from "./styles";
@@ -19,9 +16,8 @@ import StartHeader from "./StartHeader";
 
 import JumpButton from "./JumpButton";
 import Color from "../../commonComponents/Color";
-
-
-
+import {isIphoneX, screenW} from "../../commonComponents/CommonUtil";
+import {StackActions, NavigationActions} from 'react-navigation';
 
 export default class StartD extends Component {
 // 构造
@@ -29,13 +25,13 @@ export default class StartD extends Component {
         super(props);
         // 初始状态
 
-        this.keyWord='';
+        this.keyWord = '';
     }
 
     start() {
 
 
-        this.props.navigation.reset([NavigationActions.navigate({ routeName: 'App' })], 0);
+        this.props.navigation.reset([NavigationActions.navigate({routeName: 'App'})], 0);
 
     }
 
@@ -45,15 +41,24 @@ export default class StartD extends Component {
 
             <Container style={[styles.container]}>
 
-                <Content padder >
+                <Content padder>
 
-                    <StartHeader titltA='GiftExchange' titltB='让你轻松的认识新朋友'/>
+                    <StartHeader titltA='GiftExchange' titltB='讓你輕鬆認識新朋友！'/>
 
-                    <StartContentView titleA='Step 5:见面交流，成为朋友'  placeholder={'文字描述'} value={this.keyWord}
-                                      onChangeText={(text) => this.keyWord = text} />
- 
+                    <StartContentView titleA='Step 5:见面交流，成为朋友' placeholder={'文字描述'} value={this.keyWord}
+                                      onChangeText={(text) => this.keyWord = text}/>
+                    <H3 style={{marginTop: 100,color:Color.white,marginLeft: 30}}>
+                        快來體驗交換禮物的樂趣
+                    </H3>
+
                 </Content>
-                <JumpButton btnTitle='跳转' onClick={this.start.bind(this)}/>
+                <JumpButton btnTitle='跳转' onClick={this.start.bind(this)} style={{position: 'absolute',
+                    bottom: isIphoneX() ? 49:15,
+                    backgroundColor: Color.carColor,
+                    width: 100,
+                    height: 35,
+                    marginLeft: (screenW -100)/2,
+                    borderRadius: 8,}}/>
             </Container>
         );
     }
