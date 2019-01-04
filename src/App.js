@@ -22,8 +22,12 @@ import StartA from "./screens/start/StartA";
 import StartB from "./screens/start/StartB";
 import StartC from "./screens/start/StartC";
 import StartD from "./screens/start/StartD";
-import MeScreen from './screens/me/MeScreen';
+
 import WelcomeHome from  './screens/start/WelcomeHome';
+
+import MeScreen from './screens/me/MeScreen'
+import SettingScreen from './screens/setting'
+
 
 
 const HomeTab = createStackNavigator({
@@ -104,7 +108,9 @@ const AppStack = createStackNavigator({
             screen: Tabs,
         },
 
-        Test: {screen: TestScreen},
+
+    Login: {screen: LoginScreen},
+        Setting: {screen: SettingScreen},
         Profile: {screen: MeScreen},
 
     },
@@ -146,7 +152,7 @@ const AppContainer = createAppContainer(createSwitchNavigator(
         initialRouteName: 'App',
     }
 ));
-const StartContainer = createAppContainer(createSwitchNavigator(
+export const StartContainer = createAppContainer(createSwitchNavigator(
     {
         Start: StartStack,
         App: AppStack,
@@ -158,7 +164,7 @@ const StartContainer = createAppContainer(createSwitchNavigator(
 ));
 
 
-class StartAndTabRoot extends PureComponent {
+export class StartAndTabRoot extends PureComponent {
     constructor() {
         super()
         this.state = {
