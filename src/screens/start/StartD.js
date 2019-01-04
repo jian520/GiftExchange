@@ -31,7 +31,7 @@ export default class StartD extends Component {
     start() {
 
 
-        this.props.navigation.reset([NavigationActions.navigate({routeName: 'App'})], 0);
+        this.props.navigation.push("WelcomeHome");
 
     }
 
