@@ -45,9 +45,7 @@ const MeTab = createStackNavigator({
             headerMode: "none"
         },
 
-    },
-
-    {
+    }, {
         initialRouteName: "Me",
         headerMode: "none"
 
