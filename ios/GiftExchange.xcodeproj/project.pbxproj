@@ -42,6 +42,7 @@
 		8EC6261AD2FF449B92E6F88F /* rubicon-icon-font.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 401C51D5A63F4B6F8EFF941D /* rubicon-icon-font.ttf */; };
 		8DC2A5D7912D4B258FCB6AF2 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 58653D51126E42BB8F1029A7 /* SimpleLineIcons.ttf */; };
 		4A211A756E1C47FAB0AB08BE /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B2C1B9F9A55E4F51B6845F80 /* Zocial.ttf */; };
+		7CD48EC65FF64110BBEF52CB /* libRCTBEEPickerManager.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C025240E51FC41818D1F89E1 /* libRCTBEEPickerManager.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -352,6 +353,8 @@
 		401C51D5A63F4B6F8EFF941D /* rubicon-icon-font.ttf */ = {isa = PBXFileReference; name = "rubicon-icon-font.ttf"; path = "../node_modules/native-base/Fonts/rubicon-icon-font.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		58653D51126E42BB8F1029A7 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; name = "SimpleLineIcons.ttf"; path = "../node_modules/native-base/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		B2C1B9F9A55E4F51B6845F80 /* Zocial.ttf */ = {isa = PBXFileReference; name = "Zocial.ttf"; path = "../node_modules/native-base/Fonts/Zocial.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		121D852C316145B5992AD6AC /* RCTBEEPickerManager.xcodeproj */ = {isa = PBXFileReference; name = "RCTBEEPickerManager.xcodeproj"; path = "../node_modules/react-native-picker/ios/RCTBEEPickerManager.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		C025240E51FC41818D1F89E1 /* libRCTBEEPickerManager.a */ = {isa = PBXFileReference; name = "libRCTBEEPickerManager.a"; path = "libRCTBEEPickerManager.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -373,6 +376,7 @@
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
 				63DF20DFBE49458D8BE3E6E1 /* libRNGestureHandler.a in Frameworks */,
 				83D98F2698914CA78A7606CE /* libRNVectorIcons.a in Frameworks */,
+				7CD48EC65FF64110BBEF52CB /* libRCTBEEPickerManager.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -538,6 +542,7 @@
 				139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */,
 				96435FD147E6492AA4DFFD46 /* RNGestureHandler.xcodeproj */,
 				216A97A58C1B4BADA953541D /* RNVectorIcons.xcodeproj */,
+				121D852C316145B5992AD6AC /* RCTBEEPickerManager.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -1067,11 +1072,13 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/GiftExchange\"",
 					"\"$(SRCROOT)/GiftExchange\"",
+					"\"$(SRCROOT)/GiftExchange\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-gesture-handler/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
+					"$(SRCROOT)/../node_modules/react-native-picker/ios/RCTBEEPickerManager",
 				);
 			};
 			name = Debug;
@@ -1096,11 +1103,13 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/GiftExchange\"",
 					"\"$(SRCROOT)/GiftExchange\"",
+					"\"$(SRCROOT)/GiftExchange\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-gesture-handler/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
+					"$(SRCROOT)/../node_modules/react-native-picker/ios/RCTBEEPickerManager",
 				);
 			};
 			name = Release;
