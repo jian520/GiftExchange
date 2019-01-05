@@ -47,7 +47,7 @@ export default class HomeScreen extends Component {
                 </Header>
 
                 <Content padder>
-                    <Button onPress={() =>    navigation.push('Test')   }>
+                    <Button onPress={() =>   navigation.push('Test')   }>
                         <Text>push</Text>
                     </Button>
                 </Content>

@@ -1,69 +1,234 @@
-import React, { Component } from 'react'
-// import { Text, StyleSheet, View } from 'react-native'
+import React, {Component} from "react";
+import {
+    StyleSheet,
+    Image,
+    AsyncStorage,
 
-
+    TouchableHighlight,
+    ActivityIndicator,
+    ScrollView,
+    Keyboard,
+    KeyboardAvoidingView,
+    DeviceEventEmitter,
+    InteractionManager
+} from 'react-native'
+import {NavigationActions} from 'react-navigation'
 import {
     Container,
     Header,
     Title,
     Content,
     Button,
+    Icon,
+    Body,
     Left,
     Right,
-    Body,
-    Text,
-    Icon
+    Item,
+    Input,
+    Form, Separator, Thumbnail, View, Text, Spinner
 } from "native-base";
-import Ionicons from 'react-native-vector-icons/Ionicons';
 import styles from "./styles";
-import {NavigationActions, StackActions} from "react-navigation";
+import gStyles from "../../common/globalStyles"
+import common from "../../common/common"
+
+// const cover = require("../../../assets/login-icon.png");
+import service from "../../common/service"
 
 export default class LoginScreen extends Component {
-    // static navigationOptions = {
-    //     title: 'ProfileSc',
-    //
-    //     tabBarLabel: 'tab2',
-    //     tabBarIcon: ({ tintColor, focused, horizontal }) => (
-    //         <Ionicons
-    //             name={focused ? 'ios-settings' : 'ios-settings'}
-    //             size={horizontal ? 20 : 26}
-    //             style={{ color: tintColor }}
-    //         />
-    //     ),
-    //
-    //
-    // }
-    logout() {
 
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            email: '', //504822765@qq.com
+            password: '',
+            loading: false,
+            isSentVerify: true,
+        };
 
     }
 
+    start() {
+        const resetAction = NavigationActions.reset({
+            index: 0,
+            actions: [
+                NavigationActions.navigate({routeName: 'tabRoot'}),
+
+            ]
+        })
+        this.props.navigation.dispatch(resetAction)
+
+    }
+
+    componentWillMount() {
+
+        service.getEmail()
+            .then((email) => {
+                console.log(" email is " + email)
+
+                if (email.length != 0 ) {
+                    this.setState({
+                        email: email
+                    });
+                }
+
+            });
+
+        service.getPassword()
+            .then((password) => {
+
+                if (password.length != 0) {
+
+                    this.setState({
+                        password: password
+                    });
+                }
+
+            });
+
+    }
+
+    onEmailChanged(text) {
+        this.setState({email: text});
+    }
+
+    onPwdChanged(text) {
+        this.setState({password: text});
+    }
+
+    doLogin() {
+
+        this.props.navigation.reset([NavigationActions.navigate({routeName: 'App'})], 0);
+
+        return ;
+
+
+        Keyboard.dismiss()
+        console.log('doLogin')
+
+        if (this.state.loading) return;
+        if (this.state.email == '') {
+            common.toast("請輸入郵件！")
+            return;
+        }
+        if (!common.validateEmail(this.state.email)) {
+            common.toast("郵件格式不正確！")
+            return;
+        }
+
+        if (this.state.password == '') {
+            common.toast("請輸入密碼！")
+            return;
+        }
+
+
+        this.setState({
+            loading: true,
+
+        });
+
+        service.loginSystem(this.state.email, this.state.password)
+            .then((wrapData) => {
+                console.log('wrapData  ')
+                console.log(wrapData)
+
+                this.setState({
+                    loading: false,
+
+                });
+
+                if (wrapData.flag == "Success") {
+                    // common.toast(wrapData.msg)
+                    // DeviceEventEmitter.emit('DidLogin', true);
+                    this.start()
+                } else {
+                    common.toast(wrapData.msg)
+                }
+
+            }).then((items) => {
+
+        }).catch((error) => {
+            console.log(error);
+
+            this.setState({
+                loading: false,
+
+            });
+
+
+        })
+
+    }
+
+
     render() {
-
-        const { navigation } = this.props;
-
-
         return (
-            <Container style={styles.container}>
+            <Container style={gStyles.container}>
                 <Header>
-                    <Left />
-
+                    <Left>
+                        <Button transparent onPress={() => this.props.navigation.goBack()}>
+                            <Icon name="arrow-back" style={{color: "#000"}}/>
+                        </Button>
+                    </Left>
                     <Body>
-                    <Title>LOgin</Title>
+                    <Title style={gStyles.textAColor}>登錄</Title>
                     </Body>
-                    <Right />
+                    <Right/>
                 </Header>
 
                 <Content padder>
+                    <Separator style={{backgroundColor: "#FFF", height: 20}}/>
 
-                    <Button onPress={() =>    this.logout()  }>
-                        <Text>logout</Text>
-                    </Button>
+                    <View style={{flex: 1, alignItems: "center", flexWrap: "wrap", marginLeft: 40, marginRight: 40}}>
+                        {/*<Thumbnail large source={cover}/>*/}
 
+                        <Separator style={{backgroundColor: "#FFF", height: 40}}/>
+
+
+                        <Item rounded>
+                            <Input placeholder="請輸入電郵" placeholderTextColor={common.colorC}
+                                   onChangeText={(e) => {
+                                       this.onEmailChanged(e)
+                                   }}
+                                   value={this.state.email}
+                            />
+                        </Item>
+
+                        <Separator style={{backgroundColor: "#FFF", height: 20}}/>
+
+                        <Item rounded>
+                            <Input placeholder="請輸入密碼" placeholderTextColor={common.colorC} secureTextEntry
+                                   onChangeText={(e) => {
+                                       this.onPwdChanged(e)
+                                   }}
+                                   value={this.state.password}
+                            />
+                        </Item>
+                        <Separator style={{backgroundColor: "#FFF", height: 20}}/>
+
+                        <Spinner
+                            style={{position: "absolute",alignSelf: 'center'}}
+                            animating={this.state.loading} size="large" color="red"/>
+
+                        <Button block rounded style={{backgroundColor: common.colorA}} onPress={() => this.doLogin()}>
+                            <Text>登錄</Text>
+                        </Button>
+                        <Separator style={{backgroundColor: "#FFF", height: 15}}/>
+
+
+                        <Text style={gStyles.textBColor}>忘記密碼？</Text>
+
+
+                        {/*<Separator style={{backgroundColor: "#FFF", height: 10}}/>*/}
+
+
+                        {/*<Button block rounded style={{backgroundColor: common.colorE}}>*/}
+                        {/*<Text style={{color: common.colorA}}>注册</Text>*/}
+                        {/*</Button>*/}
+                    </View>
                 </Content>
             </Container>
         );
     }
 }
 
-// const styles = StyleSheet.create({})

@@ -15,11 +15,19 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import StartScreen from "./screens/start/";
 import LoginScreen from "./screens/login/LoginScreen"
+import RegScreen from "./screens/reg/regSetpA"
 
 import HomeScreen from "./screens/home/HomeScreen";
-import TestScreen from "./screens/home/TestScreen";
+
+import StartA from "./screens/start/StartA";
+import StartB from "./screens/start/StartB";
+import StartC from "./screens/start/StartC";
+import StartD from "./screens/start/StartD";
+
+import WelcomeHome from './screens/start/WelcomeHome';
 
 import MeScreen from './screens/me/MeScreen'
+import SettingScreen from './screens/setting'
 
 
 const HomeTab = createStackNavigator({
@@ -36,7 +44,6 @@ const HomeTab = createStackNavigator({
 
     }
 );
-
 
 
 const MeTab = createStackNavigator({
@@ -99,7 +106,9 @@ const AppStack = createStackNavigator({
             screen: Tabs,
         },
 
-        Test: {screen: TestScreen},
+
+        WelcomeHome: {screen: WelcomeHome},
+        Setting: {screen: SettingScreen},
         Profile: {screen: MeScreen},
 
     },
@@ -113,12 +122,22 @@ const AppStack = createStackNavigator({
 
 const StartStack = createStackNavigator({
         Start: {screen: StartScreen},
+        StartA: {screen: StartA},
+        StartB: {screen: StartB},
+        StartC: {screen: StartC},
+        StartD: {screen: StartD},
+        WelcomeHome: {screen: WelcomeHome},
+        Login: {screen: LoginScreen},
+        Reg: {screen: RegScreen},
+
         App: {screen: AppStack},
     },
     {
         initialRouteName: "Start",
-        headerMode: "none"
-
+        headerMode: "none",
+        navigationOptions: {
+            header: null
+        },
 
     }
 );
@@ -128,13 +147,13 @@ const AppContainer = createAppContainer(createSwitchNavigator(
     {
 
         App: AppStack,
-         Start: StartStack,
+        Start: StartStack,
     },
     {
         initialRouteName: 'App',
     }
 ));
-const StartContainer = createAppContainer(createSwitchNavigator(
+export const StartContainer = createAppContainer(createSwitchNavigator(
     {
         Start: StartStack,
         App: AppStack,
@@ -146,7 +165,7 @@ const StartContainer = createAppContainer(createSwitchNavigator(
 ));
 
 
-class StartAndTabRoot extends PureComponent {
+export class StartAndTabRoot extends PureComponent {
     constructor() {
         super()
         this.state = {
@@ -174,9 +193,7 @@ class StartAndTabRoot extends PureComponent {
         //     });
 
 
-
-
-        DeviceEventEmitter.addListener('jian', (value)=>{
+        DeviceEventEmitter.addListener('jian', (value) => {
             //这里面是要调用的方法，比如：刷新
             //value:是下面页面在 通知 时 ，所传递过来的参数
 
@@ -186,18 +203,15 @@ class StartAndTabRoot extends PureComponent {
             this.setState({
                 isLogin: false,
             });
-            this.setState({  isLogin: false },()=>{
+            this.setState({isLogin: false}, () => {
                 this.forceUpdate();
             });
-
-
 
 
         });
 
 
     }
-
 
 
     componentWillUnmount() {

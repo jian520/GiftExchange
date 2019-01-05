@@ -1,8 +1,15 @@
+import Color from "../../commonComponents/Color";
+
 export default {
   container: {
-    backgroundColor: "#FFF"
+    backgroundColor:  Color.theme,
+
   },
   mb10: {
     marginBottom: 10
+  },
+  whiteStyle:{
+    color:Color.white,
+
   }
 };
