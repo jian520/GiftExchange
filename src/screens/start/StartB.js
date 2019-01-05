@@ -16,7 +16,7 @@ import styles from "./styles";
 import StartContentView from "./StartContentView"
 import StartHeader from "./StartHeader";
 
-import JumpButton from "./JumpButton";
+import JumpButton from "../../commonComponents/JumpButton";
 
 import PushButton from "../../commonComponents/PushButton";
 import {StackActions, NavigationActions} from 'react-navigation';

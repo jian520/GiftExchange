@@ -16,7 +16,7 @@ import styles from "./styles";
 import StartContentView from "./StartContentView"
 import StartHeader from "./StartHeader";
 
-import JumpButton from "./JumpButton";
+import JumpButton from "../../commonComponents/JumpButton";
 import Color from "../../commonComponents/Color";
 import PushButton from "../../commonComponents/PushButton";
 
