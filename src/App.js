@@ -13,21 +13,21 @@ import {
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 
-import StartScreen from "./screens/start/";
-import LoginScreen from "./screens/login/LoginScreen"
-import RegScreen from "./screens/reg/regSetpA"
+import StartScreen from "./page/start/";
+import LoginScreen from "./page/login/LoginScreen"
+import RegScreen from "./page/reg/regSetpA"
 
-import HomeScreen from "./screens/home/HomeScreen";
+import HomeScreen from "./page/home/HomeScreen";
 
-import StartA from "./screens/start/StartA";
-import StartB from "./screens/start/StartB";
-import StartC from "./screens/start/StartC";
-import StartD from "./screens/start/StartD";
+import StartA from "./page/start/StartA";
+import StartB from "./page/start/StartB";
+import StartC from "./page/start/StartC";
+import StartD from "./page/start/StartD";
 
-import WelcomeHome from './screens/start/WelcomeHome';
+import WelcomeHome from './page/start/WelcomeHome';
 
-import MeScreen from './screens/me/MeScreen'
-import SettingScreen from './screens/setting'
+import MeScreen from './page/me/MeScreen'
+import SettingScreen from './page/setting'
 
 
 const HomeTab = createStackNavigator({

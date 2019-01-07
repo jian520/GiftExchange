@@ -43,6 +43,7 @@
 		8DC2A5D7912D4B258FCB6AF2 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 58653D51126E42BB8F1029A7 /* SimpleLineIcons.ttf */; };
 		4A211A756E1C47FAB0AB08BE /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B2C1B9F9A55E4F51B6845F80 /* Zocial.ttf */; };
 		7CD48EC65FF64110BBEF52CB /* libRCTBEEPickerManager.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C025240E51FC41818D1F89E1 /* libRCTBEEPickerManager.a */; };
+		350E0EFB37684890B71A1B88 /* libSplashScreen.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CC230A0BFCAC47818347A537 /* libSplashScreen.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -355,6 +356,8 @@
 		B2C1B9F9A55E4F51B6845F80 /* Zocial.ttf */ = {isa = PBXFileReference; name = "Zocial.ttf"; path = "../node_modules/native-base/Fonts/Zocial.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		121D852C316145B5992AD6AC /* RCTBEEPickerManager.xcodeproj */ = {isa = PBXFileReference; name = "RCTBEEPickerManager.xcodeproj"; path = "../node_modules/react-native-picker/ios/RCTBEEPickerManager.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
 		C025240E51FC41818D1F89E1 /* libRCTBEEPickerManager.a */ = {isa = PBXFileReference; name = "libRCTBEEPickerManager.a"; path = "libRCTBEEPickerManager.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		8B2883B780694320A5F66407 /* SplashScreen.xcodeproj */ = {isa = PBXFileReference; name = "SplashScreen.xcodeproj"; path = "../node_modules/react-native-splash-screen/ios/SplashScreen.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		CC230A0BFCAC47818347A537 /* libSplashScreen.a */ = {isa = PBXFileReference; name = "libSplashScreen.a"; path = "libSplashScreen.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -377,6 +380,7 @@
 				63DF20DFBE49458D8BE3E6E1 /* libRNGestureHandler.a in Frameworks */,
 				83D98F2698914CA78A7606CE /* libRNVectorIcons.a in Frameworks */,
 				7CD48EC65FF64110BBEF52CB /* libRCTBEEPickerManager.a in Frameworks */,
+				350E0EFB37684890B71A1B88 /* libSplashScreen.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -543,6 +547,7 @@
 				96435FD147E6492AA4DFFD46 /* RNGestureHandler.xcodeproj */,
 				216A97A58C1B4BADA953541D /* RNVectorIcons.xcodeproj */,
 				121D852C316145B5992AD6AC /* RCTBEEPickerManager.xcodeproj */,
+				8B2883B780694320A5F66407 /* SplashScreen.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -1073,12 +1078,14 @@
 					"\"$(SRCROOT)/GiftExchange\"",
 					"\"$(SRCROOT)/GiftExchange\"",
 					"\"$(SRCROOT)/GiftExchange\"",
+					"\"$(SRCROOT)/GiftExchange\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-gesture-handler/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
 					"$(SRCROOT)/../node_modules/react-native-picker/ios/RCTBEEPickerManager",
+					"$(SRCROOT)/../node_modules/react-native-splash-screen/ios",
 				);
 			};
 			name = Debug;
@@ -1104,12 +1111,14 @@
 					"\"$(SRCROOT)/GiftExchange\"",
 					"\"$(SRCROOT)/GiftExchange\"",
 					"\"$(SRCROOT)/GiftExchange\"",
+					"\"$(SRCROOT)/GiftExchange\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-gesture-handler/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
 					"$(SRCROOT)/../node_modules/react-native-picker/ios/RCTBEEPickerManager",
+					"$(SRCROOT)/../node_modules/react-native-splash-screen/ios",
 				);
 			};
 			name = Release;
