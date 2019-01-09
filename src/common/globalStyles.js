@@ -5,7 +5,7 @@ export default {
         backgroundColor: "#FFF"
     },
     textAColor: {
-        color: common.colorA
+        color: common.colorC
     },
     textBColor: {
         color: common.colorB
