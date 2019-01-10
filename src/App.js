@@ -29,6 +29,8 @@ import WelcomeHome from './screens/start/WelcomeHome';
 import MeScreen from './screens/me/MeScreen'
 import SettingScreen from './screens/setting'
 import RegSetp from './screens/reg/regSetpB'
+import EditprofileScreen from "./screens/me/EditprofileScreen";
+import PersonalScreen from "./screens/me/PersonalScreen";
 
 const HomeTab = createStackNavigator({
         Home: {
@@ -142,6 +144,8 @@ const AppStack = createStackNavigator({
         WelcomeHome: {screen: WelcomeHome},
         Setting: {screen: SettingScreen},
         Profile: {screen: MeScreen},
+        Editprofile:{screen:EditprofileScreen},
+        Personal:{screen:PersonalScreen}
 
     },
     {

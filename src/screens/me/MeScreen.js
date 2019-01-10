@@ -53,6 +53,10 @@ export default class MeScreen extends Component {
 
     }
 
+    editprofile(){
+        this.props.navigation.push('Editprofile')
+    }
+
     render() {
 
         const { navigation } = this.props;
@@ -80,9 +84,10 @@ export default class MeScreen extends Component {
                 <Content>
 
                     <List style={{backgroundColor: Color.gray,height:100}} >
-                        <ListItem  avatar >
+                        <ListItem  avatar onPress={() => this.editprofile()}>
                             <Left>
-                                <Thumbnail source={BaseImg.StartImg.heart} style={styles.avatastyle}/>
+                                <Thumbnail source={{uri:'https://oss.zuimeimami.com/avatar/doctor_fC14530706150363566e0dce962bb/1520556522703.jpg'}}
+                                           style={styles.avatastyle}/>
                             </Left>
                             <Body style={styles.bottmW}>
                             <Text style={{...paddingTB(-5,15),color:Color.white}}>JM</Text>
@@ -101,7 +106,9 @@ export default class MeScreen extends Component {
                             </Right>
                          </ListItem>
                     </List>
+
                     <Separator style={{backgroundColor: Color.white, height: 0.5}}/>
+
                     <List style={{backgroundColor: Color.gray}}>
                     <ListItem icon onPress={() =>  this.logout()  }>
                         <Left style={{left:20}}>
@@ -113,9 +120,11 @@ export default class MeScreen extends Component {
 
                     </ListItem>
                     </List>
+
                     <Separator style={{backgroundColor: Color.white, height: 20}}/>
-                    <List style={{backgroundColor: Color.gray}}>
-                        <ListItem icon >
+
+                    <List style={{backgroundColor: Color.gray}} >
+                        <ListItem icon onPress={ ()=> this.props.navigation.push('Personal') }>
                             <Left style={{left:20}}>
                                 <Icon active name="ios-home" />
                             </Left>
@@ -125,7 +134,9 @@ export default class MeScreen extends Component {
 
                         </ListItem>
                     </List>
+
                     <Separator style={{backgroundColor: Color.white, height: 0.5}}/>
+
                     <List style={{backgroundColor: Color.gray}}>
                         <ListItem icon >
                             <Left style={{left:20}}>
@@ -137,7 +148,9 @@ export default class MeScreen extends Component {
 
                         </ListItem>
                     </List>
+
                     <Separator style={{backgroundColor: Color.white, height: 0.5}}/>
+
                     <List style={{backgroundColor: Color.gray}}>
                         <ListItem icon >
                             <Left style={{left:20}}>
@@ -146,10 +159,11 @@ export default class MeScreen extends Component {
                             <Body style={[styles.bottmW],{left:10}}>
                             <Text style={styles.textC}>Help&Support</Text>
                             </Body>
-
                         </ListItem>
                     </List>
+
                     <Separator style={{backgroundColor: Color.white, height: 0.5}}/>
+
                     <List style={{backgroundColor: Color.gray}}>
                         <ListItem icon >
                             <Left style={{left:20}}>

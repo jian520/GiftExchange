@@ -207,7 +207,7 @@ export default class RegSetpB extends Component {
         Picker.init({
             pickerData: marrydatas,
             pickerConfirmBtnText: "確定",
-            pickerTitleText: "請選擇",
+            pickerTitleText: "請選擇職業",
             pickerCancelBtnText: "取消",
             pickerToolBarBg: [230, 70, 78, 1],
             pickerTitleColor: [255, 255, 255, 1],
@@ -443,7 +443,7 @@ export default class RegSetpB extends Component {
     }
 
     popGoBack(){
-            this.pickHide()
+          this.pickHide()
         this.props.navigation.goBack()
     }
 

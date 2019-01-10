@@ -13,6 +13,9 @@ export default {
     textCColor: {
         color: common.colorC
     },
+    textCEolor: {
+        color: common.colorE
+    },
     separatorStyle: {
         backgroundColor: common.colorD,
         height: 0.5
