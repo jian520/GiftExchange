@@ -5,10 +5,30 @@
   */
 import React, {PureComponent} from 'react';
 import {
-    StyleSheet,
+    StyleSheet, TextInput, View,
 
 } from 'react-native';
-import {Body, Button, Container, Content, Header, Left, Right, Text, Title} from "native-base";
+import {
+    Body,
+    Button,
+    Container,
+    Content,
+    Header, Input, Item,
+    Left,
+    List,
+    ListItem,
+    Right,
+    Text,
+    Thumbnail,
+    Title
+} from "native-base";
+import gStyles from "../../common/globalStyles";
+import Color from "../../commonComponents/Color";
+
+import styles from "../explore/styles";
+import common from "../../common/common";
+import StartContentView from "../start/StartContentView";
+import PropTypes from "prop-types";
 
 export default class exploreScreen extends PureComponent {
 
@@ -65,23 +85,85 @@ export default class exploreScreen extends PureComponent {
     render() {
         return (
             <Container style={styles.container}>
-                <Header>
+                <Header style={{backgroundColor:Color.pickBackground}}>
                     <Left />
                     <Body>
-                    <Title>Home</Title>
+                    <Title style={gStyles.textCEolor}>放禮物</Title>
                     </Body>
-                    <Right />
+                    <Right>
+                        <Title style={gStyles.textCEolor}>提交</Title>
+                    </Right>
                 </Header>
 
-                <Content padder>
-                    <Button onPress={() =>   navigation.push('Test')   }>
-                        <Text>push</Text>
-                    </Button>
+                <Content  style={{backgroundColor:Color.pickBackground}}>
+                    <List style={{height:100}} >
+                        <ListItem  avatar>
+                            <Left>
+                                <Thumbnail source={{uri:'https://oss.zuimeimami.com/avatar/doctor_fC14530706150363566e0dce962bb/1520556522703.jpg'}}
+                                           style={styles.avatastyle}/>
+                            </Left>
+                            <Body style={styles.bottmW}>
+
+                            <Text style={{color:Color.white}}>Jow Wong</Text>
+                            </Body>
+                         </ListItem>
+                    </List>
+
+                    <Item style={styles.regSetp}>
+
+                        <Text style={{color: Color.pickBackground, marginLeft: 15,fontWeight: 'bold'}}>禮物選項</Text>
+
+                        <Right>
+                            <Text style={ {paddingRight: 15,color: Color.pickBackground}}>{this.state.birthday}</Text>
+                        </Right>
+                    </Item>
+
+                        <TextInput
+                            style={ styles.inputStyle}
+                            selectionColor={Color.white} //光标颜色
+                            secureTextEntry={false}
+                            multiline={true}
+                            autoFocus={false} //自动获得焦点
+                            underlineColorAndroid='transparent'// Android下划线的颜色
+                            placeholder={'禮物想表達什麽'}
+                            placeholderTextColor={Color.pickBackground} //设置提示文字的颜色
+                            value={this.state.text}
+
+                            onChangeText={this._onChang}/>
+
+                    <Item style={styles.regSetp}>
+
+                        <Text style={{color: Color.pickBackground, marginLeft: 15,fontWeight: 'bold'}}>添加禮物照片</Text>
+
+                        <Right>
+                            <Text style={ {paddingRight: 15,color: Color.pickBackground}}>{this.state.birthday}</Text>
+                        </Right>
+                    </Item>
+                    <TextInput
+                        style={ styles.inputStyle}
+                        selectionColor={Color.white} //光标颜色
+                        secureTextEntry={false}
+                        multiline={true}
+                        autoFocus={false} //自动获得焦点
+                        underlineColorAndroid='transparent'// Android下划线的颜色
+                        placeholder={'我想找'}
+                        placeholderTextColor={Color.pickBackground} //设置提示文字的颜色
+                        value={this.state.text}
+
+                        onChangeText={this._onChang}/>
+                    <Item style={styles.regSetp}>
+
+                        <Text style={{color: Color.pickBackground, marginLeft: 15,fontWeight: 'bold'}}>添加禮物照片</Text>
+
+                        <Right>
+                            <Text style={ {paddingRight: 15,color: Color.pickBackground}}>{this.state.birthday}</Text>
+                        </Right>
+                    </Item>
                 </Content>
             </Container>
         );
     }
 }
 
-const styles = StyleSheet.create({});
+
 
