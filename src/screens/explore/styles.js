@@ -27,4 +27,12 @@ export default {
         padding: 15,
         fontWeight: 'bold'
     },
+    pickImg:{
+        ...marginTB(5,10),
+        backgroundColor:Color.white,
+        width:screenW -40-50,
+        height:30,
+        borderRadius:10,
+        left: 8,
+    },
 };

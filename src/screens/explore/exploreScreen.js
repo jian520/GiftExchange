@@ -27,8 +27,10 @@ import Color from "../../commonComponents/Color";
 
 import styles from "../explore/styles";
 import common from "../../common/common";
-import StartContentView from "../start/StartContentView";
-import PropTypes from "prop-types";
+
+import Entypo from "react-native-vector-icons/Entypo";
+import Row from "../../commonComponents/Row";
+import {marginTB, paddingLR} from "../../commonComponents/CommonUtil";
 
 export default class exploreScreen extends PureComponent {
 
@@ -130,15 +132,19 @@ export default class exploreScreen extends PureComponent {
                             value={this.state.text}
 
                             onChangeText={this._onChang}/>
+                    <Row style={{...marginTB(30,30),marginLeft:22}}>
+                        <Entypo name='image' size={35} />
+                        <Item style={styles.pickImg}>
 
-                    <Item style={styles.regSetp}>
+                            <Entypo name='circle-with-plus' size={20} style={{...paddingLR(10,5),top:2}}/>
+                            <Text style={{color: Color.pickBackground, marginLeft:5,fontWeight: 'bold'}}>添加禮物照片</Text>
 
-                        <Text style={{color: Color.pickBackground, marginLeft: 15,fontWeight: 'bold'}}>添加禮物照片</Text>
+                            <Right>
+                                <Text style={ {paddingRight: 15,color: Color.pickBackground}}>{this.state.birthday}</Text>
+                            </Right>
+                        </Item>
+                    </Row>
 
-                        <Right>
-                            <Text style={ {paddingRight: 15,color: Color.pickBackground}}>{this.state.birthday}</Text>
-                        </Right>
-                    </Item>
                     <TextInput
                         style={ styles.inputStyle}
                         selectionColor={Color.white} //光标颜色
@@ -151,14 +157,18 @@ export default class exploreScreen extends PureComponent {
                         value={this.state.text}
 
                         onChangeText={this._onChang}/>
-                    <Item style={styles.regSetp}>
+                    <Row style={{...marginTB(30,30),marginLeft:22}}>
+                        <Entypo name='instagram' size={35} />
+                        <Item style={styles.pickImg}>
 
-                        <Text style={{color: Color.pickBackground, marginLeft: 15,fontWeight: 'bold'}}>添加禮物照片</Text>
+                            <Entypo name='circle-with-plus' size={20} style={{...paddingLR(10,5),top:2}}/>
+                            <Text style={{color: Color.pickBackground, marginLeft:5,fontWeight: 'bold'}}>添加个人照片</Text>
 
-                        <Right>
-                            <Text style={ {paddingRight: 15,color: Color.pickBackground}}>{this.state.birthday}</Text>
-                        </Right>
-                    </Item>
+                            <Right>
+                                <Text style={ {paddingRight: 15,color: Color.pickBackground}}>{this.state.birthday}</Text>
+                            </Right>
+                        </Item>
+                    </Row>
                 </Content>
             </Container>
         );

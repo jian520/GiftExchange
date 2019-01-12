@@ -11,6 +11,7 @@ import {
 
 
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 
 import StartScreen from "./screens/start/";
@@ -72,8 +73,8 @@ const Tabs = createBottomTabNavigator(
 
                 tabBarLabel: 'Bagel',
                 tabBarIcon: ({tintColor, focused}) => (
-                    <Ionicons
-                        name={focused ? 'ios-home' : 'ios-home'}
+                    <FontAwesome
+                        name={focused ? 'gittip' : 'gittip'}
                         size={26}
                         style={{color: tintColor}}
                     />
@@ -87,8 +88,8 @@ const Tabs = createBottomTabNavigator(
 
                 tabBarLabel: '探索',
                 tabBarIcon: ({tintColor, focused}) => (
-                    <Ionicons
-                        name={focused ? 'ios-home' : 'ios-home'}
+                    <FontAwesome
+                        name={focused ? 'search' : 'search'}
                         size={26}
                         style={{color: tintColor}}
                     />
@@ -101,8 +102,8 @@ const Tabs = createBottomTabNavigator(
 
                 tabBarLabel: 'Inbox',
                 tabBarIcon: ({tintColor, focused}) => (
-                    <Ionicons
-                        name={focused ? 'ios-home' : 'ios-home'}
+                    <FontAwesome
+                        name={focused ? 'comments' : 'comments'}
                         size={26}
                         style={{color: tintColor}}
                     />
