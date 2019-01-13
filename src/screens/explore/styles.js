@@ -35,4 +35,10 @@ export default {
         borderRadius:10,
         left: 8,
     },
+    image:{
+        height:100,
+        width:150,
+        borderRadius:0,
+        marginLeft:15,
+    },
 };

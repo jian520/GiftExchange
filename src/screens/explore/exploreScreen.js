@@ -26,17 +26,33 @@ import gStyles from "../../common/globalStyles";
 import Color from "../../commonComponents/Color";
 
 import styles from "../explore/styles";
-import common from "../../common/common";
+//图片选择器
+import ImagePicker from 'react-native-image-picker';
 
 import Entypo from "react-native-vector-icons/Entypo";
 import Row from "../../commonComponents/Row";
 import {marginTB, paddingLR} from "../../commonComponents/CommonUtil";
 
+var options = {
+    title: '请选择图片来源',
+    cancelButtonTitle: '取消',
+    takePhotoButtonTitle: '拍照',
+    chooseFromLibraryButtonTitle: '相册图片',
+
+    storageOptions: {
+        skipBackup: true,
+        path: 'images'
+    }
+};
 export default class exploreScreen extends PureComponent {
 
     constructor(props) {
         super(props);
-        this.state = {}
+
+        this.state = {
+            avatarSource: null,
+            prenAvata: null
+        };
     }
 
     static propTypes = {}
@@ -84,11 +100,95 @@ export default class exploreScreen extends PureComponent {
 
     }
 
+    //选择照片按钮点击
+    choosePic() {
+        ImagePicker.showImagePicker(options, (response) => {
+            console.log('Response = ', response);
+
+            if (response.didCancel) {
+                console.log('User cancelled image picker');
+            } else if (response.error) {
+                console.log('ImagePicker Error: ', response.error);
+            } else if (response.customButton) {
+                console.log('User tapped custom button: ', response.customButton);
+            } else {
+                const source = {uri: response.uri};
+
+                // You can also display the image using data:
+                // const source = { uri: 'data:image/jpeg;base64,' + response.data };
+
+                this.setState({
+                    avatarSource: source,
+                });
+            }
+        });
+    }
+
+    // prenAvata() {
+    //
+    //     if (this.state.prenAvata == null) {
+    //         return (
+    //
+    //             <Row style={{...marginTB(30, 30), marginLeft: 22}}>
+    //                 <Entypo name='image' size={35}/>
+    //                 <Item style={styles.pickImg} onPress={() => this.choosePic()}>
+    //
+    //                     <Entypo name='circle-with-plus' size={20} style={{...paddingLR(10, 5), top: 2}}/>
+    //                     <Text style={{color: Color.pickBackground, marginLeft: 5, fontWeight: 'bold'}}>添加禮物照片</Text>
+    //
+    //                     <Right>
+    //                         <Text style={{paddingRight: 15, color: Color.pickBackground}}>{this.state.birthday}</Text>
+    //                     </Right>
+    //                 </Item>
+    //             </Row>
+    //
+    //         )
+    //     } else {
+    //         return (
+    //             <Row style={{...marginTB(30, 30), marginLeft: 22}}>
+    //                 <Text style={{color: Color.white, marginLeft: 5, fontWeight: 'bold'}}>禮物照片:</Text>
+    //                 <Thumbnail source={this.state.prenAvata} style={styles.image}/>
+    //
+    //             </Row>
+    //             )
+    //         }
+    // }
+    avatarSource() {
+
+        if (this.state.avatarSource == null) {
+            return (
+
+                <Row style={{...marginTB(30, 30), marginLeft: 22}}>
+                    <Entypo name='image' size={35}/>
+                    <Item style={styles.pickImg} onPress={() => this.choosePic()}>
+
+                        <Entypo name='circle-with-plus' size={20} style={{...paddingLR(10, 5), top: 2}}/>
+                        <Text style={{color: Color.pickBackground, marginLeft: 5, fontWeight: 'bold'}}>添加禮物照片</Text>
+
+                        <Right>
+                            <Text style={{paddingRight: 15, color: Color.pickBackground}}>{this.state.birthday}</Text>
+                        </Right>
+                    </Item>
+                </Row>
+
+            )
+        } else {
+            return (
+                <Row style={{...marginTB(30, 30), marginLeft: 22}}>
+                    <Text style={{color: Color.white, marginLeft: 5, fontWeight: 'bold'}}>禮物照片:</Text>
+                    <Thumbnail source={this.state.avatarSource} style={styles.image}/>
+
+                </Row>
+            )
+        }
+    }
+
+
     render() {
         return (
             <Container style={styles.container}>
-                <Header style={{backgroundColor:Color.pickBackground}}>
-                    <Left />
+                <Header style={{backgroundColor: Color.pickBackground}}>
+                    <Left/>
                     <Body>
                     <Title style={gStyles.textCEolor}>放禮物</Title>
                     </Body>
@@ -97,56 +197,47 @@ export default class exploreScreen extends PureComponent {
                     </Right>
                 </Header>
 
-                <Content  style={{backgroundColor:Color.pickBackground}}>
-                    <List style={{height:100}} >
-                        <ListItem  avatar>
+                <Content style={{backgroundColor: Color.pickBackground}}>
+                    <List style={{height: 100}}>
+                        <ListItem avatar>
                             <Left>
-                                <Thumbnail source={{uri:'https://oss.zuimeimami.com/avatar/doctor_fC14530706150363566e0dce962bb/1520556522703.jpg'}}
-                                           style={styles.avatastyle}/>
+                                <Thumbnail
+                                    source={{uri: 'https://oss.zuimeimami.com/avatar/doctor_fC14530706150363566e0dce962bb/1520556522703.jpg'}}
+                                    style={styles.avatastyle}/>
                             </Left>
                             <Body style={styles.bottmW}>
 
-                            <Text style={{color:Color.white}}>Jow Wong</Text>
+                            <Text style={{color: Color.white}}>Jow Wong</Text>
                             </Body>
-                         </ListItem>
+                        </ListItem>
                     </List>
 
                     <Item style={styles.regSetp}>
 
-                        <Text style={{color: Color.pickBackground, marginLeft: 15,fontWeight: 'bold'}}>禮物選項</Text>
+                        <Text style={{color: Color.pickBackground, marginLeft: 10, fontWeight: 'bold'}}>禮物選項</Text>
 
                         <Right>
-                            <Text style={ {paddingRight: 15,color: Color.pickBackground}}>{this.state.birthday}</Text>
+                            <Text style={{paddingRight: 15, color: Color.pickBackground}}>XXXXX</Text>
                         </Right>
+                        <Entypo name='chevron-small-down' size={15} style={{marginRight: 5}}/>
                     </Item>
+                    <TextInput
+                        style={styles.inputStyle}
+                        selectionColor={Color.white} //光标颜色
+                        secureTextEntry={false}
+                        multiline={true}
+                        autoFocus={false} //自动获得焦点
+                        underlineColorAndroid='transparent'// Android下划线的颜色
+                        placeholder={'禮物想表達什麽'}
+                        placeholderTextColor={Color.pickBackground} //设置提示文字的颜色
+                        value={this.state.text}
 
-                        <TextInput
-                            style={ styles.inputStyle}
-                            selectionColor={Color.white} //光标颜色
-                            secureTextEntry={false}
-                            multiline={true}
-                            autoFocus={false} //自动获得焦点
-                            underlineColorAndroid='transparent'// Android下划线的颜色
-                            placeholder={'禮物想表達什麽'}
-                            placeholderTextColor={Color.pickBackground} //设置提示文字的颜色
-                            value={this.state.text}
+                        onChangeText={this._onChang}/>
 
-                            onChangeText={this._onChang}/>
-                    <Row style={{...marginTB(30,30),marginLeft:22}}>
-                        <Entypo name='image' size={35} />
-                        <Item style={styles.pickImg}>
-
-                            <Entypo name='circle-with-plus' size={20} style={{...paddingLR(10,5),top:2}}/>
-                            <Text style={{color: Color.pickBackground, marginLeft:5,fontWeight: 'bold'}}>添加禮物照片</Text>
-
-                            <Right>
-                                <Text style={ {paddingRight: 15,color: Color.pickBackground}}>{this.state.birthday}</Text>
-                            </Right>
-                        </Item>
-                    </Row>
+                    {this.avatarSource()}
 
                     <TextInput
-                        style={ styles.inputStyle}
+                        style={styles.inputStyle}
                         selectionColor={Color.white} //光标颜色
                         secureTextEntry={false}
                         multiline={true}
@@ -157,15 +248,16 @@ export default class exploreScreen extends PureComponent {
                         value={this.state.text}
 
                         onChangeText={this._onChang}/>
-                    <Row style={{...marginTB(30,30),marginLeft:22}}>
-                        <Entypo name='instagram' size={35} />
+                    <Row style={{...marginTB(30, 30), marginLeft: 22}}>
+                        <Entypo name='instagram' size={35}/>
                         <Item style={styles.pickImg}>
 
-                            <Entypo name='circle-with-plus' size={20} style={{...paddingLR(10,5),top:2}}/>
-                            <Text style={{color: Color.pickBackground, marginLeft:5,fontWeight: 'bold'}}>添加个人照片</Text>
+                            <Entypo name='circle-with-plus' size={20} style={{...paddingLR(10, 5), top: 2}}/>
+                            <Text style={{color: Color.pickBackground, marginLeft: 5, fontWeight: 'bold'}}>添加个人照片</Text>
 
                             <Right>
-                                <Text style={ {paddingRight: 15,color: Color.pickBackground}}>{this.state.birthday}</Text>
+                                <Text
+                                    style={{paddingRight: 15, color: Color.pickBackground}}>{this.state.birthday}</Text>
                             </Right>
                         </Item>
                     </Row>
