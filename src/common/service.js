@@ -118,7 +118,6 @@ class Service {
 
     fetchNet(url, param, method) {
 
-
         return new Promise((resolve, reject) => {
 
             fetch(url, {

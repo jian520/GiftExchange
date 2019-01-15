@@ -436,8 +436,8 @@ export default class RegSetpB extends Component {
     //
     start() {
 
-        this.props.navigation.reset([NavigationActions.navigate({routeName: 'WelcomeHome'})], 0);
 
+        this.props.navigation.push('completeS')
 
 
     }

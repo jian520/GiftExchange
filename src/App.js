@@ -9,10 +9,7 @@ import {
     createAppContainer
 } from 'react-navigation'
 
-
-import Ionicons from 'react-native-vector-icons/Ionicons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-
 
 import StartScreen from "./screens/start/";
 import LoginScreen from "./screens/login/LoginScreen"
@@ -32,6 +29,7 @@ import SettingScreen from './screens/setting'
 import RegSetp from './screens/reg/regSetpB'
 import EditprofileScreen from "./screens/me/EditprofileScreen";
 import PersonalScreen from "./screens/me/PersonalScreen";
+import completeScreen from "./screens/reg/completeScreen";
 
 const HomeTab = createStackNavigator({
         Home: {
@@ -168,6 +166,7 @@ const StartStack = createStackNavigator({
         Login: {screen: LoginScreen},
         Reg: {screen: RegScreen},
         RegB:{screen:RegSetp},
+        completeS:{screen:completeScreen},
         App: {screen: AppStack},
     },
     {
@@ -201,7 +200,6 @@ export const StartContainer = createAppContainer(createSwitchNavigator(
         initialRouteName: 'Start',
     }
 ));
-
 
 export class StartAndTabRoot extends PureComponent {
     constructor() {
@@ -244,20 +242,13 @@ export class StartAndTabRoot extends PureComponent {
             this.setState({isLogin: false}, () => {
                 this.forceUpdate();
             });
-
-
         });
-
-
     }
 
 
     componentWillUnmount() {
         // 移除
-
-
-        DeviceEventEmitter.remove();
-
+    DeviceEventEmitter.remove();
     }
 
     componentWillMount() {
@@ -271,23 +262,19 @@ export class StartAndTabRoot extends PureComponent {
         //
         //
         // })
-
     }
 
     render() {
-
         if (this.state.isLogin) {
             return (
                 <AppContainer/>
             );
         }
-
         return (
             <StartContainer/>
         );
     }
 }
-
 
 export default () =>
 

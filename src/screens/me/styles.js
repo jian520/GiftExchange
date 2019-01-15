@@ -23,10 +23,10 @@ export default {
   },
   bottmW:{
     borderBottomWidth: 0,
-
+    borderColor:Color.white
   },
   textC:{
-    color: Color.white,
+    color: Color.black,
     fontWeight: 'bold',
   },
   regSetp:{
@@ -44,5 +44,6 @@ export default {
     height:30,
     alignSelf: 'center',
     marginTop: 50,
+
   },
 };
