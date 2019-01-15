@@ -19,4 +19,5 @@ export default {
     reseda: '#18d688',
     yellow: '#f8ca42',
     carColor: 'rgba(247, 185, 91, 1)',
+    pickBackground: 'rgba(93, 201, 211, 1)',
 }

@@ -16,9 +16,9 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import StartScreen from "./screens/start/";
 import LoginScreen from "./screens/login/LoginScreen"
 import RegScreen from "./screens/reg/regSetpA"
-
 import HomeScreen from "./screens/home/HomeScreen";
-
+import ExploreScreen from "./screens/explore/exploreScreen";
+import MessageScreen from  "./screens/Message/messageScreens"
 import StartA from "./screens/start/StartA";
 import StartB from "./screens/start/StartB";
 import StartC from "./screens/start/StartC";
@@ -28,7 +28,9 @@ import WelcomeHome from './screens/start/WelcomeHome';
 
 import MeScreen from './screens/me/MeScreen'
 import SettingScreen from './screens/setting'
-
+import RegSetp from './screens/reg/regSetpB'
+import EditprofileScreen from "./screens/me/EditprofileScreen";
+import PersonalScreen from "./screens/me/PersonalScreen";
 
 const HomeTab = createStackNavigator({
         Home: {
@@ -66,7 +68,7 @@ const Tabs = createBottomTabNavigator(
             screen: HomeTab,
             navigationOptions: {
 
-                tabBarLabel: 'Home',
+                tabBarLabel: 'Bagel',
                 tabBarIcon: ({tintColor, focused}) => (
                     <Ionicons
                         name={focused ? 'ios-home' : 'ios-home'}
@@ -76,11 +78,41 @@ const Tabs = createBottomTabNavigator(
                 ),
             },
         },
+
+        ExploreTab: {
+            screen: ExploreScreen,
+            navigationOptions: {
+
+                tabBarLabel: '探索',
+                tabBarIcon: ({tintColor, focused}) => (
+                    <Ionicons
+                        name={focused ? 'ios-home' : 'ios-home'}
+                        size={26}
+                        style={{color: tintColor}}
+                    />
+                ),
+            },
+        },
+        MessageTab: {
+            screen: MessageScreen,
+            navigationOptions: {
+
+                tabBarLabel: 'Inbox',
+                tabBarIcon: ({tintColor, focused}) => (
+                    <Ionicons
+                        name={focused ? 'ios-home' : 'ios-home'}
+                        size={26}
+                        style={{color: tintColor}}
+                    />
+                ),
+            },
+        },
+
         MeTab: {
             screen: MeTab,
             navigationOptions: {
 
-                tabBarLabel: 'Me',
+                tabBarLabel: '我',
                 tabBarIcon: ({tintColor, focused}) => (
                     <Ionicons
                         name={focused ? 'ios-home' : 'ios-home'}
@@ -110,6 +142,8 @@ const AppStack = createStackNavigator({
         WelcomeHome: {screen: WelcomeHome},
         Setting: {screen: SettingScreen},
         Profile: {screen: MeScreen},
+        Editprofile:{screen:EditprofileScreen},
+        Personal:{screen:PersonalScreen}
 
     },
     {
@@ -129,7 +163,7 @@ const StartStack = createStackNavigator({
         WelcomeHome: {screen: WelcomeHome},
         Login: {screen: LoginScreen},
         Reg: {screen: RegScreen},
-
+        RegB:{screen:RegSetp},
         App: {screen: AppStack},
     },
     {
@@ -169,7 +203,7 @@ export class StartAndTabRoot extends PureComponent {
     constructor() {
         super()
         this.state = {
-            isLogin: false,
+            isLogin: true,
 
         }
         StatusBar.setBarStyle('light-content')

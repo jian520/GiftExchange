@@ -5,13 +5,16 @@ export default {
         backgroundColor: "#FFF"
     },
     textAColor: {
-        color: common.colorA
+        color: common.colorC
     },
     textBColor: {
         color: common.colorB
     },
     textCColor: {
         color: common.colorC
+    },
+    textCEolor: {
+        color: common.colorE
     },
     separatorStyle: {
         backgroundColor: common.colorD,

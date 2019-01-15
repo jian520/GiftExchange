@@ -11,23 +11,19 @@ import {
     Right,
     Item,
     Input,
-    Form, Separator, Thumbnail, View, Text, Segment, ListItem, Spinner,
+    Form, Separator, DatePicker, View, Text, Segment, ListItem, Spinner,
 } from "native-base";
 
 import gStyles from "../../common/globalStyles"
 import common from "../../common/common"
-import {Grid, Row, Col} from "react-native-easy-grid";
+// import {Grid, Col} from "react-native-easy-grid";
 import Picker from 'react-native-picker';
 import area from '../../common/area.json';
-import service from "../../common/service";
-
-const cover = require("../../../assets/login-icon.png");
-import User from '../../model/User'
-
+import styles from "./styles";
 import UserParams from '../../model/UserParams'
-import {NavigationActions} from "react-navigation";
-import {marrydatas, education} from '../../common/datas.js';
-
+import Color from "../../commonComponents/Color";
+import {marrydatas, education,religious} from '../../common/datas.js';
+import {StackActions, NavigationActions} from 'react-navigation';
 
 var userParams = Object.create(UserParams);
 export default class RegSetpB extends Component {
@@ -35,15 +31,50 @@ export default class RegSetpB extends Component {
         super(props);
         this.state = {
             loading: false,
-            sex:'',
+            sex: '',
             birthday: '',
             marriage: '',
             education: '',
             height: '',
             area: '',
+            religious:''
         };
     }
-
+    _createDateData() {
+        let date = [];
+        for(let i=1970;i<2020;i++){
+            let month = [];
+            for(let j = 1;j<13;j++){
+                let day = [];
+                if(j === 2){
+                    for(let k=1;k<29;k++){
+                        day.push(k+'日');
+                    }
+                    //Leap day for years that are divisible by 4, such as 2000, 2004
+                    if(i%4 === 0){
+                        day.push(29+'日');
+                    }
+                }
+                else if(j in {1:1, 3:1, 5:1, 7:1, 8:1, 10:1, 12:1}){
+                    for(let k=1;k<32;k++){
+                        day.push(k+'日');
+                    }
+                }
+                else{
+                    for(let k=1;k<31;k++){
+                        day.push(k+'日');
+                    }
+                }
+                let _month = {};
+                _month[j+'月'] = day;
+                month.push(_month);
+            }
+            let _date = {};
+            _date[i+'年'] = month;
+            date.push(_date);
+        }
+        return date;
+    }
 
     showSexPicker() {
 
@@ -75,47 +106,71 @@ export default class RegSetpB extends Component {
 
     }
 
+    showReligiousPicker() {
 
+        Picker.init({
+            pickerData: religious,
+            pickerConfirmBtnText: "確定",
+            pickerTitleText: "請選擇性別",
+            pickerCancelBtnText: "取消",
+            pickerToolBarBg: [230, 70, 78, 1],
+            pickerTitleColor: [255, 255, 255, 1],
+            pickerCancelBtnColor: [255, 255, 255, 1],
+            pickerConfirmBtnColor: [255, 255, 255, 1],
+            pickerBg: [255, 255, 255, 1],
 
+            onPickerConfirm: pickedValue => {
+                this.setState({
+                    religious: pickedValue[0]
+                });
+            },
+            onPickerCancel: pickedValue => {
+                console.log('area', pickedValue);
+            },
+            onPickerSelect: pickedValue => {
+                //Picker.select(['山东', '青岛', '黄岛区'])
+                console.log('area', pickedValue);
+            }
+        });
+        Picker.show();
+
+    }
 
     showBirthdayPicker() {
-
-        let date = [];
-        for (let i = 1977; i < 2018; i++) {
-            let month = [];
-            for (let j = 1; j < 13; j++) {
-                let day = [];
-                if (j === 2) {
-                    for (let k = 1; k < 29; k++) {
-                        day.push(k + '日');
-                    }
-                    //Leap day for years that are divisible by 4, such as 2000, 2004
-                    if (i % 4 === 0) {
-                        day.push(29 + '日');
-                    }
-                }
-                else if (j in {1: 1, 3: 1, 5: 1, 7: 1, 8: 1, 10: 1, 12: 1}) {
-                    for (let k = 1; k < 32; k++) {
-                        day.push(k + '日');
-                    }
-                }
-                else {
-                    for (let k = 1; k < 31; k++) {
-                        day.push(k + '日');
-                    }
-                }
-                let _month = {};
-                _month[j + '月'] = day;
-                month.push(_month);
-            }
-            let _date = {};
-            _date[i + '年'] = month;
-            date.push(_date);
-        }
+        // let date = [];
+        // for (let i = 1977; i < 2018; i++) {
+        //     let month = [];
+        //     for (let j = 1; j < 13; j++) {
+        //         let day = [];
+        //         if (j === 2) {
+        //             for (let k = 1; k < 29; k++) {
+        //                 day.push(k + '日');
+        //             }
+        //             //Leap day for years that are divisible by 4, such as 2000, 2004
+        //             if (i % 4 === 0) {
+        //                 day.push(29 + '日');
+        //             }
+        //         } else if (j in {1: 1, 3: 1, 5: 1, 7: 1, 8: 1, 10: 1, 12: 1}) {
+        //             for (let k = 1; k < 32; k++) {
+        //                 day.push(k + '日');
+        //             }
+        //         } else {
+        //             for (let k = 1; k < 31; k++) {
+        //                 day.push(k + '日');
+        //             }
+        //         }
+        //         let _month = {};
+        //         _month[j + '月'] = day;
+        //         month.push(_month);
+        //     }
+        //     let _date = {};
+        //     _date[i + '年'] = month;
+        //     date.push(_date);
+        // }
 
 
         Picker.init({
-            pickerData: date,
+            pickerData: this._createDateData(),
             pickerConfirmBtnText: "確定",
             pickerTitleText: "請選擇出生日期",
             pickerCancelBtnText: "取消",
@@ -152,7 +207,7 @@ export default class RegSetpB extends Component {
         Picker.init({
             pickerData: marrydatas,
             pickerConfirmBtnText: "確定",
-            pickerTitleText: "請選擇婚姻狀況",
+            pickerTitleText: "請選擇職業",
             pickerCancelBtnText: "取消",
             pickerToolBarBg: [230, 70, 78, 1],
             pickerTitleColor: [255, 255, 255, 1],
@@ -211,7 +266,8 @@ export default class RegSetpB extends Component {
         Picker.show();
     }
 
-
+    //
+    //
     showHeightPicker() {
 
         let date = [];
@@ -293,110 +349,117 @@ export default class RegSetpB extends Component {
     }
 
 
-    doReg() {
-
-        // Keyboard.dismiss()
-        // console.log('doReg')
-        if (this.state.loading) return;
-        //
-
-        if (this.state.birthday.length == 0) {
-            common.toast("請選擇生日")
-            return;
-        }
-        if (this.state.marriage.length == 0) {
-            common.toast("請選擇 婚姻狀況")
-            return;
-        }
-        if (this.state.education.length == 0) {
-            common.toast("請選擇學歷")
-            return;
-        }
-
-        if (this.state.height == 0) {
-            common.toast("請選擇身高")
-            return;
-        }
-
-        if (this.state.area.length == 0) {
-            common.toast("請選擇所在地區")
-            return
-        }
-
-        this.setState({
-            loading: true,
-
-        });
-
-        let p = this.props.navigation.state.params.p
-        console.log(p[0])
-
-        var user = p[0];
-
-        userParams.gender = p[1]
-
-        console.log(userParams)
-
-
-        service.regSystem(user, userParams)
-            .then((wrapData) => {
-                console.log('wrapData  ')
-
-                console.log(wrapData)
-
-
-                this.setState({
-                    loading: false,
-
-                });
-
-                if (wrapData.flag == 'Success') {
-
-                    common.toast(wrapData.msg)
-
-                    this.start()
-
-                } else {
-                    common.toast(wrapData.msg)
-
-                }
-
-
-            }).then((items) => {
-
-        }).catch((error) => {
-            console.log(error);
-
-            this.setState({
-                loading: false,
-
-            });
-
-
-        })
-
-    }
-
-
+    // doReg() {
+    //
+    //     // Keyboard.dismiss()
+    //     // console.log('doReg')
+    //     if (this.state.loading) return;
+    //     //
+    //
+    //     if (this.state.birthday.length == 0) {
+    //         common.toast("請選擇生日")
+    //         return;
+    //     }
+    //     if (this.state.marriage.length == 0) {
+    //         common.toast("請選擇 婚姻狀況")
+    //         return;
+    //     }
+    //     if (this.state.education.length == 0) {
+    //         common.toast("請選擇學歷")
+    //         return;
+    //     }
+    //
+    //     if (this.state.height == 0) {
+    //         common.toast("請選擇身高")
+    //         return;
+    //     }
+    //
+    //     if (this.state.area.length == 0) {
+    //         common.toast("請選擇所在地區")
+    //         return
+    //     }
+    //
+    //     this.setState({
+    //         loading: true,
+    //
+    //     });
+    //
+    //     let p = this.props.navigation.state.params.p
+    //     console.log(p[0])
+    //
+    //     var user = p[0];
+    //
+    //     userParams.gender = p[1]
+    //
+    //     console.log(userParams)
+    //
+    //
+    //     service.regSystem(user, userParams)
+    //         .then((wrapData) => {
+    //             console.log('wrapData  ')
+    //
+    //             console.log(wrapData)
+    //
+    //
+    //             this.setState({
+    //                 loading: false,
+    //
+    //             });
+    //
+    //             if (wrapData.flag == 'Success') {
+    //
+    //                 common.toast(wrapData.msg)
+    //
+    //                 this.start()
+    //
+    //             } else {
+    //                 common.toast(wrapData.msg)
+    //
+    //             }
+    //
+    //
+    //         }).then((items) => {
+    //
+    //     }).catch((error) => {
+    //         console.log(error);
+    //
+    //         this.setState({
+    //             loading: false,
+    //
+    //         });
+    //
+    //
+    //     })
+    //
+    // }
+    //
+    //
     start() {
-        const resetAction = NavigationActions.reset({
-            index: 0,
-            actions: [
-                NavigationActions.navigate({routeName: 'tabRoot'}),
 
-            ]
-        })
-        this.props.navigation.dispatch(resetAction)
+        this.props.navigation.reset([NavigationActions.navigate({routeName: 'WelcomeHome'})], 0);
+
+
 
     }
+
+    popGoBack(){
+          this.pickHide()
+        this.props.navigation.goBack()
+    }
+
+    pickHide(){
+        Picker.hide()
+    }
+
+
 
     render() {
 
         return (
-            <Container style={gStyles.container}>
+            <Container style={gStyles.container} >
                 <Header>
                     <Left>
-                        <Button transparent onPress={() => this.props.navigation.goBack()}>
+                        <Button transparent onPress={() => this.popGoBack()}>
                             <Icon name="arrow-back" style={{color: "#000"}}/>
                         </Button>
                     </Left>
@@ -406,161 +469,103 @@ export default class RegSetpB extends Component {
                     <Right/>
                 </Header>
 
-                <Content>
-
-                    <ListItem itemDivider>
-                        <Text style={gStyles.textBColor}>基本資料</Text>
-                    </ListItem>
-                    <ListItem icon>
-                        <Body>
-                        <Text style={gStyles.textBColor}>手機號</Text>
-                        </Body>
-                        <Right>
-                            <Text style={gStyles.textCColor}>12345678 </Text>
-
-                        </Right>
-                    </ListItem>
-
-                    <ListItem icon>
-                        <Body>
-                        <Text style={gStyles.textBColor}>郵箱</Text>
-                        </Body>
-                        <Right>
-                            <Text style={gStyles.textCColor}>333 </Text>
-
-                        </Right>
-                    </ListItem>
-
-                    <ListItem icon>
-                        <Body>
-                        <Text style={gStyles.textBColor}>姓名</Text>
-                        </Body>
-                        <Right>
-                            <Text style={gStyles.textCColor}></Text>
-                            <Icon active name="arrow-forward" style={gStyles.textCColor}/>
-                        </Right>
-                    </ListItem>
-                    <ListItem icon
-                              button
-                              onPress={() => this.showSexPicker()}
-                    >
-                        <Body>
-                        <Text style={gStyles.textBColor}>性别</Text>
-                        </Body>
-                        <Right>
-                            <Text style={gStyles.textCColor}>{this.state.sex}</Text>
-                            <Icon active name="arrow-forward" style={gStyles.textCColor}/>
-                        </Right>
-                    </ListItem>
-
-                    <ListItem icon button
+                <Content  onTouchStart={() => this.pickHide()} onScrollEndDrag={() => this.pickHide()}>
+                    <View style={styles.containerView}>
+                        <Item style={styles.regSetp}
                               onPress={() => this.showBirthdayPicker()}>
-                        <Body>
-                        <Text style={gStyles.textBColor}>出生年月日</Text>
-                        </Body>
 
-                        <Right>
-                            <Text style={gStyles.textCColor}>{this.state.birthday}</Text>
-                            <Icon active name="arrow-forward" style={gStyles.textCColor}/>
-                        </Right>
-                    </ListItem>
-
-                    <ListItem icon button
-                              onPress={() => this.showMarriagePicker()}>
-                        <Body>
-                        <Text style={gStyles.textBColor}>婚姻狀況</Text>
-                        </Body>
-
-                        <Right>
-                            <Text style={gStyles.textCColor}>{this.state.marriage}</Text>
-                            <Icon active name="arrow-forward" style={gStyles.textCColor}/>
-                        </Right>
-
-                    </ListItem>
+                            <Text style={{color: Color.white, marginLeft: 15}}>年龄</Text>
 
 
-                    <ListItem icon button
-                              onPress={() => this.showEducationPicker()}>
-                        <Body>
-                        <Text style={gStyles.textBColor}>學歷</Text>
-                        </Body>
+                            <Right>
+                                <Text style={[gStyles.textCColor, {paddingRight: 15}]}>{this.state.birthday}</Text>
 
-                        <Right>
-                            <Text style={gStyles.textCColor}>{this.state.education}</Text>
-                            <Icon active name="arrow-forward" style={gStyles.textCColor}/>
-                        </Right>
-
-                    </ListItem>
+                            </Right>
+                        </Item>
 
 
-                    <ListItem icon button
+                        <Item style={styles.regSetp}
+                              onPress={() => this.showSexPicker()}>
+
+                            <Text style={{color: Color.white, marginLeft: 15}}>性别</Text>
+
+
+                            <Right>
+                                <Text style={[gStyles.textCColor, {paddingRight: 15}]}>{this.state.sex}</Text>
+
+                            </Right>
+                        </Item>
+
+
+                        <Item style={styles.regSetp}
+                              onPress={() => this.showAreaPicker()}>
+
+                            <Text style={{color: Color.white, marginLeft: 15}}>居住國家/地址</Text>
+
+
+                            <Right>
+                                <Text style={[gStyles.textCColor, {paddingRight: 15}]}>{this.state.area}</Text>
+
+                            </Right>
+                        </Item>
+
+
+                        <Item style={styles.regSetp}
                               onPress={() => this.showHeightPicker()}>
-                        <Body>
-                        <Text style={gStyles.textBColor}>身高</Text>
-                        </Body>
-                        <Right>
-                            <Text style={gStyles.textCColor}>{this.state.height}</Text>
-                            <Icon active name="arrow-forward" style={gStyles.textCColor}/>
-                        </Right>
-                    </ListItem>
+
+                            <Text style={{color: Color.white, marginLeft: 15}}>高度</Text>
 
 
-                    {/*<ListItem icon button*/}
-                              {/*onPress={() => this.showAreaPicker()}>*/}
-                        {/*<Body>*/}
-                        {/*<Text style={gStyles.textBColor}>所在地區</Text>*/}
-                        {/*</Body>*/}
-                        {/*<Right>*/}
-                            {/*<Text style={gStyles.textCColor}>{this.state.area}</Text>*/}
-                            {/*<Icon active name="arrow-forward" style={gStyles.textCColor}/>*/}
-                        {/*</Right>*/}
-                    {/*</ListItem>*/}
+                            <Right>
+                                <Text style={[gStyles.textCColor, {paddingRight: 15}]}>{this.state.height}</Text>
+
+                            </Right>
+                        </Item>
 
 
-                    <View style={{flex: 1, alignItems: "center", flexWrap: "wrap", marginLeft: 40, marginRight: 40}}>
+                        <Item style={styles.regSetp}
+                              onPress={() => this.showEducationPicker()}>
+
+                            <Text style={{color: Color.white, marginLeft: 15}}>學歷</Text>
 
 
-                        <Separator style={{backgroundColor: "#FFF", height: 25}}/>
+                            <Right>
+                                <Text style={[gStyles.textCColor, {paddingRight: 15}]}>{this.state.education}</Text>
 
-                        <Grid style={{width: 190}}>
-                            <Col>
-                                <View style={{borderRadius: 5 / 2, width: 60, height: 5, backgroundColor: "#ECECEC"}}/>
-                            </Col>
-                            <Col>
-                                <View style={{borderRadius: 5 / 2, width: 60, height: 5, backgroundColor: "#ECECEC"}}/>
-
-                            </Col>
-                            <Col>
-                                <View style={{
-                                    borderRadius: 5 / 2,
-                                    width: 60,
-                                    height: 5,
-                                    backgroundColor: common.colorA
-                                }}/>
-                            </Col>
-                        </Grid>
-
-                        <Separator style={{backgroundColor: "#FFF", height: 20}}/>
-
-                        <Spinner
-                            style={{position: "absolute", alignSelf: 'center'}}
-                            animating={this.state.loading} size="large" color="red"/>
+                            </Right>
+                        </Item>
 
 
-                        <Grid style={{width: 100}}>
-                            <Col>
-                                <Button block rounded style={{backgroundColor: common.colorA, height: 35, width: 90}}
-                                        onPress={() => this.doReg()}>
-                                    <Text>確定</Text>
-                                </Button>
-                            </Col>
-                        </Grid>
+                        <Item style={styles.regSetp}
+                              onPress={() => this.showMarriagePicker()}>
 
+                            <Text style={{color: Color.white, marginLeft: 15}}>職業</Text>
+
+                            <Right>
+                                <Text style={[gStyles.textCColor, {paddingRight: 15}]}>{this.state.marriage}</Text>
+
+                            </Right>
+                        </Item>
+
+
+                        <Item style={styles.regSetp}
+                              onPress={() => this.showReligiousPicker()}>
+
+                            <Text style={{color: Color.white, marginLeft: 15}}>宗教</Text>
+
+
+                            <Right>
+                                <Text style={[gStyles.textCColor, {paddingRight: 15}]}>{this.state.religious}</Text>
+
+                            </Right>
+                        </Item>
 
                     </View>
 
-
                 </Content>
+                <Button block style={styles.botomBtn} onPress={() => this.start()}>
+                    <Text>完成</Text>
+                </Button>
             </Container>
         );
     }

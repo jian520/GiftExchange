@@ -7,7 +7,8 @@ import {
     Container,
     H3,
     Button,
-    Text
+    Text,
+    Thumbnail
 } from "native-base";
 
 
@@ -18,8 +19,6 @@ import Row from "../../commonComponents/Row";
 import Color from "../../commonComponents/Color";
 import Column from "../../commonComponents/Column";
 import JumpButton from "./StartD";
-
-
 
 
 export default class WelcomeHome extends Component {
@@ -36,6 +35,7 @@ export default class WelcomeHome extends Component {
 
 
     }
+
     doReg() {
 
         this.props.navigation.push("Reg")
@@ -48,63 +48,63 @@ export default class WelcomeHome extends Component {
         return (
 
             <Container style={[styles.container]}>
+                <Thumbnail square source={BaseImg.StartImg.rest}
+                           style={{
+                               width: screenW,
+                               height: isIphoneX() ? 88 + screenH * 0.35 : screenH * 0.35,
+                           }}
+                />
 
-                    <Image style={{
 
-                        resizeMode:'stretch',
-                        width:screenW,
-                        height:isIphoneX() ?  88 +screenH *0.35:screenH *0.35,
-                    }}
-                     source={BaseImg.StartImg.rest}/>
 
-                <Row horizontalCenter style={{...marginTB(50,50)}}>
-                    <H3 style={{color:Color.white}}>歡迎來到</H3>
-                    <H3 style={{color:Color.orange}}>GiftExchange</H3>
+
+                <Row horizontalCenter style={{...marginTB(50, 50)}}>
+                    <H3 style={{color: Color.white}}>歡迎來到</H3>
+                    <H3 style={{color: Color.orange}}>GiftExchange</H3>
+
                 </Row>
 
-                <Column  style={{alignItems: 'center',justifyContent: 'center'}}>
-                    <H3 style={{color:Color.white,...paddingTB(5,5)}}>選取一份禮物</H3>
-                    <H3 style={{color:Color.white,...paddingTB(5,5)}}>認識一個你欣賞的人</H3>
-                    <H3 style={{color:Color.white,...paddingTB(5,5)}}>見面交流。成為朋友</H3>
+                <Column style={{alignItems: 'center', justifyContent: 'center'}}>
+                    <H3 style={{color: Color.white, ...paddingTB(5, 5)}}>選取一份禮物</H3>
+                    <H3 style={{color: Color.white, ...paddingTB(5, 5)}}>認識一個你欣賞的人</H3>
+
+                    <Row horizontalCenter>
+                        <H3 style={{color: Color.white, ...paddingTB(5, 5)}}>見面交流。成為朋友</H3>
+                        <Thumbnail square style={{
+                            width: 40,
+                            height: 40,
+                            marginLeft: 10,
+                            marginTop: -5,
+                        }}
+                               source={BaseImg.StartImg.heart}/>
+                    </Row>
+
                 </Column>
 
 
-                <Button block onPress={() => this.doReg()}
-                         style={{
-                             width:150,
-                             ...marginTB(10,15),
-                             backgroundColor:Color.white,
-                             alignSelf:"center",
-                             height:35,
-                         }}>
-                    <Text style={{color:Color.red}}>註冊用戶</Text>
+
+                <Button block  onPress={() => this.doReg()}
+                        style={{
+                            width: 150,
+                            backgroundColor: Color.white,
+                            alignSelf: "center",
+                            height: 35,
+                            ...marginTB(200, 20)
+                        }}>
+                    <Text style={{color: Color.red}}>註冊用戶</Text>
+                </Button>
+                <Button block onPress={() => this.doLogin()}
+                        style={{
+                            width: 150,
+                            backgroundColor: Color.white,
+                            alignSelf: "center",
+                            height: 35,
+                            ...marginTB(15, 15),
+                        }}>
+                    <Text style={{color: Color.red}}>登入</Text>
                 </Button>
 
-                {/*<Column style={{alignItems: 'center',*/}
-                    {/*justifyContent: 'center', ...marginTB(200,20)}}>*/}
-                {/*<Button  onPress={() => this.doReg()}*/}
-                        {/*style={{*/}
-                            {/*width:150,*/}
-                            {/*...marginTB(10,15),*/}
-                            {/*backgroundColor:Color.white,*/}
-                            {/*alignSelf:"center",*/}
-                            {/*height:35,*/}
-                           {/*}}>*/}
-                    {/*<Text style={{color:Color.red,...paddingTB(5,5),marginLeft: 30}}>註冊用戶</Text>*/}
-                {/*</Button>*/}
-                    {/**/}
-                    {/**/}
-                {/*<Button  onPress={() => this.doLogin()}*/}
-                        {/*style={{*/}
-                            {/*width:150,*/}
-                            {/*backgroundColor:Color.white,*/}
-                            {/*alignSelf:"center",*/}
-                            {/*height:35,*/}
-                      {/*...marginTB(15,15),*/}
-                        {/*}}     >*/}
-                    {/*<Text style={{color:Color.red,...paddingTB(5,5),marginLeft:50}}>登入</Text>*/}
-                {/*</Button>*/}
-                {/*</Column>*/}
+
             </Container>
         );
     }

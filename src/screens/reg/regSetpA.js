@@ -24,7 +24,12 @@ import {
     Right,
     Item,
     Input,
-    Form, Separator, Thumbnail, View, Text, Spinner
+    Separator,
+    Thumbnail,
+    View,
+    Text,
+    Footer,
+    FooterTab
 } from "native-base";
 import styles from "./styles";
 import gStyles from "../../common/globalStyles"
@@ -173,8 +178,9 @@ export default class RegSetpA extends Component {
     }
 
     doReg() {
-        this.props.navigation.navigate("RegSetpB" )
-return
+        this.props.navigation.push("RegB")
+
+        return
 
         Keyboard.dismiss()
         console.log('doReg')
@@ -278,7 +284,7 @@ return
 
         return (
             <Container style={gStyles.container}>
-                <Header>
+                <Header style={styles.header}>
                     <Left>
                         <Button transparent onPress={() => this.props.navigation.goBack()}>
                             <Icon name="arrow-back" style={{color: "#000"}}/>
@@ -291,111 +297,61 @@ return
                 </Header>
 
 
-                <Content  >
+                <Content >
+                     <View style={ styles.containerView}>
+                         <Item style={styles.input}>
+                             <Input placeholder="名"
+                                    placeholderTextColor={common.colorC}
 
-
-                    <View style={ styles.containerView}>
-
-
-
-                        {/*<Thumbnail large source={cover}/>*/}
-                        {/*<Separator style={{backgroundColor: "#FFF", height: 40}}/>*/}
-                        <Item rounded>
-                            <Input placeholder="手機號" placeholderTextColor={common.colorC}
-
-                                   onChangeText={(e) => {
-                                       this.onPhoneChanged(e)
-                                   }}
-                            />
-                        </Item>
-                        <Separator style={{backgroundColor: "#FFF", height: 10}}/>
-                        <Grid>
-                            <Col>
-                                <Item rounded>
-                                    <Input placeholder="驗證碼" placeholderTextColor={common.colorC}
-
-                                           onChangeText={(e) => {
-                                               this.onCodeChanged(e)
-                                           }}
-                                    />
-
-                                </Item>
-                            </Col>
-                            <Col><Body>
-                                {this.buttonClickStatus()}
-                            </Body>
-                            </Col>
-                        </Grid>
-                        <Separator style={{backgroundColor: "#FFF", height: 10}}/>
-
-
-                        <Item rounded>
-                            <Input placeholder="郵件" placeholderTextColor={common.colorC}
-
-                                   onChangeText={(e) => {
-                                       this.onEmailChanged(e)
-                                   }}
-                            />
-                        </Item>
-                        <Separator style={{backgroundColor: "#FFF", height: 10}}/>
-                        <Item rounded>
-                            <Input placeholder="密碼" placeholderTextColor={common.colorC}
-                                   secureTextEntry
-                                   onChangeText={(e) => {
-                                       this.onPwdChanged(e)
-                                   }}
-
-
-                            />
-                        </Item>
-                        <Separator style={{backgroundColor: "#FFF", height: 10}}/>
-
-                        <Item rounded>
-                            <Input placeholder="確認密碼" placeholderTextColor={common.colorC}
-                                   secureTextEntry
-                                   onChangeText={(e) => {
-                                       this.onPwdConfirmChanged(e)
-                                   }}
-
-                            />
-                        </Item>
-                        {/*<Separator style={{backgroundColor: "#FFF", height: 10}}/>*/}
-                        <Spinner
-                            style={{position: "absolute", alignSelf: 'center'}}
-                            animating={this.state.loading} size="large" color="red"/>
+                                    onChangeText={(e) => {
+                                        this.onPhoneChanged(e)
+                                    }}
+                             />
+                         </Item>
 
                         <Separator style={{backgroundColor: "#FFF", height: 20}}/>
 
-                        <Grid style={{width: 190}}>
-                            <Col>
-                                <View style={{
-                                    borderRadius: 5 / 2,
-                                    width: 60,
-                                    height: 5,
-                                    backgroundColor: "#ECECEC"
-                                }}/>
-                            </Col>
-                            <Col>
-                                <View style={{borderRadius: 5 / 2, width: 60, height: 5, backgroundColor:  common.colorA  }}/>
+                         <Item style={styles.input}>
+                             <Input placeholder="姓氏"
+                                    placeholderTextColor={common.colorC}
 
-                            </Col>
-                            <Col>
-                                <View style={{borderRadius: 5 / 2, width: 60, height: 5, backgroundColor: "#ECECEC"}}/>
-                            </Col>
-                        </Grid>
+                                    onChangeText={(e) => {
+                                        this.onPhoneChanged(e)
+                                    }}
+                             />
+                         </Item>
 
-                        <Separator style={{backgroundColor: "#FFF", height: 20}}/>
+                         <Separator style={{backgroundColor: "#FFF", height: 20}}/>
 
-                        <Button block rounded style={{backgroundColor: common.colorA}} onPress={() => this.doReg()}>
-                            <Text>註冊</Text>
-                        </Button>
+                         <Item style={styles.input}>
+                             <Input placeholder="郵箱地址"
+                                    placeholderTextColor={common.colorC}
 
+                                    onChangeText={(e) => {
+                                        this.onPhoneChanged(e)
+                                    }}
+                             />
+                         </Item>
+                         <Separator style={{backgroundColor: "#FFF", height: 20}}/>
 
+                         <Item style={styles.input}>
+                             <Input placeholder="聯絡電話"
+                                    placeholderTextColor={common.colorC}
 
-
+                                    onChangeText={(e) => {
+                                        this.onPhoneChanged(e)
+                                    }}
+                             />
+                         </Item>
 
                     </View>
                 </Content>
+
+
+                            <Button block  style={styles.botomBtn} onPress={() => this.doReg()}>
+                                <Text>繼續</Text>
+                            </Button>
+
             </Container>
         );
     }
