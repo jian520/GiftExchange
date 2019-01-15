@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 // import { Text, StyleSheet, View, Button } from 'react-native'
-import { createStackNavigator, createAppContainer } from 'react-navigation';
+import {createStackNavigator, createAppContainer, NavigationActions} from 'react-navigation';
 
 import {
     Container,
@@ -11,9 +11,11 @@ import {
     Left,
     Right,
     Body,
-    Text, Thumbnail, List, ListItem
+    Text, Thumbnail, List, ListItem, Item
 } from "native-base";
-import Ionicons from 'react-native-vector-icons/Ionicons';
+import Entypo from "react-native-vector-icons/Entypo";
+import Ionicons from "react-native-vector-icons/Ionicons";
+
 import styles from "./styles";
 import globalStyles from "../../common/globalStyles";
 import BaseImg from "../../commonComponents/BaseImg";
@@ -34,7 +36,10 @@ export default class HomeScreen extends Component {
     //     ),
     // }
 
+    shoppingView(){
 
+        this.props.navigation.push("ShoppingScreen");
+    }
 
     render() {
 
@@ -48,7 +53,10 @@ export default class HomeScreen extends Component {
                     <Body>
                     <Title style={globalStyles.textCColor}>Fate Date</Title>
                     </Body>
-                    <Right><Text style={globalStyles.textCColor}>...</Text></Right>
+                    <Right>
+                         <Entypo name='shop' size={25} style={{marginRight: 15}} onPress={ ()=>{this.shoppingView()}}/>
+                        <Ionicons name='ios-more' size={25} style={{marginRight: 5}}/>
+                    </Right>
                 </Header>
 
                 <Content>

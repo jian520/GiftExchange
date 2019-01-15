@@ -30,6 +30,7 @@ import RegSetp from './screens/reg/regSetpB'
 import EditprofileScreen from "./screens/me/EditprofileScreen";
 import PersonalScreen from "./screens/me/PersonalScreen";
 import completeScreen from "./screens/reg/completeScreen";
+import ShoppingScreen from "./screens/home/ShoppingScreen";
 
 const HomeTab = createStackNavigator({
         Home: {
@@ -145,7 +146,8 @@ const AppStack = createStackNavigator({
         Setting: {screen: SettingScreen},
         Profile: {screen: MeScreen},
         Editprofile:{screen:EditprofileScreen},
-        Personal:{screen:PersonalScreen}
+        Personal:{screen:PersonalScreen},
+        ShoppingScreen:{screen:ShoppingScreen}
 
     },
     {
@@ -205,7 +207,7 @@ export class StartAndTabRoot extends PureComponent {
     constructor() {
         super()
         this.state = {
-            isLogin: false,
+            isLogin: true,
 
         }
         StatusBar.setBarStyle('light-content')
