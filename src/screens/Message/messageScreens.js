@@ -8,7 +8,8 @@ import {
     StyleSheet,
     View,
 } from 'react-native';
-import {Body, Button, Container, Content, Header, Left, Right, Text, Title} from "native-base";
+import {Body, Right, Container, Left, Header, TabHeading, Tabs, Text, Tab,Title} from "native-base";
+import gStyles from "../../common/globalStyles";
 
 export default class messageScreens extends PureComponent {
 
@@ -45,7 +46,7 @@ export default class messageScreens extends PureComponent {
 
     }
 
-    
+
 
     /**
      * 调用了 render() 更新完成界面之后，会调用 componentDidUpdate() 来得到通知
@@ -69,16 +70,16 @@ export default class messageScreens extends PureComponent {
                 <Header>
                     <Left />
                     <Body>
-                    <Title>Home</Title>
+                    <Title style={gStyles.textCColor}>Fate Date</Title>
                     </Body>
-                    <Right />
+                    <Right/>
                 </Header>
-
-                <Content padder>
-                    <Button onPress={() =>   navigation.push('Test')   }>
-                        <Text>push</Text>
-                    </Button>
-                </Content>
+                <Tabs>
+                    <Tab heading={ <TabHeading><Text>Camera</Text></TabHeading>}>
+                    </Tab>
+                    <Tab heading={ <TabHeading><Text>No Icon</Text></TabHeading>}>
+                    </Tab>
+                </Tabs>
             </Container>
         );
     }

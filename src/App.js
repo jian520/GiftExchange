@@ -11,6 +11,7 @@ import {
 
 
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 
 import StartScreen from "./screens/start/";
@@ -25,7 +26,7 @@ import StartC from "./screens/start/StartC";
 import StartD from "./screens/start/StartD";
 
 import WelcomeHome from './screens/start/WelcomeHome';
-
+import Entypo from 'react-native-vector-icons/Entypo';
 import MeScreen from './screens/me/MeScreen'
 import SettingScreen from './screens/setting'
 import RegSetp from './screens/reg/regSetpB'
@@ -70,8 +71,8 @@ const Tabs = createBottomTabNavigator(
 
                 tabBarLabel: 'Bagel',
                 tabBarIcon: ({tintColor, focused}) => (
-                    <Ionicons
-                        name={focused ? 'ios-home' : 'ios-home'}
+                    <FontAwesome
+                        name={focused ? 'gittip' : 'gittip'}
                         size={26}
                         style={{color: tintColor}}
                     />
@@ -85,8 +86,8 @@ const Tabs = createBottomTabNavigator(
 
                 tabBarLabel: '探索',
                 tabBarIcon: ({tintColor, focused}) => (
-                    <Ionicons
-                        name={focused ? 'ios-home' : 'ios-home'}
+                    <FontAwesome
+                        name={focused ? 'search' : 'search'}
                         size={26}
                         style={{color: tintColor}}
                     />
@@ -99,8 +100,8 @@ const Tabs = createBottomTabNavigator(
 
                 tabBarLabel: 'Inbox',
                 tabBarIcon: ({tintColor, focused}) => (
-                    <Ionicons
-                        name={focused ? 'ios-home' : 'ios-home'}
+                    <FontAwesome
+                        name={focused ? 'comments' : 'comments'}
                         size={26}
                         style={{color: tintColor}}
                     />
@@ -114,10 +115,11 @@ const Tabs = createBottomTabNavigator(
 
                 tabBarLabel: '我',
                 tabBarIcon: ({tintColor, focused}) => (
-                    <Ionicons
-                        name={focused ? 'ios-home' : 'ios-home'}
-                        size={26}
-                        style={{color: tintColor}}
+
+                    <Entypo
+                name={'user'}
+                size={26}
+                style={{color: tintColor}}
                     />
                 ),
             },

@@ -22,14 +22,14 @@ import {
 } from "native-base";
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import styles from "./styles";
-import {NavigationActions, StackActions} from "react-navigation";
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import gStyles from "../../common/globalStyles";
-import BaseImg from "../../commonComponents/BaseImg";
+
 import {marginTB, paddingTB, screenW} from "../../commonComponents/CommonUtil";
 import Color from "../../commonComponents/Color";
-import commonColor from "../../../native-base-theme/variables/commonColor";
-import {Col} from "react-native-easy-grid";
+import Entypo from "react-native-vector-icons/Entypo";
 
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 export default class MeScreen extends Component {
     // static navigationOptions = {
     //     title: 'ProfileSc',
@@ -42,7 +42,6 @@ export default class MeScreen extends Component {
     //             style={{ color: tintColor }}
     //         />
     //     ),
-    //
     //
     // }
     logout() {
@@ -112,7 +111,9 @@ export default class MeScreen extends Component {
                     <List style={{backgroundColor: Color.gray}}>
                     <ListItem icon onPress={() =>  this.logout()  }>
                         <Left style={{left:20}}>
-                             <Icon active name="ios-home" />
+                            <FontAwesome name='cogs'  size={20}/>
+
+
                          </Left>
                         <Body style={[styles.bottmW],{left:10}}>
                         <Text style={styles.textC}>偏好设置</Text>
@@ -126,8 +127,9 @@ export default class MeScreen extends Component {
                     <List style={{backgroundColor: Color.gray}} >
                         <ListItem icon onPress={ ()=> this.props.navigation.push('Personal') }>
                             <Left style={{left:20}}>
-                                <Icon active name="ios-home" />
+                                <FontAwesome5 name='medapps'  size={20}/>
                             </Left>
+
                             <Body style={[styles.bottmW],{left:10}}>
                             <Text style={styles.textC}>Tips</Text>
                             </Body>
@@ -140,7 +142,7 @@ export default class MeScreen extends Component {
                     <List style={{backgroundColor: Color.gray}}>
                         <ListItem icon >
                             <Left style={{left:20}}>
-                                <Icon active name="ios-home" />
+                                <FontAwesome name='user-plus'  size={20}/>
                             </Left>
                             <Body style={[styles.bottmW],{left:10}}>
                             <Text style={styles.textC}>邀請朋友，賺取500</Text>
@@ -154,7 +156,7 @@ export default class MeScreen extends Component {
                     <List style={{backgroundColor: Color.gray}}>
                         <ListItem icon >
                             <Left style={{left:20}}>
-                                <Icon active name="ios-home" />
+                                <Entypo size={20}  name="help-with-circle" />
                             </Left>
                             <Body style={[styles.bottmW],{left:10}}>
                             <Text style={styles.textC}>Help&Support</Text>
@@ -167,7 +169,7 @@ export default class MeScreen extends Component {
                     <List style={{backgroundColor: Color.gray}}>
                         <ListItem icon >
                             <Left style={{left:20}}>
-                                <Icon active name="ios-home" />
+                                <FontAwesome name='cog'  size={20}/>
                             </Left>
                             <Body style={[styles.bottmW],{left:10}}>
                             <Text style={styles.textC}>設定</Text>
