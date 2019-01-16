@@ -36,7 +36,7 @@ export default {
     height:45,
     // borderRadius:15,
     // alignItems:'center',
-    // justifyContent: 'center',
+      justifyContent: 'right',
     // width:common.deviceWidth - 100,
   },
   botomBtn:{

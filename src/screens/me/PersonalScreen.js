@@ -23,10 +23,12 @@ import {
     Title
 } from "native-base";
 import gStyles from "../../common/globalStyles";
-import Ionicons from "react-native-vector-icons/Ionicons";
+
 import Color from "../../commonComponents/Color";
-import {marginTB, paddingTB} from "../../commonComponents/CommonUtil";
+
 import Column from "../../commonComponents/Column";
+import Row from "../../commonComponents/Row";
+
 
 export default class PersonalScreen  extends Component {
 
@@ -67,7 +69,7 @@ export default class PersonalScreen  extends Component {
 
     render() {
         return (
-            <Container style={gStyles.container} >
+            <Container style={gStyles.cbg} >
                 <Header>
                     <Left>
                         <Button transparent onPress={() =>  this.props.navigation.goBack()}>
@@ -79,73 +81,68 @@ export default class PersonalScreen  extends Component {
                     </Body>
                     <Right>
                         <Title style={gStyles.textAColor}>...</Title>
-                        {/*<Ionicons*/}
-                            {/*name={'more'}*/}
-                            {/*size={26}*/}
-                            {/*style={gStyles.textAColor}*/}
-                        {/*/>*/}
+
                     </Right>
                 </Header>
 
-                <Content style={{backgroundColor:Color.pickBackground}}>
-                    <List style={{height:90}}>
+                <Content >
+                    <List style={{height:90,backgroundColor:Color.white}}>
                         <ListItem  avatar>
                             <Left>
                                 <Thumbnail source={{uri:'https://oss.zuimeimami.com/avatar/doctor_fC14530706150363566e0dce962bb/1520556522703.jpg'}}
                                            style={styles.avatastyle}/>
                             </Left>
-                            <Body style={{top:10}}>
-                                <Text style={{color:Color.white}}>40,Tuen Mun,New Territories</Text>
-                            </Body>
+                             <Row   verticalCenter style={{marginLeft: 15,marginTop: 10}}>
+                                <Text>40,Tuen Mun,New Territories</Text>
+                             </Row>
                         </ListItem>
                     </List>
-                    <Separator style={{backgroundColor: Color.white, height: 0.5}}/>
-                    <List style={{height:90,top:20}}>
+
+                    <List style={{ backgroundColor:Color.white}}>
                         <ListItem >
-                            <Left style={{left:10}}>
+                            <Left  >
                                 <Column>
-                                    <Text style={{color:Color.white,left:-12,fontWeight: 'bold'}}>身高</Text>
-                                    <Text style={{color:Color.white,fontWeight: 'bold'}}>160公分</Text>
+                                    <Text style={{ left:-14,fontWeight: 'bold'}}>身高</Text>
+                                    <Text style={{ fontWeight: 'bold'}}>160公分</Text>
                                 </Column>
 
                             </Left>
-                            <Right style={{right:50}}>
-                                <Column>
-                                <Text style={{color:Color.white,fontWeight: 'bold'}}>地址</Text>
-                                <Text style={{color:Color.white,fontWeight: 'bold'}}>香港</Text>
+                            <Right  >
+                                <Column style={{justifyContent:'flex-end'}}>
+                                <Text style={{ fontWeight: 'bold',textAlign:'right'}}>地址</Text>
+                                <Text style={{ fontWeight: 'bold',textAlign:'right'}}>香港</Text>
                                 </Column>
                             </Right>
                         </ListItem>
                     </List>
-                    <List style={{height:90}}>
+                    <List style={{backgroundColor:Color.white}}>
                         <ListItem >
-
-                            <Left style={{left:10}}>
+                            <Left  >
                                 <Column>
-                                <Text style={{color:Color.white,fontWeight: 'bold',left:-10}}>宗教</Text>
-                                <Text style={{color:Color.white,fontWeight: 'bold'}}>基督教</Text>
+                                <Text style={{ fontWeight: 'bold',left:-8}}>宗教</Text>
+                                <Text style={{ fontWeight: 'bold'}}>基督教</Text>
                                 </Column>
                             </Left>
-                            <Right style={{right:30}}>
-                                <Column>
-                                <Text style={{color:Color.white,fontWeight: 'bold'}}>職業</Text>
-                                <Text style={{color:Color.white,fontWeight: 'bold'}}>Admin</Text>
+                            <Right >
+                                <Column style={{justifyContent:'flex-end'}}>
+                                <Text style={{ fontWeight: 'bold',textAlign:'right'}}>職業</Text>
+                                <Text style={{ fontWeight: 'bold',textAlign:'right'}}>Admin</Text>
                                 </Column>
                             </Right>
                         </ListItem>
                     </List>
-                    <List style={{height:90}}>
+                    <List style={{backgroundColor:Color.white}}>
                         <ListItem >
-                            <Left style={{left:10}}>
+                            <Left  >
                                 <Column>
-                                <Text style={{color:Color.white,fontWeight: 'bold' }}>公司</Text>
-                                <Text style={{color:Color.white,fontWeight: 'bold'}}>HK</Text>
+                                <Text style={{ fontWeight: 'bold'}}>公司</Text>
+                                <Text style={{ fontWeight: 'bold'}}>HK</Text>
                                 </Column>
                             </Left>
-                            <Right style={{right:15}}>
-                                <Column>
-                                <Text style={{color:Color.white,fontWeight: 'bold'}}>學歷</Text>
-                                <Text style={{color:Color.white,fontWeight: 'bold'}}>HK/學士</Text>
+                            <Right >
+                                <Column style={{justifyContent:'flex-end'}}>
+                                <Text style={{ fontWeight: 'bold',textAlign:'right'}}>學歷</Text>
+                                <Text style={{ fontWeight: 'bold',textAlign:'right'}}>HK/學士</Text>
                                 </Column>
                             </Right>
                         </ListItem>

@@ -12,7 +12,7 @@ export default {
         justifyContent: 'center',
         alignItems: 'center',
 
-         ...marginTB(50,50)
+         ...marginTB(10,50)
     },
     videoBox:{
         width:common.deviceWidth - 30,
@@ -32,7 +32,7 @@ export default {
 
     },
     input:{
-        width:common.deviceWidth - 100,
+        width:common.deviceWidth - 30,
         borderBottomWidth: 2,
 
     },
@@ -44,13 +44,10 @@ export default {
         bottom:isIphoneX()?49+33:49,
     },
     regSetp:{
-        ...marginTB(50,10),
-        backgroundColor:Color.pickBackground,
-        width:common.deviceWidth - 100,
+
+        backgroundColor:Color.white,
+
         height:45,
-        borderRadius:15,
-        alignItems:'center',
-        justifyContent: 'center'
     },
 
 
