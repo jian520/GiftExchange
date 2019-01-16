@@ -30,13 +30,14 @@ export default {
     fontWeight: 'bold',
   },
   regSetp:{
-    ...marginTB(50,10),
+
     backgroundColor:Color.white,
-    width:common.deviceWidth - 100,
+
     height:45,
-    borderRadius:15,
-    alignItems:'center',
-    justifyContent: 'center'
+    // borderRadius:15,
+    // alignItems:'center',
+    // justifyContent: 'center',
+    // width:common.deviceWidth - 100,
   },
   botomBtn:{
     backgroundColor:Color.carColor,

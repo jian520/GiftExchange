@@ -20,7 +20,9 @@ import {
     Right,
     Text,
     Thumbnail,
-    Title
+    Title,
+    Button,
+    Icon
 } from "native-base";
 import gStyles from "../../common/globalStyles";
 import Color from "../../commonComponents/Color";
@@ -185,13 +187,17 @@ export default class exploreScreen extends PureComponent {
     render() {
         return (
             <Container style={styles.container}>
-                <Header style={{backgroundColor: Color.pickBackground}}>
-                    <Left/>
+                <Header>
+                    <Left>
+                        <Button transparent onPress={() =>this.props.navigation.goBack() }>
+                            <Icon name="arrow-back" style={{color: "#000"}}/>
+                        </Button>
+                    </Left>
                     <Body>
-                    <Title style={gStyles.textCEolor}>放禮物</Title>
+                    <Title style={gStyles.textAColor}>放禮物</Title>
                     </Body>
                     <Right>
-                        <Title style={gStyles.textCEolor}>提交</Title>
+                        <Title style={gStyles.textAColor}>提交</Title>
                     </Right>
                 </Header>
 
@@ -203,10 +209,10 @@ export default class exploreScreen extends PureComponent {
                                     source={{uri: 'https://oss.zuimeimami.com/avatar/doctor_fC14530706150363566e0dce962bb/1520556522703.jpg'}}
                                     style={styles.avatastyle}/>
                             </Left>
-                            <Body style={styles.bottmW}>
 
+                            <Row style={{ marginLeft : 20, marginTop : 20}}>
                             <Text style={{color: Color.white}}>Jow Wong</Text>
-                            </Body>
+                            </Row>
                         </ListItem>
                     </List>
 

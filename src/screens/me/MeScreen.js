@@ -71,11 +71,7 @@ export default class MeScreen extends Component {
                     </Body>
                     <Right>
                         <Title style={gStyles.textAColor}>605</Title>
-                        <Ionicons
-                            name={'ios-home'}
-                            size={26}
-                            style={gStyles.textAColor}
-                        />
+                        <Entypo name="flower" style={{color: Color.red,marginRight: 10}} size={15}/>
                     </Right>
 
                 </Header>
@@ -156,7 +152,7 @@ export default class MeScreen extends Component {
                     <Separator style={ [gStyles.cbg, {height: 0.5}]}/>
 
                     <List style={{backgroundColor: Color.white}}>
-                        <ListItem icon >
+                        <ListItem icon onPress={()=> this.props.navigation.push("HelpScreen")} >
                             <Left style={{left:20}}>
                                 <Entypo size={20}  name="help-with-circle" />
                             </Left>

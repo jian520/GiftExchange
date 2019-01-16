@@ -5,21 +5,36 @@
   */
 import React, {Component} from 'react';
 
-import {Body, Button, Container, Content, Header, Icon, Item, Right, Text, Title,H3,Left} from "native-base";
+import {Body, Button, Container, Content, Header, Icon, Item, Right, Text, Title,H3,Left,View} from "native-base";
 import styles from "../home/styles";
 import gStyles from "../../common/globalStyles";
 import Color from "../../commonComponents/Color";
 import Entypo from "react-native-vector-icons/Entypo";
 import Row from "../../commonComponents/Row";
-import {Col} from "react-native-easy-grid";
+import Dialog, {
+    DialogTitle,
+    DialogContent,
+    DialogButton,
+    SlideAnimation,
+    ScaleAnimation,
+} from 'react-native-popup-dialog';
+import Column from "../../commonComponents/Column";
+import common from "../../common/common";
+
+
+
+
 export default class ShoppingScreen  extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {}
+        this.state = {
+            slideAnimationDialog: false,
+        }
+
     }
 
-    static propTypes = {}
+
 
     /**
      * 初始化了状态之后，在第一次绘制 render() 之前
@@ -47,36 +62,10 @@ export default class ShoppingScreen  extends Component {
 
     }
 
-    /**
-     * 当组件接收到新的属性和状态改变的话，都会触发调用 shouldComponentUpdate(...)
-     * （不能够使用setState()来改变属性 多次调用）
-     */
-    shouldComponentUpdate() {
-
-    }
-
-    /**
-     * 如果组件状态或者属性改变，并且上面的 shouldComponentUpdate(...) 返回为 true，就会开始准更新组件
-     * （不能够使用setState()来改变属性 多次调用）
-     */
-    componentWillUpdate() {
-
-    }
-
-    /**
-     * 调用了 render() 更新完成界面之后，会调用 componentDidUpdate() 来得到通知
-     * （不能够使用setState()来改变属性 多次调用）
-     */
-    componentDidUpdate() {
-
-    }
-
-    /**
-     * 组件要被从界面上移除的时候，就会调用 componentWillUnmount()
-     * （不能够使用setState()来改变属性 有且只有一次调用）
-     */
-    componentWillUnmount() {
-
+    showSlideAnimationDialog() {
+        this.setState({
+            slideAnimationDialog: true,
+        });
     }
 
     render() {
@@ -89,13 +78,13 @@ export default class ShoppingScreen  extends Component {
                     </Button>
                     </Left>
                     <Body>
-                    <Title>商店</Title>
+                    <Title style={gStyles.textAColor}>商店</Title>
                     </Body>
                     <Right />
                 </Header>
 
                 <Content>
-                    <Button block onPress={() =>   navigation.push('Test') } style={styles.shoppingBtn}>
+                    <Button block onPress={()=>{this.showSlideAnimationDialog()}} style={styles.shoppingBtn}>
                         <H3 style={{color:Color.white}}>订阅高级功能</H3>
                     </Button>
 
@@ -207,6 +196,54 @@ export default class ShoppingScreen  extends Component {
                     </Item>
 
                 </Content>
+                <Dialog
+                    onDismiss={() => {
+                        this.setState({ slideAnimationDialog: false });
+                    }}
+                    onTouchOutside={() => {
+                        this.setState({ slideAnimationDialog: false });
+                    }}
+                    visible={this.state.slideAnimationDialog}
+                    dialogAnimation={new SlideAnimation({ slideFrom: 'bottom' })}
+                >
+                    <DialogContent>
+                        <Column style={{height:350,backgroundColor:Color.white}}>
+                           <Column  style={{margin:20}}>
+                                <Text style={gStyles.textCColor}>選擇下列的月費計劃，</Text>
+                                <Text style={[gStyles.textCColor,{marginLeft:10}]}>即可獲得高級功能</Text>
+                            </Column>
+
+                            <Button block  style={{backgroundColor: common.colorC,marginTop:20}}  >
+                                <Column>
+                                    <Text style={gStyles.textBColor}>6個月/HK$938</Text>
+                                    <Text style={[gStyles.textCEolor,{marginLeft:10} ]}>HK$938/月</Text>
+                                </Column>
+                            </Button>
+                            <Button block  style={{backgroundColor: common.colorC,marginTop:20}}  >
+                                <Column>
+                                    <Text style={gStyles.textBColor}>3個月/HK$588</Text>
+                                    <Text style={[gStyles.textCEolor,{marginLeft:10} ]}>HK$196/月</Text>
+                                </Column>
+                            </Button>
+                            <Button block  style={{backgroundColor: common.colorC,marginTop:20}} >
+                               <Text style={gStyles.textBColor}>1個月/HK$2718</Text>
+                             </Button>
+
+                            <Button block  warning style={{marginTop:30,height:30}} onPress={() => { this.setState({
+                                slideAnimationDialog: false,
+                            })}}>
+                                  <Text style={gStyles.textCEolor}>立即訂閱</Text>
+                             </Button>
+
+                            <Button block  style={{backgroundColor:Color.white}} onPress={() => { this.setState({
+                                slideAnimationDialog: false,
+                            })}}>
+                                <Text style={gStyles.textBColor}>現在不要</Text>
+                            </Button>
+
+                        </Column>
+                     </DialogContent>
+                </Dialog>
             </Container>
         );
     }

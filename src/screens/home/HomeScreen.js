@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
-// import { Text, StyleSheet, View, Button } from 'react-native'
-import {createStackNavigator, createAppContainer, NavigationActions} from 'react-navigation';
+
 
 import {
     Container,
@@ -15,7 +14,7 @@ import {
 } from "native-base";
 import Entypo from "react-native-vector-icons/Entypo";
 import Ionicons from "react-native-vector-icons/Ionicons";
-
+import gStyles from "../../common/globalStyles"
 import styles from "./styles";
 import globalStyles from "../../common/globalStyles";
 import BaseImg from "../../commonComponents/BaseImg";
@@ -51,11 +50,12 @@ export default class HomeScreen extends Component {
                 <Header>
                     <Left />
                     <Body>
-                    <Title style={globalStyles.textCColor}>Fate Date</Title>
+                    <Title style={gStyles.textAColor}>Fate Date</Title>
                     </Body>
                     <Right>
                          <Entypo name='shop' size={25} style={{marginRight: 15}} onPress={ ()=>{this.shoppingView()}}/>
-                        <Ionicons name='ios-more' size={25} style={{marginRight: 5}}/>
+
+                         <Ionicons name='ios-more' size={25} style={{marginRight: 5}} onPress={ ()=>this.props.navigation.push("ExploreScreen")}/>
                     </Right>
                 </Header>
 

@@ -31,6 +31,8 @@ import EditprofileScreen from "./screens/me/EditprofileScreen";
 import PersonalScreen from "./screens/me/PersonalScreen";
 import completeScreen from "./screens/reg/completeScreen";
 import ShoppingScreen from "./screens/home/ShoppingScreen";
+import HelpScreen from "./screens/me/HelpScreen";
+import TestScreen from "./screens/home/TestScreen";
 
 const HomeTab = createStackNavigator({
         Home: {
@@ -80,7 +82,7 @@ const Tabs = createBottomTabNavigator(
         },
 
         ExploreTab: {
-            screen: ExploreScreen,
+            screen: TestScreen,
             navigationOptions: {
 
                 tabBarLabel: '探索',
@@ -145,8 +147,9 @@ const AppStack = createStackNavigator({
         Profile: {screen: MeScreen},
         Editprofile:{screen:EditprofileScreen},
         Personal:{screen:PersonalScreen},
-        ShoppingScreen:{screen:ShoppingScreen}
-
+        ShoppingScreen:{screen:ShoppingScreen},
+        HelpScreen:{screen:HelpScreen},
+        ExploreScreen:{screen:ExploreScreen}
     },
     {
 
@@ -205,7 +208,7 @@ export class StartAndTabRoot extends PureComponent {
     constructor() {
         super()
         this.state = {
-            isLogin: true,
+            isLogin: false,
 
         }
         StatusBar.setBarStyle('light-content')

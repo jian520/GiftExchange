@@ -17,7 +17,7 @@ import {
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import styles from "./styles";
 
-export default class MeScreen extends Component {
+export default class TestScreen extends Component {
     static navigationOptions = {
         title: 'ProfileSc',
 

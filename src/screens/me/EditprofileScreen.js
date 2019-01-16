@@ -26,7 +26,7 @@ import {
 import gStyles from "../../common/globalStyles";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import Color from "../../commonComponents/Color";
-import {marginTB, paddingTB} from "../../commonComponents/CommonUtil";
+import { marginLR, marginTB, paddingTB } from "../../commonComponents/CommonUtil";
 import {Col} from "react-native-easy-grid";
 import Picker from "react-native-picker";
 import {education, marrydatas, religious} from "../../common/datas";
@@ -38,16 +38,85 @@ export default class EditprofileScreen  extends Component {
         super(props);
         this.state = {
             loading: false,
-            sex: '',
-            birthday: '',
-            marriage: '',
-            education: '',
-            height: '',
-            area: '',
-            religious:''
+            sex: '請選擇性別',
+            birthday: null,
+            marriage: '請選擇職業',
+            education: '請選擇學歷',
+            height: '請選擇身高',
+            area: '請選擇國家/地址',
+
         };
     }
+    _createDateData() {
+        let date = [];
+        for(let i=1970;i<2020;i++){
+            let month = [];
+            for(let j = 1;j<13;j++){
+                let day = [];
+                if(j === 2){
+                    for(let k=1;k<29;k++){
+                        day.push(k+'日');
+                    }
+                    //Leap day for years that are divisible by 4, such as 2000, 2004
+                    if(i%4 === 0){
+                        day.push(29+'日');
+                    }
+                }
+                else if(j in {1:1, 3:1, 5:1, 7:1, 8:1, 10:1, 12:1}){
+                    for(let k=1;k<32;k++){
+                        day.push(k+'日');
+                    }
+                }
+                else{
+                    for(let k=1;k<31;k++){
+                        day.push(k+'日');
+                    }
+                }
+                let _month = {};
+                _month[j+'月'] = day;
+                month.push(_month);
+            }
+            let _date = {};
+            _date[i+'年'] = month;
+            date.push(_date);
+        }
+        return date;
+    }
 
+    showBirthdayPicker() {
+
+        Picker.init({
+            pickerData: this._createDateData(),
+            pickerConfirmBtnText: "確定",
+            pickerTitleText: "請選擇出生日期",
+            pickerCancelBtnText: "取消",
+            pickerToolBarBg: [230, 70, 78, 1],
+            pickerTitleColor: [255, 255, 255, 1],
+            pickerCancelBtnColor: [255, 255, 255, 1],
+            pickerConfirmBtnColor: [255, 255, 255, 1],
+            pickerBg: [255, 255, 255, 1],
+            onPickerConfirm: (pickedValue, pickedIndex) => {
+                console.log('date', pickedValue, pickedIndex);
+
+                this.setState({
+                    birthday: pickedValue[0] + pickedValue[1] + pickedValue[2],
+                });
+
+                // userParams.ageyear = parseInt(pickedValue[0])
+                // userParams.agemonth = parseInt(pickedValue[1])
+                // userParams.ageday = parseInt(pickedValue[2])
+
+
+            },
+            onPickerCancel: (pickedValue, pickedIndex) => {
+                // console.log('date', pickedValue, pickedIndex);
+            },
+            onPickerSelect: (pickedValue, pickedIndex) => {
+                // console.log('date', pickedValue, pickedIndex);
+            }
+        });
+        Picker.show();
+    }
     showSexPicker() {
 
         Picker.init({
@@ -98,7 +167,7 @@ export default class EditprofileScreen  extends Component {
                 this.setState({
                     marriage: pickedValue[0]
                 });
-                userParams.marrystatus = parseInt(pickedIndex) + 1
+                // userParams.marrystatus = parseInt(pickedIndex) + 1
 
 
             },
@@ -131,7 +200,7 @@ export default class EditprofileScreen  extends Component {
                     education: pickedValue[0]
                 });
 
-                userParams.education = parseInt(pickedIndex) + 1
+                // userParams.education = parseInt(pickedIndex) + 1
 
             },
             onPickerCancel: (pickedValue, pickedIndex) => {
@@ -167,7 +236,7 @@ export default class EditprofileScreen  extends Component {
                 this.setState({
                     height: pickedValue[0] + 'CM'
                 });
-                userParams.height = parseInt(pickedValue[0])
+                // userParams.height = parseInt(pickedValue[0])
 
             },
             onPickerCancel: pickedValue => {
@@ -212,7 +281,7 @@ export default class EditprofileScreen  extends Component {
                 this.setState({
                     area: pickedValue[0] + ' ' + pickedValue[1]
                 });
-                userParams.city = pickedValue[1]
+                // userParams.city = pickedValue[1]
 
             },
             onPickerCancel: pickedValue => {
@@ -275,49 +344,43 @@ export default class EditprofileScreen  extends Component {
 
     render() {
         return (
-            <Container style={styles.container}>
-                <Header style={{backgroundColor:Color.pickBackground}}>
+            <Container style={gStyles.cbg}>
+                <Header>
                     <Left>
                         <Button transparent onPress={() =>this.goBack() }>
                             <Icon name="arrow-back" style={{color: "#000"}}/>
                         </Button>
                     </Left>
                     <Body>
-                    <Title style={gStyles.textCEolor}>编辑个人资料</Title>
+                    <Title style={gStyles.textAColor}>编辑个人资料</Title>
                     </Body>
                     <Right/>
 
                 </Header>
 
-                <Content style={{backgroundColor:Color.pickBackground}} onTouchStart={() => this.pickHide()} onScrollEndDrag={() => this.pickHide()}>
-                    <Segment style={{...marginTB(20,0)}}>
-                        <Button first style={{borderColor:Color.white,backgroundColor:Color.pickBackground}} active={true}
-                       >
-                            <Text style={{color:Color.white}}>照片</Text>
-                        </Button>
-                        <Button style={{borderColor:Color.white,backgroundColor:Color.white}} active={true}>
-                            <Text style={{color:Color.orange}}>详细资料</Text>
-                        </Button>
-
+                <Content   onTouchStart={() => this.pickHide()} onScrollEndDrag={() => this.pickHide()}>
+                     <Segment style={{...marginTB(20,0)}}>
+                        <Button first><Text>照片</Text></Button>
+                        <Button last active><Text>详细资料</Text></Button>
                     </Segment>
-                <View style={styles.containerView}>
-                    <Item style={styles.regSetp}
-                          onPress={() => this.showSexPicker()}>
 
-                        <Text style={{color: Color.pickBackground, marginLeft: 15,fontWeight: 'bold'}}>年龄</Text>
+                <View style={styles.containerView}>
+                    <Item style={[styles.regSetp, {...marginTB(50,0)}]}
+                          onPress={() => this.showBirthdayPicker()}>
+
+                        <Text style={{marginLeft: 15,fontWeight: 'bold'}}>年龄</Text>
 
                         <Right>
-                            <Text style={ {paddingRight: 15,color: Color.pickBackground}}>{this.state.birthday}</Text>
-
+                            <Text style={ {paddingRight: 15,color: Color.gray3}}>{this.state.birthday == null? "請選擇年齡":this.state.birthday}</Text>
                         </Right>
                     </Item>
 
                     <Item style={styles.regSetp}
                           onPress={() => this.showAreaPicker()}>
 
-                        <Text style={{color: Color.pickBackground, marginLeft: 15,fontWeight: 'bold'}}>居住国家/地址</Text>
+                        <Text style={{ marginLeft: 15,fontWeight: 'bold'}}>居住国家/地址</Text>
                         <Right>
-                            <Text style={ {paddingRight: 15,color: Color.pickBackground}}>{this.state.birthday}</Text>
+                            <Text style={ {paddingRight: 15,color: Color.gray3}}>{this.state.area}</Text>
 
                         </Right>
                     </Item>
@@ -325,9 +388,9 @@ export default class EditprofileScreen  extends Component {
                     <Item style={styles.regSetp}
                           onPress={() => this.showHeightPicker()}>
 
-                        <Text style={{color: Color.pickBackground, marginLeft: 15,fontWeight: 'bold'}}>高度</Text>
+                        <Text style={{ marginLeft: 15,fontWeight: 'bold'}}>高度</Text>
                         <Right>
-                            <Text style={ {paddingRight: 15,color: Color.pickBackground}}>{this.state.birthday}</Text>
+                            <Text style={ {paddingRight: 15,color: Color.gray3}}>{this.state.height}</Text>
 
                         </Right>
                     </Item>
@@ -335,23 +398,23 @@ export default class EditprofileScreen  extends Component {
                     <Item style={styles.regSetp}
                           onPress={() => this.showEducationPicker()}>
 
-                        <Text style={{color: Color.pickBackground, marginLeft: 15,fontWeight: 'bold'}}>学历</Text>
+                        <Text style={{ marginLeft: 15,fontWeight: 'bold'}}>学历</Text>
                         <Right>
-                            <Text style={ {paddingRight: 15,color: Color.pickBackground}}>{this.state.birthday}</Text>
+                            <Text style={ {paddingRight: 15,color: Color.gray3}}>{this.state.education}</Text>
 
                         </Right>
                     </Item>
                     <Item style={styles.regSetp}
                           onPress={() => this.showMarriagePicker()}>
 
-                        <Text style={{color: Color.pickBackground, marginLeft: 15,fontWeight: 'bold'}}>職業</Text>
+                        <Text style={{  marginLeft: 15,fontWeight: 'bold'}}>職業</Text>
                         <Right>
-                            <Text style={ {paddingRight: 15,color: Color.pickBackground}}>{this.state.birthday}</Text>
+                            <Text style={ {paddingRight: 15,color: Color.gray3}}>{this.state.marriage}</Text>
 
                         </Right>
                     </Item>
                 </View>
-                    <Button block style={styles.botomBtn} onPress={() => this.goBack()}>
+                    <Button block warning style={{...marginLR(30,30)}} onPress={() => this.goBack()}>
                         <Text>完成</Text>
                     </Button>
                 </Content>
