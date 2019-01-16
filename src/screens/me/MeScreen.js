@@ -80,17 +80,17 @@ export default class MeScreen extends Component {
 
                 </Header>
 
-                <Content>
+                <Content style={gStyles.cbg}>
 
-                    <List style={{backgroundColor: Color.gray,height:100}} >
+                    <List style={{backgroundColor: Color.white,height:100}} >
                         <ListItem  avatar onPress={() => this.editprofile()}>
                             <Left>
                                 <Thumbnail source={{uri:'https://oss.zuimeimami.com/avatar/doctor_fC14530706150363566e0dce962bb/1520556522703.jpg'}}
                                            style={styles.avatastyle}/>
                             </Left>
                             <Body style={styles.bottmW}>
-                            <Text style={{...paddingTB(-5,15),color:Color.white}}>JM</Text>
-                            <Text style={{color:Color.white}}>查看和编辑个人档案</Text>
+                            <Text style={{...paddingTB(-5,15),color:Color.black}}>JM</Text>
+                            <Text style={{color:Color.black}}>查看和编辑个人档案</Text>
                             </Body>
                             <Right style={[styles.bottmW,marginTB(55,15)]}>
                                   <Button block style={{
@@ -99,6 +99,8 @@ export default class MeScreen extends Component {
                                       alignSelf: "center",
                                       height: 30,
                                       borderRadius:10,
+                                      borderWidth: 0.5,
+                                      borderColor:Color.black
                                       }}>
                                     <Text style={{color:Color.red,top:1}}>不完整</Text>
                                 </Button>
@@ -106,10 +108,10 @@ export default class MeScreen extends Component {
                          </ListItem>
                     </List>
 
-                    <Separator style={{backgroundColor: Color.white, height: 0.5}}/>
+                    <Separator style={ [gStyles.cbg, {height: 0.5}]}/>
 
-                    <List style={{backgroundColor: Color.gray}}>
-                    <ListItem icon onPress={() =>  this.logout()  }>
+                    <List style={[styles.bottmW,{backgroundColor: Color.white}]}>
+                    <ListItem icon onPress={() =>  this.logout()  } style={styles.bottmW}>
                         <Left style={{left:20}}>
                             <FontAwesome name='cogs'  size={20}/>
 
@@ -122,9 +124,9 @@ export default class MeScreen extends Component {
                     </ListItem>
                     </List>
 
-                    <Separator style={{backgroundColor: Color.white, height: 20}}/>
+                    <Separator style={ [gStyles.cbg, {height: 20}]}/>
 
-                    <List style={{backgroundColor: Color.gray}} >
+                    <List style={{backgroundColor: Color.white}} >
                         <ListItem icon onPress={ ()=> this.props.navigation.push('Personal') }>
                             <Left style={{left:20}}>
                                 <FontAwesome5 name='medapps'  size={20}/>
@@ -137,9 +139,9 @@ export default class MeScreen extends Component {
                         </ListItem>
                     </List>
 
-                    <Separator style={{backgroundColor: Color.white, height: 0.5}}/>
+                    <Separator style={ [gStyles.cbg, {height: 0.5}]}/>
 
-                    <List style={{backgroundColor: Color.gray}}>
+                    <List style={{backgroundColor: Color.white}}>
                         <ListItem icon >
                             <Left style={{left:20}}>
                                 <FontAwesome name='user-plus'  size={20}/>
@@ -151,9 +153,9 @@ export default class MeScreen extends Component {
                         </ListItem>
                     </List>
 
-                    <Separator style={{backgroundColor: Color.white, height: 0.5}}/>
+                    <Separator style={ [gStyles.cbg, {height: 0.5}]}/>
 
-                    <List style={{backgroundColor: Color.gray}}>
+                    <List style={{backgroundColor: Color.white}}>
                         <ListItem icon >
                             <Left style={{left:20}}>
                                 <Entypo size={20}  name="help-with-circle" />
@@ -164,9 +166,9 @@ export default class MeScreen extends Component {
                         </ListItem>
                     </List>
 
-                    <Separator style={{backgroundColor: Color.white, height: 0.5}}/>
+                    <Separator style={ [gStyles.cbg, {height: 0.5}]}/>
 
-                    <List style={{backgroundColor: Color.gray}}>
+                    <List style={{backgroundColor: Color.white}}>
                         <ListItem icon >
                             <Left style={{left:20}}>
                                 <FontAwesome name='cog'  size={20}/>

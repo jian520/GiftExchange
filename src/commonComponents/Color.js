@@ -21,3 +21,6 @@ export default {
     carColor: 'rgba(247, 185, 91, 1)',
     pickBackground: 'rgba(93, 201, 211, 1)',
 }
+
+
+

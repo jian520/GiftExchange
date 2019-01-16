@@ -19,6 +19,7 @@ export default {
         arrowRight:require('../img/arrow_more02_w.png'),
         rest:require('../img/gift1.png'),
         heart:require('../img/heart.png'),
+        bgImg:require('../img/bg.png'),
     }
 }
 

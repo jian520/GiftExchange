@@ -1,3 +1,6 @@
+import {marginTB} from "../../commonComponents/CommonUtil";
+import Color from "../../commonComponents/Color";
+
 export default {
   container: {
     backgroundColor: "#FFF"
@@ -15,4 +18,11 @@ export default {
     borderBottomWidth: 0,
 
   },
+  shoppingBtn:{
+    width: 200,
+    alignSelf: 'center',
+    ...marginTB(40,40),
+    backgroundColor: Color.red,
+
+  }
 };

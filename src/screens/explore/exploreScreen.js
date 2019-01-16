@@ -10,10 +10,10 @@ import {
 } from 'react-native';
 import {
     Body,
-    Button,
     Container,
     Content,
-    Header, Input, Item,
+    Header,
+    Item,
     Left,
     List,
     ListItem,
@@ -97,7 +97,6 @@ export default class exploreScreen extends PureComponent {
      * （不能够使用setState()来改变属性 有且只有一次调用）
      */
     componentWillUnmount() {
-
     }
 
     //选择照片按钮点击
@@ -183,7 +182,6 @@ export default class exploreScreen extends PureComponent {
         }
     }
 
-
     render() {
         return (
             <Container style={styles.container}>
@@ -246,7 +244,6 @@ export default class exploreScreen extends PureComponent {
                         placeholder={'我想找'}
                         placeholderTextColor={Color.pickBackground} //设置提示文字的颜色
                         value={this.state.text}
-
                         onChangeText={this._onChang}/>
                     <Row style={{...marginTB(30, 30), marginLeft: 22}}>
                         <Entypo name='instagram' size={35}/>
@@ -266,6 +263,7 @@ export default class exploreScreen extends PureComponent {
         );
     }
 }
+
 
 
 
