@@ -111,22 +111,23 @@ export default class ShoppingScreen  extends Component {
                             <Text>4折优惠</Text>
                           </Row>
                         <Right>
-                            <Row style={{paddingRight: 30,borderRadius:10}}>
-                               <Text style={{backgroundColor:Color.orange,}}>HK$188.00</Text>
+                            <Row  style={{borderRadius:10,backgroundColor:Color.orange,height:30,marginRight:30}}>
+                                <Text style={[gStyles.textCEolor,{width:100,textAlign:'center',lineHeight:30}]}>HK$188.00</Text>
                             </Row>
-                        </Right>
+                         </Right>
                     </Item>
 
                     <Item style={[{backgroundColor:Color.white,height:45}]}>
                         <Row verticalCenter style={{paddingLeft: 30}}>
                             <Text>2000</Text>
-                            <Entypo name="flower" style={{color: Color.red,marginRight: 5}} size={15}/>
+                            <Entypo name="flower" style={{color: Color.red,marginRight: 10}} size={15}/>
                             <Text>4折优惠</Text>
                         </Row>
                         <Right>
-                            <Row style={{paddingRight: 30,borderRadius:10}}>
-                                <Text style={{backgroundColor:Color.orange,}}>HK$178.00</Text>
+                            <Row  style={{borderRadius:10,backgroundColor:Color.orange,height:30,marginRight:30}}>
+                                <Text style={[gStyles.textCEolor,{width:100,textAlign:'center',lineHeight:30}]}>HK$178.00</Text>
                             </Row>
+
                         </Right>
                     </Item>
                     <Item style={[{backgroundColor:Color.white,height:45}]}>
@@ -136,13 +137,13 @@ export default class ShoppingScreen  extends Component {
 
                         </Row>
                         <Right>
-                            <Row style={{paddingRight: 30,borderRadius:10}}>
-                                <Text style={{backgroundColor:Color.orange,}}>HK$15.00</Text>
+                            <Row  style={{borderRadius:10,backgroundColor:Color.orange,height:30,marginRight:30}}>
+                                <Text style={[gStyles.textCEolor,{width:100,textAlign:'center',lineHeight:30}]}>HK$15.00</Text>
                             </Row>
                         </Right>
                     </Item>
 
-                    <Item style={[styles.bottmW,{height:50,alignItems: 'center',justifyContent: 'center',marginTop:30}]}>
+                    <Item style={[styles.bottmW,{height:50,alignItems: 'center',justifyContent: 'center',marginTop:20, marginBottom : 20}]}>
                          <Text>赠送免费豆豆</Text>
                     </Item>
 
