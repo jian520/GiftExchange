@@ -20,6 +20,9 @@ export default {
         rest:require('../img/gift1.png'),
         heart:require('../img/heart.png'),
         bgImg:require('../img/bg.png'),
-    }
+    },
+    meImg:{
+        defaultAvatar:require("../img/login-icon.png"),
+    },
 }
 
