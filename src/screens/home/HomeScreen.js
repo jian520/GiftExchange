@@ -16,28 +16,37 @@ import Entypo from "react-native-vector-icons/Entypo";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import gStyles from "../../common/globalStyles"
 import styles from "./styles";
-import globalStyles from "../../common/globalStyles";
+
+import EvilIcons from "react-native-vector-icons/EvilIcons";
 import BaseImg from "../../commonComponents/BaseImg";
 import {isIphoneX, marginLR, marginTB, paddingTB, screenH, screenW} from "../../commonComponents/CommonUtil";
 import Color from "../../commonComponents/Color";
 import Column from "../../commonComponents/Column";
+import common from "../../common/common";
+import Dialog, {
+     DialogContent,
+    SlideAnimation,
+} from 'react-native-popup-dialog';
+import Row from "../../commonComponents/Row";
 
 export default class HomeScreen extends Component {
-    // static navigationOptions = {
-    //   //  title: 'Home1',
-    //     tabBarLabel: 'tab1',
-    //     tabBarIcon: ({ tintColor, focused, horizontal }) => (
-    //         <Ionicons
-    //             name={focused ? 'ios-home' : 'ios-home'}
-    //             size={horizontal ? 20 : 26}
-    //             style={{ color: tintColor }}
-    //         />
-    //     ),
-    // }
+    constructor(props) {
+        super(props);
+        this.state = {
+            slideAnimationDialog: false,
+        }
+    }
+
 
     shoppingView() {
 
         this.props.navigation.push("ShoppingScreen");
+    }
+
+    showSlideAnimationDialog() {
+        this.setState({
+            slideAnimationDialog: true,
+        });
     }
 
     render() {
@@ -103,6 +112,7 @@ export default class HomeScreen extends Component {
                             <Body style={{borderBottomWidth: 0}}/>
                             <Right style={{borderBottomWidth: 0}}>
                                 <Button block
+                                        onPress={()=>{this.showSlideAnimationDialog()}}
                                         style={{
                                             width: 120,
                                             backgroundColor: Color.white,
@@ -144,9 +154,50 @@ export default class HomeScreen extends Component {
                             <Text style={{color: Color.white}}>个人资料</Text>
                         </Button>
                     </List>
-                    {/*<Button onPress={() =>   navigation.push('Test')   }>*/}
-                    {/*<Text>push</Text>*/}
-                    {/*</Button>*/}
+                    <Dialog
+                        onDismiss={() => {
+                            this.setState({ slideAnimationDialog: false });
+                        }}
+                        onTouchOutside={() => {
+                            this.setState({ slideAnimationDialog: false });
+                        }}
+                        visible={this.state.slideAnimationDialog}
+                        dialogAnimation={new SlideAnimation({ slideFrom: 'bottom' })}
+                    >
+                        <DialogContent>
+                            <Column style={{height:370,backgroundColor:Color.white}}>
+                                <Column  style={{margin:20}}>
+                                    <Text style={[gStyles.textCColor,{ fontWeight : 'bold', fontSize : 18, textAlign : 'center'}]}>跳過排隊隊伍！</Text>
+                                 </Column>
+                                <Row verticalCenter style={{justifyContent:'space-between', marginTop : 20}}>
+                                    <EvilIcons name='minus' size={30}
+                                              onPress={() => alert('上一頁')}/>
+                                <Thumbnail
+                                    source={BaseImg.CommndImg.image1}
+                                    style={{width:100,height:150}}/>
+
+                                    <EvilIcons name='plus' size={30}
+                                               onPress={() => alert('下一頁')}/>
+                                </Row>
+                                <Column style={{marginTop : 20,}}>
+                                    <Text style={[gStyles.textCColor,{ textAlign : 'center'}]}>35人已經搶先一步對這位Bagel按贊！</Text>
+                                    <Text style={[gStyles.textCColor,{ textAlign : 'center'}]}>必須經過至少6天，她才看見你</Text>
+                                </Column>
+                                <Button block  style={{marginTop:20,height:30,backgroundColor:Color.gray3}} onPress={() => { this.setState({
+                                    slideAnimationDialog: false,
+                                })}}>
+                                    <Text style={gStyles.textCEolor}>立即訂閱</Text>
+                                </Button>
+
+                                <Button block  style={{backgroundColor:Color.white}} onPress={() => { this.setState({
+                                    slideAnimationDialog: false,
+                                })}}>
+                                    <Text style={gStyles.textCColor}>NO Thanks</Text>
+                                </Button>
+
+                            </Column>
+                        </DialogContent>
+                    </Dialog>
                 </Content>
             </Container>
         );

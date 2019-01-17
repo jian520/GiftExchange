@@ -24,5 +24,8 @@ export default {
     meImg:{
         defaultAvatar:require("../img/login-icon.png"),
     },
+    CommndImg:{
+        image1:require("../img/image1.png"),
+    },
 }
 

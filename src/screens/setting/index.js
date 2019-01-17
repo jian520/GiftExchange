@@ -13,13 +13,11 @@ import {
     List,
     ListItem, View,ActionSheet
 } from "native-base";
-// import TimerMixin from 'react-native-timer-mixin';
 
-import styles from "./styles";
 import gStyles from "../../common/globalStyles";
 import common from "../../common/common";
 import {StackActions,NavigationActions} from "react-navigation";
-import {StartAndTabRoot} from "../../App";
+
 import service from "../../common/service"
 
 const datas = [
@@ -66,14 +64,7 @@ export default class Setting extends Component {
     logout() {
         service.logout()
 
-        // const resetAction = StackActions.reset({
-        //     index: 0,
-        //     actions: [
-        //         NavigationActions.navigate({routeName: 'Start'}),
-        //
-        //     ]
-        // })
-        // this.props.navigation.dispatch(resetAction)
+
 
         this.props.navigation.reset([NavigationActions.navigate({routeName: 'WelcomeHome'})], 0);
 

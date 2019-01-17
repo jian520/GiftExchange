@@ -3,10 +3,12 @@
   * author：
   * date： 
   */
-import React, {PureComponent} from 'react';
+import React, { PureComponent } from 'react';
 import {
-    StyleSheet, TextInput, View,
-
+    StyleSheet,
+    TextInput,
+    View,
+    TouchableOpacity
 } from 'react-native';
 import {
     Body,
@@ -33,17 +35,18 @@ import ImagePicker from 'react-native-image-picker';
 
 import Entypo from "react-native-vector-icons/Entypo";
 import Row from "../../commonComponents/Row";
-import {marginTB, paddingLR} from "../../commonComponents/CommonUtil";
+import { marginTB, paddingLR } from "../../commonComponents/CommonUtil";
+import LookPhotoModal from "../../commonComponents/LookPhotoModal";
 
 var options = {
-    title: '请选择图片来源',
-    cancelButtonTitle: '取消',
-    takePhotoButtonTitle: '拍照',
-    chooseFromLibraryButtonTitle: '相册图片',
+    title : '请选择图片来源',
+    cancelButtonTitle : '取消',
+    takePhotoButtonTitle : '拍照',
+    chooseFromLibraryButtonTitle : '相册图片',
 
-    storageOptions: {
-        skipBackup: true,
-        path: 'images'
+    storageOptions : {
+        skipBackup : true,
+        path : 'images'
     }
 };
 export default class exploreScreen extends PureComponent {
@@ -52,8 +55,9 @@ export default class exploreScreen extends PureComponent {
         super(props);
 
         this.state = {
-            avatarSource: null,
-            prenAvata: null
+            avatarSource : null,
+            prenAvata : null,
+            previewImg:false
         };
     }
 
@@ -85,7 +89,6 @@ export default class exploreScreen extends PureComponent {
 
     }
 
-
     /**
      * 调用了 render() 更新完成界面之后，会调用 componentDidUpdate() 来得到通知
      * （不能够使用setState()来改变属性 多次调用）
@@ -102,7 +105,7 @@ export default class exploreScreen extends PureComponent {
     }
 
     //选择照片按钮点击
-    choosePic() {
+    choosePic(type) {
         ImagePicker.showImagePicker(options, (response) => {
             console.log('Response = ', response);
 
@@ -113,70 +116,74 @@ export default class exploreScreen extends PureComponent {
             } else if (response.customButton) {
                 console.log('User tapped custom button: ', response.customButton);
             } else {
-                const source = {uri: response.uri};
+                const source = { uri : response.uri };
 
                 // You can also display the image using data:
                 // const source = { uri: 'data:image/jpeg;base64,' + response.data };
+                if (type === 'prenAvata') {
+                    this.setState({
+                        prenAvata : source,
+                    });
+                }else {
+                    this.setState({
+                        avatarSource : source,
+                    });
+                }
 
-                this.setState({
-                    avatarSource: source,
-                });
             }
         });
     }
 
-    // prenAvata() {
-    //
-    //     if (this.state.prenAvata == null) {
-    //         return (
-    //
-    //             <Row style={{...marginTB(30, 30), marginLeft: 22}}>
-    //                 <Entypo name='image' size={35}/>
-    //                 <Item style={styles.pickImg} onPress={() => this.choosePic()}>
-    //
-    //                     <Entypo name='circle-with-plus' size={20} style={{...paddingLR(10, 5), top: 2}}/>
-    //                     <Text style={{color: Color.pickBackground, marginLeft: 5, fontWeight: 'bold'}}>添加禮物照片</Text>
-    //
-    //                     <Right>
-    //                         <Text style={{paddingRight: 15, color: Color.pickBackground}}>{this.state.birthday}</Text>
-    //                     </Right>
-    //                 </Item>
-    //             </Row>
-    //
-    //         )
-    //     } else {
-    //         return (
-    //             <Row style={{...marginTB(30, 30), marginLeft: 22}}>
-    //                 <Text style={{color: Color.white, marginLeft: 5, fontWeight: 'bold'}}>禮物照片:</Text>
-    //                 <Thumbnail source={this.state.prenAvata} style={styles.image}/>
-    //
-    //             </Row>
-    //             )
-    //         }
-    // }
-    avatarSource() {
+    previewImg(){
+            this.setState({
+                previewImg:true
+            })
+    }
 
-        if (this.state.avatarSource == null) {
+    prenAvata() {
+        if (this.state.prenAvata == null) {
             return (
-
-                <Row style={{...marginTB(30, 30), marginLeft: 22}}>
-                    <Entypo name='image' size={35}/>
-                    <Item style={styles.pickImg} onPress={() => this.choosePic()}>
-
-                        <Entypo name='circle-with-plus' size={20} style={{...paddingLR(10, 5), top: 2}}/>
-                        <Text style={{color: Color.pickBackground, marginLeft: 5, fontWeight: 'bold'}}>添加禮物照片</Text>
-
-                        <Right>
-                            <Text style={{paddingRight: 15, color: Color.pickBackground}}>{this.state.birthday}</Text>
-                        </Right>
+                <Row style={{ ...marginTB(30, 30), marginLeft : 22 }}>
+                    <Entypo name='instagram' size={35}/>
+                    <Item style={styles.pickImg} onPress={() => this.choosePic('prenAvata')}>
+                        <Entypo name='circle-with-plus' size={20} style={{ ...paddingLR(10, 5), top : 2 }}/>
+                        <Text style={{ color : Color.pickBackground, marginLeft : 5, fontWeight : 'bold' }}>添加个人照片</Text>
                     </Item>
                 </Row>
 
             )
         } else {
             return (
-                <Row style={{...marginTB(30, 30), marginLeft: 22}}>
-                    <Text style={{color: Color.white, marginLeft: 5, fontWeight: 'bold'}}>禮物照片:</Text>
+                <TouchableOpacity onPress={()=>this.previewImg()}>
+                     <Row style={{ ...marginTB(30, 30), marginLeft : 22 }} >
+                        <Text style={{ color : Color.white, marginLeft : 5, fontWeight : 'bold' }}>个人照片:</Text>
+                        <Thumbnail source={this.state.prenAvata} style={styles.image} />
+                    </Row>
+                </TouchableOpacity>
+            )
+        }
+    }
+
+    avatarSource() {
+
+        if (this.state.avatarSource == null) {
+            return (
+
+                <Row style={{ ...marginTB(30, 30), marginLeft : 22 }}>
+                    <Entypo name='image' size={35}/>
+                    <Item style={styles.pickImg} onPress={() => this.choosePic()}>
+
+                        <Entypo name='circle-with-plus' size={20} style={{ ...paddingLR(10, 5), top : 2 }}/>
+                        <Text style={{ color : Color.pickBackground, marginLeft : 5, fontWeight : 'bold' }}>添加禮物照片</Text>
+
+                    </Item>
+                </Row>
+
+            )
+        } else {
+            return (
+                <Row style={{ ...marginTB(30, 30), marginLeft : 22 }}>
+                    <Text style={{ color : Color.white, marginLeft : 5, fontWeight : 'bold' }}>禮物照片:</Text>
                     <Thumbnail source={this.state.avatarSource} style={styles.image}/>
 
                 </Row>
@@ -189,8 +196,8 @@ export default class exploreScreen extends PureComponent {
             <Container style={styles.container}>
                 <Header>
                     <Left>
-                        <Button transparent onPress={() =>this.props.navigation.goBack() }>
-                            <Icon name="arrow-back" style={{color: "#000"}}/>
+                        <Button transparent onPress={() => this.props.navigation.goBack()}>
+                            <Icon name="arrow-back" style={{ color : "#000" }}/>
                         </Button>
                     </Left>
                     <Body>
@@ -201,29 +208,29 @@ export default class exploreScreen extends PureComponent {
                     </Right>
                 </Header>
 
-                <Content style={{backgroundColor: Color.pickBackground}}>
-                    <List style={{height: 100}}>
+                <Content style={{ backgroundColor : Color.pickBackground }}>
+                    <List style={{ height : 100 }}>
                         <ListItem avatar>
                             <Left>
                                 <Thumbnail
-                                    source={{uri: 'https://oss.zuimeimami.com/avatar/doctor_fC14530706150363566e0dce962bb/1520556522703.jpg'}}
+                                    source={{ uri : 'https://oss.zuimeimami.com/avatar/doctor_fC14530706150363566e0dce962bb/1520556522703.jpg' }}
                                     style={styles.avatastyle}/>
                             </Left>
 
-                            <Row style={{ marginLeft : 20, marginTop : 20}}>
-                            <Text style={{color: Color.white}}>Jow Wong</Text>
+                            <Row style={{ marginLeft : 20, marginTop : 20 }}>
+                                <Text style={{ color : Color.white }}>Jow Wong</Text>
                             </Row>
                         </ListItem>
                     </List>
 
                     <Item style={styles.regSetp}>
 
-                        <Text style={{color: Color.pickBackground, marginLeft: 10, fontWeight: 'bold'}}>禮物選項</Text>
+                        <Text style={{ color : Color.pickBackground, marginLeft : 10, fontWeight : 'bold' }}>禮物選項</Text>
 
                         <Right>
-                            <Text style={{paddingRight: 15, color: Color.pickBackground}}>XXXXX</Text>
+                            <Text style={{ paddingRight : 15, color : Color.pickBackground }}>XXXXX</Text>
                         </Right>
-                        <Entypo name='chevron-small-down' size={15} style={{marginRight: 5}}/>
+                        <Entypo name='chevron-small-down' size={15} style={{ marginRight : 5 }}/>
                     </Item>
                     <TextInput
                         style={styles.inputStyle}
@@ -251,19 +258,19 @@ export default class exploreScreen extends PureComponent {
                         placeholderTextColor={Color.pickBackground} //设置提示文字的颜色
                         value={this.state.text}
                         onChangeText={this._onChang}/>
-                    <Row style={{...marginTB(30, 30), marginLeft: 22}}>
-                        <Entypo name='instagram' size={35}/>
-                        <Item style={styles.pickImg}>
 
-                            <Entypo name='circle-with-plus' size={20} style={{...paddingLR(10, 5), top: 2}}/>
-                            <Text style={{color: Color.pickBackground, marginLeft: 5, fontWeight: 'bold'}}>添加个人照片</Text>
+                    {this.prenAvata()}
 
-                            <Right>
-                                <Text
-                                    style={{paddingRight: 15, color: Color.pickBackground}}>{this.state.birthday}</Text>
-                            </Right>
-                        </Item>
-                    </Row>
+                    {
+                        this.state.previewImg === true &&
+             <LookPhotoModal imageData={['https://oss.zuimeimami.com/prescription/doctor_fC14530706150363566e0dce962bb/1547712860489.jpg']} onClick={()=>{
+                 this.setState({
+                     previewImg:false
+                 })
+             }
+             }/>
+                     }
+
                 </Content>
             </Container>
         );
