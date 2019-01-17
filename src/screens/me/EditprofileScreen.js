@@ -340,8 +340,7 @@ export default class EditprofileScreen  extends Component {
     pickHide(){
         Picker.hide()
     }
-
-
+    
     render() {
         return (
             <Container style={gStyles.cbg}>
