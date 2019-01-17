@@ -24,13 +24,14 @@ import {
     Title, Item
 } from "native-base";
 import gStyles from "../../common/globalStyles";
-import Ionicons from "react-native-vector-icons/Ionicons";
+
 import Color from "../../commonComponents/Color";
 import { marginLR, marginTB, paddingTB } from "../../commonComponents/CommonUtil";
-import {Col} from "react-native-easy-grid";
+import EvilIcons from "react-native-vector-icons/EvilIcons";
 import Picker from "react-native-picker";
-import {education, marrydatas, religious} from "../../common/datas";
+import {education, marrydatas} from "../../common/datas";
 import area from "../../common/area";
+import Row from "../../commonComponents/Row";
 
 export default class EditprofileScreen  extends Component {
 
@@ -369,8 +370,12 @@ export default class EditprofileScreen  extends Component {
 
                         <Text style={{marginLeft: 15,fontWeight: 'bold'}}>年龄</Text>
 
+
                         <Right>
-                            <Text style={ {paddingRight: 15,color: Color.gray3}}>{this.state.birthday == null? "請選擇年齡":this.state.birthday}</Text>
+                            <Row verticalCenter>
+                                <Text style={ { color: Color.gray3}}>{this.state.birthday == null? "請選擇年齡":this.state.birthday}</Text>
+                                <EvilIcons name="chevron-right" size={30}/>
+                            </Row>
                         </Right>
                     </Item>
 
@@ -379,8 +384,10 @@ export default class EditprofileScreen  extends Component {
 
                         <Text style={{ marginLeft: 15,fontWeight: 'bold'}}>居住国家/地址</Text>
                         <Right>
-                            <Text style={ {paddingRight: 15,color: Color.gray3}}>{this.state.area}</Text>
-
+                             <Row verticalCenter>
+                                <Text style={ {color: Color.gray3}}>{this.state.area}</Text>
+                                <EvilIcons name="chevron-right" size={30}/>
+                            </Row>
                         </Right>
                     </Item>
 
@@ -389,8 +396,10 @@ export default class EditprofileScreen  extends Component {
 
                         <Text style={{ marginLeft: 15,fontWeight: 'bold'}}>高度</Text>
                         <Right>
-                            <Text style={ {paddingRight: 15,color: Color.gray3}}>{this.state.height}</Text>
-
+                             <Row verticalCenter>
+                                <Text style={{color: Color.gray3}}>{this.state.height}</Text>
+                                <EvilIcons name="chevron-right" size={30}/>
+                            </Row>
                         </Right>
                     </Item>
 
@@ -399,7 +408,11 @@ export default class EditprofileScreen  extends Component {
 
                         <Text style={{ marginLeft: 15,fontWeight: 'bold'}}>学历</Text>
                         <Right>
-                            <Text style={ {paddingRight: 15,color: Color.gray3}}>{this.state.education}</Text>
+                            <Row verticalCenter>
+                                <Text style={ {color: Color.gray3}}>{this.state.education}</Text>
+                                <EvilIcons name="chevron-right" size={30}/>
+                            </Row>
+
 
                         </Right>
                     </Item>
@@ -408,8 +421,11 @@ export default class EditprofileScreen  extends Component {
 
                         <Text style={{  marginLeft: 15,fontWeight: 'bold'}}>職業</Text>
                         <Right>
-                            <Text style={ {paddingRight: 15,color: Color.gray3}}>{this.state.marriage}</Text>
 
+                            <Row verticalCenter>
+                                <Text style={ {color: Color.gray3}}>{this.state.marriage}</Text>
+                                <EvilIcons name="chevron-right" size={30}/>
+                            </Row>
                         </Right>
                     </Item>
                 </View>

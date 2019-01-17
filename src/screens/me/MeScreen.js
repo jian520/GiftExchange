@@ -113,7 +113,7 @@ export default class MeScreen extends Component {
 
 
                          </Left>
-                        <Body style={[styles.bottmW],{left:10}}>
+                        <Body style={[styles.bottmW,{left:10}]}>
                         <Text style={styles.textC}>偏好设置</Text>
                         </Body>
 
@@ -123,7 +123,7 @@ export default class MeScreen extends Component {
                     <Separator style={ [gStyles.cbg, {height: 20}]}/>
 
                     <List style={{backgroundColor: Color.white}} >
-                        <ListItem icon onPress={ ()=> this.props.navigation.push('Personal') }>
+                        <ListItem icon >
                             <Left style={{left:20}}>
                                 <FontAwesome5 name='medapps'  size={20}/>
                             </Left>

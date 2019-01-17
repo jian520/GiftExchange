@@ -39,6 +39,7 @@ import {Grid, Row, Col} from "react-native-easy-grid";
 import service from "../../common/service"
 import User from '../../model/User'
 import CountdownUtil from "../../common/CountdownUtil"
+import {marginLR} from "../../commonComponents/CommonUtil";
 
 
 
@@ -283,8 +284,8 @@ export default class RegSetpA extends Component {
 
 
         return (
-            <Container style={gStyles.container}>
-                <Header style={styles.header}>
+            <Container style={gStyles.cbg}>
+                <Header >
                     <Left>
                         <Button transparent onPress={() => this.props.navigation.goBack()}>
                             <Icon name="arrow-back" style={{color: "#000"}}/>
@@ -309,7 +310,7 @@ export default class RegSetpA extends Component {
                              />
                          </Item>
 
-                        <Separator style={{backgroundColor: "#FFF", height: 20}}/>
+
 
                          <Item style={styles.input}>
                              <Input placeholder="姓氏"
@@ -321,7 +322,7 @@ export default class RegSetpA extends Component {
                              />
                          </Item>
 
-                         <Separator style={{backgroundColor: "#FFF", height: 20}}/>
+
 
                          <Item style={styles.input}>
                              <Input placeholder="郵箱地址"
@@ -332,7 +333,7 @@ export default class RegSetpA extends Component {
                                     }}
                              />
                          </Item>
-                         <Separator style={{backgroundColor: "#FFF", height: 20}}/>
+
 
                          <Item style={styles.input}>
                              <Input placeholder="聯絡電話"
@@ -345,12 +346,11 @@ export default class RegSetpA extends Component {
                          </Item>
 
                     </View>
+
+                    <Button block warning style={{...marginLR(30, 30)}} onPress={() => this.doReg()}>
+                        <Text>繼續</Text>
+                    </Button>
                 </Content>
-
-
-                            <Button block  style={styles.botomBtn} onPress={() => this.doReg()}>
-                                <Text>繼續</Text>
-                            </Button>
 
             </Container>
         );

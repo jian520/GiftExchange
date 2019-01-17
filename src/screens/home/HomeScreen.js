@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, {Component} from 'react'
 
 
 import {
@@ -35,27 +35,30 @@ export default class HomeScreen extends Component {
     //     ),
     // }
 
-    shoppingView(){
+    shoppingView() {
 
         this.props.navigation.push("ShoppingScreen");
     }
 
     render() {
 
-        const { navigation } = this.props;
+        const {navigation} = this.props;
 
 
         return (
             <Container style={styles.container}>
                 <Header>
-                    <Left />
+                    <Left/>
                     <Body>
                     <Title style={gStyles.textAColor}>Fate Date</Title>
                     </Body>
                     <Right>
-                         <Entypo name='shop' size={25} style={{marginRight: 15}} onPress={ ()=>{this.shoppingView()}}/>
+                        <Entypo name='shop' size={25} style={{marginRight: 15}} onPress={() => {
+                            this.shoppingView()
+                        }}/>
 
-                         <Ionicons name='ios-more' size={25} style={{marginRight: 5}} onPress={ ()=>this.props.navigation.push("ExploreScreen")}/>
+                        <Ionicons name='ios-more' size={25} style={{marginRight: 5}}
+                                  onPress={() => this.props.navigation.push("ExploreScreen")}/>
                     </Right>
                 </Header>
 
@@ -66,24 +69,25 @@ export default class HomeScreen extends Component {
                                    height: 200,
                                }}
                     />
-                    <List style={{backgroundColor: Color.pickBackground,height:130}} >
-                        <ListItem  avatar>
+                    <List style={{backgroundColor: Color.pickBackground, height: 130}}>
+                        <ListItem avatar>
                             <Left>
-                                <Thumbnail source={{uri:'https://oss.zuimeimami.com/avatar/doctor_fC14530706150363566e0dce962bb/1520556522703.jpg'}}
-                                           style={styles.avatastyle}/>
+                                <Thumbnail
+                                    source={{uri: 'https://oss.zuimeimami.com/avatar/doctor_fC14530706150363566e0dce962bb/1520556522703.jpg'}}
+                                    style={styles.avatastyle}/>
                             </Left>
 
                             <Body>
 
-                                <Text style={{...marginTB(30,5),color:Color.white}}>年龄：32</Text>
-                                <Text style={{...paddingTB(5,5),color:Color.white}}>性别：女性</Text>
-                                <Text style={{...paddingTB(5,5),color:Color.white}}>地址：Hong Kong TK</Text>
+                            <Text style={{...marginTB(30, 5), color: Color.white}}>年龄：32</Text>
+                            <Text style={{...paddingTB(5, 5), color: Color.white}}>性别：女性</Text>
+                            <Text style={{...paddingTB(5, 5), color: Color.white}}>地址：Hong Kong TK</Text>
 
                             </Body>
                         </ListItem>
                     </List>
-                    <List style={{backgroundColor: Color.gray,height:80}} >
-                        <ListItem  avatar>
+                    <List style={{backgroundColor: Color.gray, height: 80}}>
+                        <ListItem avatar>
                             <Left>
                                 <Button block
                                         style={{
@@ -111,21 +115,21 @@ export default class HomeScreen extends Component {
                             </Right>
                         </ListItem>
                     </List>
-                    <List style={{backgroundColor: Color.pickBackground,height:180}} >
-                         <Column style={{marginLeft:15,...marginTB(5,10)}}>
-                             <Text style={{fontWeight: 'bold',color:Color.white,...marginTB(5,5)}}>
-                                 简介
-                             </Text>
-                             <Text style={{fontWeight: 'bold',color:Color.white}}>
-                                 Love traveling.want to see the world
-                             </Text>
-                         </Column>
+                    <List style={{backgroundColor: Color.pickBackground, height: 180}}>
+                        <Column style={{marginLeft: 15, ...marginTB(5, 10)}}>
+                            <Text style={{fontWeight: 'bold', color: Color.white, ...marginTB(5, 5)}}>
+                                简介
+                            </Text>
+                            <Text style={{fontWeight: 'bold', color: Color.white}}>
+                                Love traveling.want to see the world
+                            </Text>
+                        </Column>
 
-                        <Column style={{marginLeft:15,...marginTB(30,20)}}>
-                            <Text style={{fontWeight: 'bold',color:Color.white,...marginTB(5,15)}}>
+                        <Column style={{marginLeft: 15, ...marginTB(30, 20)}}>
+                            <Text style={{fontWeight: 'bold', color: Color.white, ...marginTB(5, 15)}}>
                                 礼物代表了：
                             </Text>
-                            <Text style={{fontWeight: 'bold',color:Color.white}}>
+                            <Text style={{fontWeight: 'bold', color: Color.white}}>
                                 Movies,a good book and be with friend
                             </Text>
                         </Column>
@@ -136,13 +140,12 @@ export default class HomeScreen extends Component {
                                     alignSelf: "center",
                                     height: 30,
                                     ...marginTB(15, 15),
-
-                                }}>
+                                }} onPress={() => this.props.navigation.push('Personal')}>
                             <Text style={{color: Color.white}}>个人资料</Text>
                         </Button>
                     </List>
                     {/*<Button onPress={() =>   navigation.push('Test')   }>*/}
-                        {/*<Text>push</Text>*/}
+                    {/*<Text>push</Text>*/}
                     {/*</Button>*/}
                 </Content>
             </Container>
