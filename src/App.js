@@ -33,7 +33,7 @@ import completeScreen from "./screens/reg/completeScreen";
 import ShoppingScreen from "./screens/home/ShoppingScreen";
 import HelpScreen from "./screens/me/HelpScreen";
 import TestScreen from "./screens/home/TestScreen";
-
+import SettingView from './screens/setting/SettingScreen'
 const HomeTab = createStackNavigator({
         Home: {
             screen: HomeScreen,
@@ -149,7 +149,8 @@ const AppStack = createStackNavigator({
         Personal:{screen:PersonalScreen},
         ShoppingScreen:{screen:ShoppingScreen},
         HelpScreen:{screen:HelpScreen},
-        ExploreScreen:{screen:ExploreScreen}
+        ExploreScreen:{screen:ExploreScreen},
+        SettingScreen:{screen:SettingView}
     },
     {
 
@@ -208,7 +209,7 @@ export class StartAndTabRoot extends PureComponent {
     constructor() {
         super()
         this.state = {
-            isLogin: true,
+            isLogin: false,
 
         }
         StatusBar.setBarStyle('light-content')
@@ -240,7 +241,7 @@ export class StartAndTabRoot extends PureComponent {
             console.log(value)
 
             this.setState({
-                isLogin: false,
+                isLogin: true,
             });
             this.setState({isLogin: false}, () => {
                 this.forceUpdate();

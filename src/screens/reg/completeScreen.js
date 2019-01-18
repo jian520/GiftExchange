@@ -7,7 +7,8 @@ import React, {Component} from 'react';
 import {
     StyleSheet,
     View,
-    TouchableOpacity
+    TouchableOpacity,
+    ImageBackground
 } from 'react-native';
 import {
     Container,
@@ -60,7 +61,7 @@ export default class completeScreen extends Component {
         return (
             <Container >
                 <TouchableOpacity   onPress={()=>this.popHome()}>
-                <Thumbnail square style={{
+                <ImageBackground style={{
                     width: screenW,
                     height: screenH,
                  }}

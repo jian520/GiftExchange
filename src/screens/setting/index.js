@@ -140,9 +140,6 @@ export default class Setting extends Component {
                                 }
                             )}
 
-
-
-
                         >
                             <Text>退出登錄</Text>
                         </Button>
