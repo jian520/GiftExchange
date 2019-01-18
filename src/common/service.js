@@ -160,6 +160,8 @@ class Service {
             for (var key in params){
                 formData.append(key, params[key]);
             }
+            console.log('params.path', params.path);
+
             let file = {uri: params.path, type: 'application/octet-stream', name: 'image.jpg'};
             formData.append("pic", file);
             fetch( url, {
@@ -169,7 +171,11 @@ class Service {
                     // "x-access-token": token,
                 },
                 body: formData,
-            }).then((response) => response.json())
+            }).then((response) =>  {
+
+                console.log('responseresponseresponse', response);
+                response.json()
+            } )
                 .then((responseData)=> {
                     console.log('uploadImage', responseData);
                     resolve(responseData);

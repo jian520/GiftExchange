@@ -20,6 +20,7 @@ import Dialog, {
 } from 'react-native-popup-dialog';
 import Column from "../../commonComponents/Column";
 import common from "../../common/common";
+import ShareUtile from "../../native/ShareUtil";
 
 
 
@@ -61,6 +62,15 @@ export default class ShoppingScreen  extends Component {
     componentWillReceiveProps() {
 
     }
+
+    shareboard(){
+        var list = [0,1,2,3,4]
+        ShareUtile.shareboard('sssss','http://dev.umeng.com/images/tab2_1.png','http://www.umeng.com/','title',list,(code,message) =>{
+            this.setState({result:message});
+
+        });
+    }
+
 
     showSlideAnimationDialog() {
         this.setState({
@@ -136,7 +146,7 @@ export default class ShoppingScreen  extends Component {
                          <Text>赠送免费豆豆</Text>
                     </Item>
 
-                    <Item style={[{backgroundColor:Color.white,height:45}]}>
+                    <Item style={[{backgroundColor:Color.white,height:45}]} onPress={()=>this.shareboard()}>
                         <Row verticalCenter style={{paddingLeft: 30}}>
                             <Text>100</Text>
                             <Entypo name="flower" style={{color: Color.red,marginRight: 5}} size={15}/>
@@ -147,7 +157,7 @@ export default class ShoppingScreen  extends Component {
                             </Row>
                         </Right>
                     </Item>
-                    <Item style={[{backgroundColor:Color.white,height:45}]}>
+                    <Item style={[{backgroundColor:Color.white,height:45}]} onPress={()=>this.shareboard()}>
                         <Row verticalCenter style={{paddingLeft: 30}}>
                             <Text>100</Text>
                             <Entypo name="flower" style={{color: Color.red,marginRight: 10}} size={15}/>
@@ -159,7 +169,7 @@ export default class ShoppingScreen  extends Component {
                             </Row>
                         </Right>
                     </Item>
-                    <Item style={[{backgroundColor:Color.white,height:45}]}>
+                    <Item style={[{backgroundColor:Color.white,height:45}]} onPress={()=>this.shareboard()}>
                         <Row verticalCenter style={{paddingLeft: 30}}>
                             <Text>100</Text>
                             <Entypo name="flower" style={{color: Color.red,marginRight: 5}} size={15}/>
@@ -170,7 +180,7 @@ export default class ShoppingScreen  extends Component {
                             </Row>
                         </Right>
                     </Item>
-                    <Item style={[{backgroundColor:Color.white,height:45}]}>
+                    <Item style={[{backgroundColor:Color.white,height:45}]} onPress={()=>this.shareboard()}>
                         <Row verticalCenter style={{paddingLeft: 30}}>
                             <Text>200</Text>
                             <Entypo name="flower" style={{color: Color.red,marginRight: 10}} size={15}/>
@@ -182,7 +192,7 @@ export default class ShoppingScreen  extends Component {
                             </Row>
                         </Right>
                     </Item>
-                    <Item style={[{backgroundColor:Color.white,height:45}]}>
+                    <Item style={[{backgroundColor:Color.white,height:45}]} onPress={()=>this.shareboard()}>
                         <Row verticalCenter style={{paddingLeft: 30}}>
                             <Text>500</Text>
                             <Entypo name="flower" style={{color: Color.red,marginRight: 5}} size={15}/>

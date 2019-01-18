@@ -8,7 +8,8 @@ import {
     StyleSheet,
     TextInput,
     View,
-    TouchableOpacity
+    TouchableOpacity,
+    ImageBackground
 } from 'react-native';
 import {
     Body,
@@ -24,7 +25,7 @@ import {
     Thumbnail,
     Title,
     Button,
-    Icon
+    Icon,
 } from "native-base";
 import gStyles from "../../common/globalStyles";
 import Color from "../../commonComponents/Color";
@@ -32,11 +33,15 @@ import Color from "../../commonComponents/Color";
 import styles from "../explore/styles";
 //图片选择器
 import ImagePicker from 'react-native-image-picker';
+import Service from "../../common/service";
+import API from "../../common/API";
 
+import EvilIcons from "react-native-vector-icons/EvilIcons";
 import Entypo from "react-native-vector-icons/Entypo";
 import Row from "../../commonComponents/Row";
 import { marginTB, paddingLR } from "../../commonComponents/CommonUtil";
 import LookPhotoModal from "../../commonComponents/LookPhotoModal";
+import common from "../../common/common";
 
 var options = {
     title : '请选择图片来源',
@@ -57,7 +62,7 @@ export default class exploreScreen extends PureComponent {
         this.state = {
             avatarSource : null,
             prenAvata : null,
-            previewImg:false
+            previewImg : false
         };
     }
 
@@ -118,13 +123,15 @@ export default class exploreScreen extends PureComponent {
             } else {
                 const source = { uri : response.uri };
 
+
+                this.upload(source)
                 // You can also display the image using data:
                 // const source = { uri: 'data:image/jpeg;base64,' + response.data };
                 if (type === 'prenAvata') {
                     this.setState({
                         prenAvata : source,
                     });
-                }else {
+                } else {
                     this.setState({
                         avatarSource : source,
                     });
@@ -134,10 +141,80 @@ export default class exploreScreen extends PureComponent {
         });
     }
 
-    previewImg(){
-            this.setState({
-                previewImg:true
-            })
+
+
+    upload(path) {
+        console.log('path image', path);
+        let params = {
+            userid: "1111",   //用户id
+            path: path   //本地文件地址
+        }
+        console.log('params', params);
+        Service.uploadImage('https://ws3.sinaimg.cn/large', params)
+            .then(res => {
+
+                common.toast(res.msg)
+                if (res.flag == "Success") {
+                    this.loadData()
+                }
+
+
+            }).catch(err => {
+            //请求失败
+        })
+
+
+    }
+
+    loadData() {
+
+        Service.photoAlbumList("1111")
+            .then((wrapData) => {
+                console.log('wrapData  ')
+                console.log(wrapData)
+
+                // this.setState({
+                //     loading: false,
+                //
+                // });
+                //
+                // if (wrapData.flag == "Success") {
+                //     // common.toast(wrapData.msg)
+                //     // DeviceEventEmitter.emit('DidLogin', true);
+                //
+                //     this.setState({
+                //         dataSource: wrapData.data,
+                //
+                //     });
+                //
+                // } else {
+                //     common.toast(wrapData.msg)
+                //     this.setState({
+                //         dataSource: [],
+                //
+                //     });
+                // }
+
+            }).then((items) => {
+
+        }).catch((error) => {
+            console.log(error);
+
+            // this.setState({
+            //     loading: false,
+            //
+            // });
+
+
+        })
+    }
+
+
+
+    previewImg() {
+        this.setState({
+            previewImg : true
+        })
     }
 
     prenAvata() {
@@ -154,12 +231,16 @@ export default class exploreScreen extends PureComponent {
             )
         } else {
             return (
-                <TouchableOpacity onPress={()=>this.previewImg()}>
-                     <Row style={{ ...marginTB(30, 30), marginLeft : 22 }} >
-                        <Text style={{ color : Color.white, marginLeft : 5, fontWeight : 'bold' }}>个人照片:</Text>
-                        <Thumbnail source={this.state.prenAvata} style={styles.image} />
-                    </Row>
-                </TouchableOpacity>
+
+                <Row style={{ ...marginTB(30, 30), marginLeft : 22 }}>
+                    <Text style={{ color : Color.white, marginLeft : 5, fontWeight : 'bold' }}>个人照片:</Text>
+                    <TouchableOpacity onPress={() => this.previewImg()}>
+                        <ImageBackground source={this.state.prenAvata} style={styles.image}>
+                            <EvilIcons name='close-o' size={30} style={{ position : 'absolute', right : -10,top:-10}} onPress={()=>this.setState({prenAvata:null})}/>
+                        </ImageBackground>
+                    </TouchableOpacity>
+                </Row>
+
             )
         }
     }
@@ -184,9 +265,15 @@ export default class exploreScreen extends PureComponent {
             return (
                 <Row style={{ ...marginTB(30, 30), marginLeft : 22 }}>
                     <Text style={{ color : Color.white, marginLeft : 5, fontWeight : 'bold' }}>禮物照片:</Text>
-                    <Thumbnail source={this.state.avatarSource} style={styles.image}/>
 
+                    <TouchableOpacity onPress={() => this.previewImg()}>
+                        <ImageBackground source={this.state.avatarSource} style={styles.image}>
+                            <EvilIcons name='close-o' size={30} style={{ position : 'absolute', right : -3}} onPress={()=>this.setState({avatarSource:null})}/>
+                        </ImageBackground>
+                    </TouchableOpacity>
                 </Row>
+
+
             )
         }
     }
@@ -263,13 +350,13 @@ export default class exploreScreen extends PureComponent {
 
                     {
                         this.state.previewImg === true &&
-             <LookPhotoModal imageData={['https://oss.zuimeimami.com/prescription/doctor_fC14530706150363566e0dce962bb/1547712860489.jpg']} onClick={()=>{
-                 this.setState({
-                     previewImg:false
-                 })
-             }
-             }/>
-                     }
+                        <LookPhotoModal imageData={[ 'https://oss.zuimeimami.com/prescription/doctor_fC14530706150363566e0dce962bb/1547712860489.jpg' ]} onClick={() => {
+                            this.setState({
+                                previewImg : false
+                            })
+                        }
+                        }/>
+                    }
 
                 </Content>
             </Container>

@@ -33,7 +33,7 @@ export default {
     },
     input:{
         width:common.deviceWidth - 30,
-        borderBottomWidth: 2,
+        borderBottomWidth: 1,
 
     },
     botomBtn:{

@@ -1,7 +1,7 @@
 import React, {PureComponent, PropTypes} from 'react';
-import {StatusBar, DeviceEventEmitter} from 'react-native';
+import {StatusBar, DeviceEventEmitter,NetInfo} from 'react-native';
 
-import {Root} from "native-base";
+import {Root,Toast} from "native-base";
 import {
     createStackNavigator,
     createSwitchNavigator,
@@ -33,7 +33,7 @@ import completeScreen from "./screens/reg/completeScreen";
 import ShoppingScreen from "./screens/home/ShoppingScreen";
 import HelpScreen from "./screens/me/HelpScreen";
 import TestScreen from "./screens/home/TestScreen";
-
+import SettingView from './screens/setting/SettingScreen'
 const HomeTab = createStackNavigator({
         Home: {
             screen: HomeScreen,
@@ -71,6 +71,7 @@ const Tabs = createBottomTabNavigator(
             navigationOptions: {
 
                 tabBarLabel: 'Bagel',
+
                 tabBarIcon: ({tintColor, focused}) => (
                     <FontAwesome
                         name={focused ? 'gittip' : 'gittip'}
@@ -149,7 +150,8 @@ const AppStack = createStackNavigator({
         Personal:{screen:PersonalScreen},
         ShoppingScreen:{screen:ShoppingScreen},
         HelpScreen:{screen:HelpScreen},
-        ExploreScreen:{screen:ExploreScreen}
+        ExploreScreen:{screen:ExploreScreen},
+        SettingScreen:{screen:SettingView}
     },
     {
 
@@ -214,6 +216,27 @@ export class StartAndTabRoot extends PureComponent {
         StatusBar.setBarStyle('light-content')
     }
 
+
+    componentWillMount() {
+
+
+        NetInfo.isConnected.addEventListener(
+            'connectionChange',
+            this.handleFirstConnectivityChange
+        );
+    }
+
+    handleFirstConnectivityChange(isConnected) {
+        if (!isConnected) {
+            Toast.show({
+                text: "网络未连接",
+                position: "top"
+            });
+
+        }
+    }
+
+
     componentDidMount() {
         // service.getUserFromCache()
         //     .then((user) => {
@@ -240,7 +263,7 @@ export class StartAndTabRoot extends PureComponent {
             console.log(value)
 
             this.setState({
-                isLogin: false,
+                isLogin: true,
             });
             this.setState({isLogin: false}, () => {
                 this.forceUpdate();
@@ -252,20 +275,13 @@ export class StartAndTabRoot extends PureComponent {
     componentWillUnmount() {
         // 移除
     DeviceEventEmitter.remove();
+        NetInfo.isConnected.removeEventListener(
+            'connectionChange',
+            this.handleFirstConnectivityChange
+        );
     }
 
-    componentWillMount() {
-        // this.subscription = DeviceEventEmitter.addListener('DidLogin', (value) => {
-        //     console.log("DidLogin")
-        //     console.log(value)
-        //
-        //     this.setState({
-        //         isLogin: value
-        //     });
-        //
-        //
-        // })
-    }
+
 
     render() {
         if (this.state.isLogin) {

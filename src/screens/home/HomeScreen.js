@@ -170,13 +170,13 @@ export default class HomeScreen extends Component {
                                     <Text style={[gStyles.textCColor,{ fontWeight : 'bold', fontSize : 18, textAlign : 'center'}]}>跳過排隊隊伍！</Text>
                                  </Column>
                                 <Row verticalCenter style={{justifyContent:'space-between', marginTop : 20}}>
-                                    <EvilIcons name='minus' size={30}
+                                    <EvilIcons name='minus' size={40}
                                               onPress={() => alert('上一頁')}/>
                                 <Thumbnail
                                     source={BaseImg.CommndImg.image1}
                                     style={{width:100,height:150}}/>
 
-                                    <EvilIcons name='plus' size={30}
+                                    <EvilIcons name='plus' size={40}
                                                onPress={() => alert('下一頁')}/>
                                 </Row>
                                 <Column style={{marginTop : 20,}}>
