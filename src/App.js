@@ -1,7 +1,7 @@
 import React, {PureComponent, PropTypes} from 'react';
-import {StatusBar, DeviceEventEmitter} from 'react-native';
+import {StatusBar, DeviceEventEmitter,NetInfo} from 'react-native';
 
-import {Root} from "native-base";
+import {Root,Toast} from "native-base";
 import {
     createStackNavigator,
     createSwitchNavigator,
@@ -71,6 +71,7 @@ const Tabs = createBottomTabNavigator(
             navigationOptions: {
 
                 tabBarLabel: 'Bagel',
+
                 tabBarIcon: ({tintColor, focused}) => (
                     <FontAwesome
                         name={focused ? 'gittip' : 'gittip'}
@@ -209,11 +210,32 @@ export class StartAndTabRoot extends PureComponent {
     constructor() {
         super()
         this.state = {
-            isLogin: false,
+            isLogin: true,
 
         }
         StatusBar.setBarStyle('light-content')
     }
+
+
+    componentWillMount() {
+
+
+        NetInfo.isConnected.addEventListener(
+            'connectionChange',
+            this.handleFirstConnectivityChange
+        );
+    }
+
+    handleFirstConnectivityChange(isConnected) {
+        if (!isConnected) {
+            Toast.show({
+                text: "网络未连接",
+                position: "top"
+            });
+
+        }
+    }
+
 
     componentDidMount() {
         // service.getUserFromCache()
@@ -253,20 +275,13 @@ export class StartAndTabRoot extends PureComponent {
     componentWillUnmount() {
         // 移除
     DeviceEventEmitter.remove();
+        NetInfo.isConnected.removeEventListener(
+            'connectionChange',
+            this.handleFirstConnectivityChange
+        );
     }
 
-    componentWillMount() {
-        // this.subscription = DeviceEventEmitter.addListener('DidLogin', (value) => {
-        //     console.log("DidLogin")
-        //     console.log(value)
-        //
-        //     this.setState({
-        //         isLogin: value
-        //     });
-        //
-        //
-        // })
-    }
+
 
     render() {
         if (this.state.isLogin) {
