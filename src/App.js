@@ -208,7 +208,7 @@ export class StartAndTabRoot extends PureComponent {
     constructor() {
         super()
         this.state = {
-            isLogin: true,
+            isLogin: false,
 
         }
         StatusBar.setBarStyle('light-content')
