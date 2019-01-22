@@ -34,6 +34,10 @@ import ShoppingScreen from "./screens/home/ShoppingScreen";
 import HelpScreen from "./screens/me/HelpScreen";
 import TestScreen from "./screens/home/TestScreen";
 import SettingView from './screens/setting/SettingScreen'
+import { storageUtil } from "./commonComponents/CommonUtil";
+
+global.storageUtil = storageUtil;
+
 const HomeTab = createStackNavigator({
         Home: {
             screen: HomeScreen,
@@ -207,10 +211,12 @@ export const StartContainer = createAppContainer(createSwitchNavigator(
 ));
 
 export class StartAndTabRoot extends PureComponent {
+
+
     constructor() {
         super()
         this.state = {
-            isLogin: true,
+            isLogin: false,
 
         }
         StatusBar.setBarStyle('light-content')
@@ -218,7 +224,6 @@ export class StartAndTabRoot extends PureComponent {
 
 
     componentWillMount() {
-
 
         NetInfo.isConnected.addEventListener(
             'connectionChange',

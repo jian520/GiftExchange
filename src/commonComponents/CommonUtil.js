@@ -6,6 +6,7 @@ import {
     Platform,
 } from 'react-native';
 
+import BaseImg from "./BaseImg";
 
 export let screenW = Dimensions.get('window').width;
 export let screenH = Dimensions.get('window').height;
@@ -26,6 +27,11 @@ const h2 = 1334 / DEFAULT_DENSITY;
 // iPhoneX
 const X_WIDTH = 375;
 const X_HEIGHT = 812;
+
+
+export function defaultAvatar(avatar) {
+    return avatar && avatar !== '0' ? {uri: avatar} : BaseImg.meImg.defaultAvatar
+}
 
 
 /**

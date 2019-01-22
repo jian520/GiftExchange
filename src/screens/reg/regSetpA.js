@@ -35,7 +35,7 @@ import styles from "./styles";
 import gStyles from "../../common/globalStyles"
 import common from "../../common/common"
 
-import {Grid, Row, Col} from "react-native-easy-grid";
+
 import service from "../../common/service"
 import User from '../../model/User'
 import CountdownUtil from "../../common/CountdownUtil"
@@ -282,7 +282,6 @@ export default class RegSetpA extends Component {
 
     render() {
 
-
         return (
             <Container style={gStyles.cbg}>
                 <Header >
@@ -297,9 +296,8 @@ export default class RegSetpA extends Component {
                     <Right/>
                 </Header>
 
-
-                <Content >
-                     <View style={ styles.containerView}>
+                <Content style={gStyles.containerView}>
+                    <View style={styles.containerView}>
                          <Item style={styles.input}>
                              <Input placeholder="名"
                                     placeholderTextColor={common.colorC}
@@ -309,8 +307,6 @@ export default class RegSetpA extends Component {
                                     }}
                              />
                          </Item>
-
-
 
                          <Item style={styles.input}>
                              <Input placeholder="姓氏"
@@ -346,10 +342,10 @@ export default class RegSetpA extends Component {
                          </Item>
 
                     </View>
-
                     <Button block warning style={{...marginLR(30, 30)}} onPress={() => this.doReg()}>
                         <Text>繼續</Text>
                     </Button>
+
                 </Content>
 
             </Container>

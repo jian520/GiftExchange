@@ -24,7 +24,7 @@ import styles from "./styles";
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import gStyles from "../../common/globalStyles";
 
-import { marginTB, paddingTB, screenW } from "../../commonComponents/CommonUtil";
+import { defaultAvatar, marginTB, paddingTB, screenW } from "../../commonComponents/CommonUtil";
 import Color from "../../commonComponents/Color";
 import Entypo from "react-native-vector-icons/Entypo";
 import ShareUtile from '../../native/ShareUtil'
@@ -42,6 +42,16 @@ var DESTRUCTIVE_INDEX = 0;
 var CANCEL_INDEX = 1;
 
 export default class MeScreen extends Component {
+
+    // 构造
+      constructor(props) {
+        super(props);
+        // 初始状态
+        this.state = {
+            image:null
+        };
+      }
+
 
     logout() {
         // service.logout()
@@ -84,7 +94,7 @@ export default class MeScreen extends Component {
                     <List style={{ backgroundColor : Color.white, height : 100 }}>
                         <ListItem avatar onPress={() => this.editprofile()}>
                             <Left>
-                                <Thumbnail source={{ uri : 'https://oss.zuimeimami.com/avatar/doctor_fC14530706150363566e0dce962bb/1520556522703.jpg' }}
+                                <Thumbnail source={defaultAvatar(this.state.image)}
                                            style={styles.avatastyle}/>
                             </Left>
                             <Body style={styles.bottmW}>

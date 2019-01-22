@@ -4,12 +4,23 @@
   * date： 
   */
 import React, {PureComponent} from 'react';
-import {
-    StyleSheet,
-    View,
-} from 'react-native';
-import {Body, Right, Container, Left, Header, TabHeading, Tabs, Text, Tab,Title} from "native-base";
+import { Image } from 'react-native';
 import gStyles from "../../common/globalStyles";
+
+
+import { Container, Header, View, DeckSwiper, Card, CardItem, Thumbnail, Text, Left, Body, Icon ,Title,Right} from 'native-base';
+const cards = [
+    {
+        text: 'Card One',
+        name: 'One',
+        image: require('../../img/swiper-1.png'),
+    },
+    {
+        text: 'Card One',
+        name: 'One',
+        image: require('../../img/swiper-2.png'),
+    }
+];
 
 export default class messageScreens extends PureComponent {
 
@@ -66,7 +77,7 @@ export default class messageScreens extends PureComponent {
 
     render() {
         return (
-            <Container style={styles.container}>
+            <Container style={gStyles.container}>
                 <Header>
                     <Left />
                     <Body>
@@ -74,16 +85,42 @@ export default class messageScreens extends PureComponent {
                     </Body>
                     <Right/>
                 </Header>
-                <Tabs>
-                    <Tab heading={ <TabHeading><Text>Camera</Text></TabHeading>}>
-                    </Tab>
-                    <Tab heading={ <TabHeading><Text>No Icon</Text></TabHeading>}>
-                    </Tab>
-                </Tabs>
+                <View>
+                    <DeckSwiper
+                        dataSource={cards}
+                        renderItem={item =>
+                            <Card style={{ elevation: 3 }}>
+                                <CardItem>
+                                    <Left>
+                                        <Thumbnail source={item.image} />
+                                        <Body>
+                                        <Text>{item.text}</Text>
+                                        <Text note>NativeBase</Text>
+                                        </Body>
+                                    </Left>
+                                </CardItem>
+                                <CardItem cardBody>
+                                    <Image style={{ height: 300, flex: 1 }} source={item.image} />
+                                </CardItem>
+                                <CardItem>
+                                    <Text>我们处理手势可以使用GestureDetector组件，它是可以添加手势的一个widget，观察它的源码我们处理手势可以使用GestureDetector组件，它是可以添加手势的一个widget，观察它的源码</Text>
+
+
+                                </CardItem>
+                                <CardItem>
+                                    <Icon name="heart" style={{ color: '#ED4A6A' }} />
+                                    <Text>{item.name}</Text>
+                                </CardItem>
+
+
+                            </Card>
+                        }
+                    />
+                </View>
             </Container>
         );
     }
 }
 
-const styles = StyleSheet.create({});
+
 
