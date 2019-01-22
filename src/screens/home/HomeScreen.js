@@ -147,7 +147,7 @@ export default class HomeScreen extends Component {
                                     height: 30,
                                     ...marginTB(15, 15),
                                 }} onPress={() => this.props.navigation.push('Personal')}>
-                            <Text style={{color: Color.white}}>个人资料</Text>
+                            <Text style={{color: Color.white}}>個人資料</Text>
                         </Button>
                     </List>
                     <Dialog

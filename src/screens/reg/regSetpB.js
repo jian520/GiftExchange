@@ -468,7 +468,7 @@ export default class RegSetpB extends Component {
                     <Right/>
                 </Header>
 
-                <Content onTouchStart={() => this.pickHide()} onScrollEndDrag={() => this.pickHide()}>
+                <Content onTouchStart={() => this.pickHide()} onScrollEndDrag={() => this.pickHide()} >
                     <View style={styles.containerView}>
 
 
