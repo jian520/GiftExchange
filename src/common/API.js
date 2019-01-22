@@ -17,8 +17,6 @@ export default {
     PhotoAlbumUpload:     API_ADDRESS + 'index.php/Service/PhotoAlbum/upload',
     PhotoAlbumDelete:     API_ADDRESS + 'index.php/Service/PhotoAlbum/del',
 
-
-
 };
 
 

@@ -37,9 +37,7 @@ export default class HomeScreen extends Component {
         }
     }
 
-
     shoppingView() {
-
         this.props.navigation.push("ShoppingScreen");
     }
 
@@ -50,9 +48,7 @@ export default class HomeScreen extends Component {
     }
 
     render() {
-
         const {navigation} = this.props;
-
 
         return (
             <Container style={styles.container}>
@@ -175,7 +171,6 @@ export default class HomeScreen extends Component {
                                 <Thumbnail
                                     source={BaseImg.CommndImg.image1}
                                     style={{width:100,height:150}}/>
-
                                     <EvilIcons name='plus' size={40}
                                                onPress={() => alert('下一頁')}/>
                                 </Row>

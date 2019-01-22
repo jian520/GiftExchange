@@ -10,7 +10,6 @@ import {
 } from 'react-navigation'
 
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-
 import StartScreen from "./screens/start/";
 import LoginScreen from "./screens/login/LoginScreen"
 import RegScreen from "./screens/reg/regSetpA"
@@ -21,7 +20,6 @@ import StartA from "./screens/start/StartA";
 import StartB from "./screens/start/StartB";
 import StartC from "./screens/start/StartC";
 import StartD from "./screens/start/StartD";
-
 import WelcomeHome from './screens/start/WelcomeHome';
 import Entypo from 'react-native-vector-icons/Entypo';
 import MeScreen from './screens/me/MeScreen'
@@ -34,18 +32,16 @@ import ShoppingScreen from "./screens/home/ShoppingScreen";
 import HelpScreen from "./screens/me/HelpScreen";
 import TestScreen from "./screens/home/TestScreen";
 import SettingView from './screens/setting/SettingScreen'
+
 const HomeTab = createStackNavigator({
         Home: {
             screen: HomeScreen,
             headerMode: "none"
         },
-
     },
-
     {
         initialRouteName: "Home",
         headerMode: "none"
-
     }
 );
 
@@ -55,11 +51,9 @@ const MeTab = createStackNavigator({
             screen: MeScreen,
             headerMode: "none"
         },
-
     }, {
         initialRouteName: "Me",
         headerMode: "none"
-
     }
 );
 
@@ -141,8 +135,6 @@ const AppStack = createStackNavigator({
         Tabs: {
             screen: Tabs,
         },
-
-
         WelcomeHome: {screen: WelcomeHome},
         Setting: {screen: SettingScreen},
         Profile: {screen: MeScreen},
@@ -154,9 +146,7 @@ const AppStack = createStackNavigator({
         SettingScreen:{screen:SettingView}
     },
     {
-
         headerMode: "none"
-
     }
 );
 
@@ -216,7 +206,6 @@ export class StartAndTabRoot extends PureComponent {
         StatusBar.setBarStyle('light-content')
     }
 
-
     componentWillMount() {
 
 
@@ -235,7 +224,6 @@ export class StartAndTabRoot extends PureComponent {
 
         }
     }
-
 
     componentDidMount() {
         // service.getUserFromCache()
@@ -280,8 +268,6 @@ export class StartAndTabRoot extends PureComponent {
             this.handleFirstConnectivityChange
         );
     }
-
-
 
     render() {
         if (this.state.isLogin) {

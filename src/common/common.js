@@ -16,10 +16,7 @@ function toast(msg) {
     Toast.show({
         text: msg,
     })
-
 }
-
-
 
 
 export default {
@@ -30,12 +27,9 @@ export default {
     colorC: "#999999",
     colorD: "#F4F4F4",
     colorE: "#FBEFEF",
-
     colorF: "#d7d7d7",
-
     validateEmail,
     toast,
-
 };
 
 

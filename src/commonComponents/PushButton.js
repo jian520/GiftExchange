@@ -12,7 +12,6 @@ import Column from "./Column";
 import {wh} from "./CommonUtil";
 import BaseImg from "./BaseImg";
 
-
 //圆形BUTTON
 export default class PushButton extends PureComponent {
 
