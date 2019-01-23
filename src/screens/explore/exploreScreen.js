@@ -123,7 +123,6 @@ export default class exploreScreen extends PureComponent {
             } else {
                 const source = { uri : response.uri };
 
-
                 this.upload(source)
                 // You can also display the image using data:
                 // const source = { uri: 'data:image/jpeg;base64,' + response.data };
@@ -141,13 +140,11 @@ export default class exploreScreen extends PureComponent {
         });
     }
 
-
-
     upload(path) {
         console.log('path image', path);
         let params = {
-            userid: "1111",   //用户id
-            path: path   //本地文件地址
+            userid : "1111",   //用户id
+            path : path   //本地文件地址
         }
         console.log('params', params);
         Service.uploadImage('https://ws3.sinaimg.cn/large', params)
@@ -158,11 +155,9 @@ export default class exploreScreen extends PureComponent {
                     this.loadData()
                 }
 
-
             }).catch(err => {
             //请求失败
         })
-
 
     }
 
@@ -205,11 +200,8 @@ export default class exploreScreen extends PureComponent {
             //
             // });
 
-
         })
     }
-
-
 
     previewImg() {
         this.setState({
@@ -236,7 +228,7 @@ export default class exploreScreen extends PureComponent {
                     <Text style={{ color : Color.white, marginLeft : 5, fontWeight : 'bold' }}>个人照片:</Text>
                     <TouchableOpacity onPress={() => this.previewImg()}>
                         <ImageBackground source={this.state.prenAvata} style={styles.image}>
-                            <EvilIcons name='close-o' size={30} style={{ position : 'absolute', right : -10,top:-10}} onPress={()=>this.setState({prenAvata:null})}/>
+                            <EvilIcons name='close-o' size={30} style={{ position : 'absolute', right : -10, top : -10 }} onPress={() => this.setState({ prenAvata : null })}/>
                         </ImageBackground>
                     </TouchableOpacity>
                 </Row>
@@ -268,12 +260,10 @@ export default class exploreScreen extends PureComponent {
 
                     <TouchableOpacity onPress={() => this.previewImg()}>
                         <ImageBackground source={this.state.avatarSource} style={styles.image}>
-                            <EvilIcons name='close-o' size={30} style={{ position : 'absolute', right : -3}} onPress={()=>this.setState({avatarSource:null})}/>
+                            <EvilIcons name='close-o' size={30} style={{ position : 'absolute', right : -3 }} onPress={() => this.setState({ avatarSource : null })}/>
                         </ImageBackground>
                     </TouchableOpacity>
                 </Row>
-
-
             )
         }
     }
@@ -331,7 +321,7 @@ export default class exploreScreen extends PureComponent {
                         value={this.state.text}
                         onChangeText={this._onChang}/>
 
-                     {this.avatarSource()}
+                    {this.avatarSource()}
 
                     <TextInput
                         style={styles.inputStyle}

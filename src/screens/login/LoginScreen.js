@@ -32,19 +32,25 @@ import {
 import gStyles from "../../common/globalStyles"
 import common from "../../common/common"
 
-
+import WebIM from '../../Lib/WebIM'
 import service from "../../common/service"
+import LoadingView from "../../commonComponents/LoadingView";
+import StorageUtil from "../../common/Storage";
+import { nisEmpty } from "../../commonComponents/CommonUtil";
 
 export default class LoginScreen extends Component {
 
     constructor(props) {
         super(props);
 
+
         this.state = {
             email: '', //504822765@qq.com
             password: '',
             loading: false,
             isSentVerify: true,
+            showProgress: false,
+            avatar: ''
         };
 
     }
@@ -99,9 +105,9 @@ export default class LoginScreen extends Component {
 
     doLogin() {
 
-        this.props.navigation.reset([NavigationActions.navigate({routeName: 'App'})], 0);
-
-        return ;
+        // this.props.navigation.reset([NavigationActions.navigate({routeName: 'App'})], 0);
+        //
+        // return ;
 
 
         Keyboard.dismiss()
@@ -112,10 +118,10 @@ export default class LoginScreen extends Component {
             common.toast("請輸入郵件！")
             return;
         }
-        if (!common.validateEmail(this.state.email)) {
-            common.toast("郵件格式不正確！")
-            return;
-        }
+        // if (!common.validateEmail(this.state.email)) {
+        //     common.toast("郵件格式不正確！")
+        //     return;
+        // }
 
         if (this.state.password == '') {
             common.toast("請輸入密碼！")
@@ -128,39 +134,116 @@ export default class LoginScreen extends Component {
 
         });
 
-        service.loginSystem(this.state.email, this.state.password)
-            .then((wrapData) => {
-                console.log('wrapData  ')
-                console.log(wrapData)
+        let url = 'http://app.yubo725.top/login2';
+        let formData = new FormData();
+        formData.append('username', this.state.email);
+        formData.append('password', this.state.password);
+        this.setState({showProgress: true});
+        fetch(url, {method: 'POST', body: formData})
+            .then((res) => res.json())
+            .then((json) => {
+                console.log(json)
 
-                this.setState({
-                    loading: false,
+                    if (!nisEmpty(json)) {
 
-                });
+                        console.log(json.code)
+                        if (json.code === 1) {
+                            // 登录服务器成功，再登录NIM的服务器
+                            let data = json.msg;
+                            console.log(json.msg)
+                            if (data != null) {
+                                let userInfo = {
+                                    username : this.state.email,
+                                    nick : data.nick,
+                                    avatar : data.avatar
+                                };
+                                let key = 'userInfo-' + this.state.email;
+                                StorageUtil.set(key, { 'info' : userInfo });
 
-                if (wrapData.flag == "Success") {
-                    // common.toast(wrapData.msg)
-                    // DeviceEventEmitter.emit('DidLogin', true);
-                    this.start()
-                } else {
-                    common.toast(wrapData.msg)
-                }
+                                this.registerHXListener();
+                                this.loginToHX(this.state.email, this.state.password);
+                            }
+                        } else {
+                            console.log(json.msg)
 
-            }).then((items) => {
+                        }
+                    }else {
+                        common.toast('登录失败');
+                   }
 
-        }).catch((error) => {
-            console.log(error);
-
-            this.setState({
-                loading: false,
-
-            });
-
-
-        })
-
+            }).catch((e) => {
+            this.setState({showProgress: false});
+            console.log('网络请求出错: ' + e);
+        });
+        // service.loginSystem(this.state.email, this.state.password)
+        //     .then((wrapData) => {
+        //         console.log('wrapData  ')
+        //         console.log(wrapData)
+        //
+        //         this.setState({
+        //             loading: false,
+        //
+        //         });
+        //
+        //         if (wrapData.flag == "Success") {
+        //             // common.toast(wrapData.msg)
+        //             // DeviceEventEmitter.emit('DidLogin', true);
+        //             this.start()
+        //         } else {
+        //             common.toast(wrapData.msg)
+        //         }
+        //
+        //     }).then((items) => {
+        //
+        // }).catch((error) => {
+        //     console.log(error);
+        //
+        //     this.setState({
+        //         loading: false,
+        //
+        //     });
+        //
+        //
+        // })
+    }
+    loginToHX(username, password) {
+        // 登录环信聊天服务器
+        this.loginUsername = username;
+        this.loginPassword = password;
+        if (WebIM.conn.isOpened()) {
+            WebIM.conn.close('logout');
+        }
+        // 下面调用成功后，会回调SplashScreen中注册的listener
+        WebIM.conn.open({
+            apiUrl: WebIM.config.apiURL,
+            user: username,
+            pwd: password,
+            appKey: WebIM.config.appkey
+        });
     }
 
+    registerHXListener() {
+        WebIM.conn.listen({
+            // xmpp连接成功
+            onOpened: (msg) => {
+                // 登录环信服务器成功后回调这里，关闭当前页面并跳转到HomeScreen
+                common.toast('登录成功');
+                StorageUtil.set('hasLogin', {'hasLogin': true});
+                StorageUtil.set('username', {'username': this.loginUsername});
+                StorageUtil.set('password', {'password': this.loginPassword});
+                this.props.navigation.reset([NavigationActions.navigate({routeName: 'App'})], 0);
+            },
+            // 各种异常
+            onError: (error) => {
+                common.toast('登录聊天服务器出错');
+                console.log('onError: ' + JSON.stringify(error))
+            },
+            // 连接断开
+            onClosed: (msg) => {
+                // Toast.showShortCenter('与聊天服务器连接断开');
+            },
+        });
+    }
 
     render() {
         return (

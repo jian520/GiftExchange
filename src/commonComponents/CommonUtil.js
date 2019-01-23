@@ -24,6 +24,8 @@ const w2 = 750 / DEFAULT_DENSITY;
 const h2 = 1334 / DEFAULT_DENSITY;
 
 
+
+
 // iPhoneX
 const X_WIDTH = 375;
 const X_HEIGHT = 812;
@@ -33,6 +35,9 @@ export function defaultAvatar(avatar) {
     return avatar && avatar !== '0' ? {uri: avatar} : BaseImg.meImg.defaultAvatar
 }
 
+export function nisEmpty(str) {
+    return str === null || str === '' || str === undefined;
+}
 
 /**
  * 设置字体的size（单位px）

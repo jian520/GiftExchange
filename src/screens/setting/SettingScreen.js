@@ -16,8 +16,7 @@ import {
     Separator,
     ListItem,
     Switch,
-    List,
-
+    List
 } from "native-base";
 import gStyles from "../../common/globalStyles";
 import Color from "../../commonComponents/Color";
@@ -25,7 +24,7 @@ import Row from "../../commonComponents/Row";
 
 export default class SettingScreen extends Component {
 
-    // 构造
+      // 构造
       constructor(props) {
         super(props);
         // 初始状态
@@ -37,9 +36,9 @@ export default class SettingScreen extends Component {
       }
 
     clickFunc() {
-
-        Linking.openURL("app-settings:").catch(err => console.log(err));
+         Linking.openURL("app-settings:").catch(err => console.log(err));
     }
+
     render() {
         return (
             <Container >
@@ -119,8 +118,8 @@ export default class SettingScreen extends Component {
                         <Left>
                             <Text>隱私權限服務條款</Text>
                         </Left>
-                        <Right >
-                                <Icon name="arrow-forward"/>
+                         <Right>
+                               <Icon name="arrow-forward"/>
                          </Right>
                     </ListItem>
                     </List>
