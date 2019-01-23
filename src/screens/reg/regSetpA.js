@@ -284,7 +284,7 @@ export default class RegSetpA extends Component {
 
         return (
             <Container style={gStyles.cbg}>
-                <Header >
+                <Header>
                     <Left>
                         <Button transparent onPress={() => this.props.navigation.goBack()}>
                             <Icon name="arrow-back" style={{color: "#000"}}/>

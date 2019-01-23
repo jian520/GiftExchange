@@ -329,10 +329,9 @@ export default class exploreScreen extends PureComponent {
                         placeholder={'禮物想表達什麽'}
                         placeholderTextColor={Color.pickBackground} //设置提示文字的颜色
                         value={this.state.text}
-
                         onChangeText={this._onChang}/>
 
-                    {this.avatarSource()}
+                     {this.avatarSource()}
 
                     <TextInput
                         style={styles.inputStyle}

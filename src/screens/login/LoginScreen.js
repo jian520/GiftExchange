@@ -27,11 +27,12 @@ import {
     Input,
     Form, Separator, Thumbnail, View, Text, Spinner
 } from "native-base";
-import styles from "./styles";
+
+
 import gStyles from "../../common/globalStyles"
 import common from "../../common/common"
 
-// const cover = require("../../../assets/login-icon.png");
+
 import service from "../../common/service"
 
 export default class LoginScreen extends Component {
