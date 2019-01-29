@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import {} from 'react-native';
+import {
+    Linking,
+} from "react-native";
 import {
     Container,
     Header,
@@ -22,7 +24,7 @@ import Row from "../../commonComponents/Row";
 
 export default class SettingScreen extends Component {
 
-    // 构造
+      // 构造
       constructor(props) {
         super(props);
         // 初始状态
@@ -33,6 +35,9 @@ export default class SettingScreen extends Component {
         };
       }
 
+    clickFunc() {
+         Linking.openURL("app-settings:").catch(err => console.log(err));
+    }
 
     render() {
         return (
@@ -53,8 +58,8 @@ export default class SettingScreen extends Component {
                     <Separator bordered>
                         <Text >賬號</Text>
                     </Separator>
-                    <List style={{backgroundColor:Color.white}}>
-                    <ListItem>
+                    <List style={{backgroundColor:Color.white}} >
+                    <ListItem  >
                         <Left>
                             <Text>活躍</Text>
                         </Left>
@@ -76,7 +81,9 @@ export default class SettingScreen extends Component {
                             <Text>每日中午提示</Text>
                         </Left>
                         <Right>
-                            <Switch value={this.state.notice} onChange={()=>{this.setState({notice:this.state.notice = !this.state.notice})}}/>
+                            <Switch value={this.state.notice}   onChange={()=>{
+                                this.clickFunc();
+                                this.setState({notice:this.state.notice = !this.state.notice})}} />
                         </Right>
                     </ListItem>
                     </List>
@@ -111,8 +118,8 @@ export default class SettingScreen extends Component {
                         <Left>
                             <Text>隱私權限服務條款</Text>
                         </Left>
-                        <Right >
-                                <Icon name="arrow-forward"/>
+                         <Right>
+                               <Icon name="arrow-forward"/>
                          </Right>
                     </ListItem>
                     </List>

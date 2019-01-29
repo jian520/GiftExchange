@@ -1,150 +1,53 @@
-'use strict'
+import {AsyncStorage} from 'react-native';
 
-import {
-    AsyncStorage
-} from 'react-native'
-
-export default class Storage {
-
-    constructor(options: Object) {
-        const {
-            defaultExpires,
-            enableCache
-        } = options
-        //过期时间（单位毫秒），默认一天
-        this.defaultExpires = typeof defaultExpires === 'number' ?
-            defaultExpires : 1000 * 3600 * 24
-        //是否缓存，默认开启
-        this.enableCache = enableCache !== false
-        this._prefix = 'map_'
-        //缓存对象
-        this.cache = {}
-    }
-
-    setItem(key: string, data = {}, expired = this.defaultExpires) {
-        if (typeof data !== 'object') {
-            console.warn('data must be Object');
-            return
-        }
-
-        let dataToSave = {
-            data
-        };
-
-        if (typeof expired === 'number' && expired > 0) {
-            let now = new Date().getTime()
-            dataToSave.expired = now + expired;
-        }
-        if (this.enableCache) {
-            this._setCache(key, dataToSave) //直接存内存中，无需json
-        }
-
-        dataToSave = JSON.stringify(dataToSave);
-        return AsyncStorage.setItem(this._prefix + key, dataToSave)
-    }
-
-    getItem(key: string, defaultData = null) {
-        if (this.enableCache) {
-            let data = this._getCache(key)
-            if (data && !this._isExpired(data)) {
-                return Promise.resolve(data.data)
-            }
-        }
-        return this._getStorageData(key, defaultData)
-    }
-
+export default class StorageUtil {
     /**
-     * 判断本地存储值是否为null
+     * 获取
      * @param key
-     * @param defaultData
-     * @private
+     * @returns {Promise<T>|*|Promise.<TResult>}
      */
-    _getStorageData(key: string, defaultData = null) {
-        return AsyncStorage.getItem(this._prefix + key)
-            .then(data => {
-                if (data !== null) {
-                    data = JSON.parse(data)
-                    if (!this._isExpired(data)) {
-                        if (this.enableCache) {
-                            this._setCache(key, data)
-                        }
-                        return data.data
-                    } else {
-                        this.removeItem(key)
-                    }
-                }
-                return defaultData
-            })
-    }
-
-    /**
-     * 判断值是否已经过期
-     * @param data
-     * @returns {*}
-     * @private
-     */
-    _isExpired(data: Object) {
-        return data.expired > 0 && new Date().getTime() > data.expired;
-    }
-
-    removeItem(key: string) {
-        key = this._prefix + key;
-        this.removeCache(key);
-        return AsyncStorage.removeItem(key)
-    }
-
-    removeCache(key: string) {
-        if (this.enableCache) {
-            delete this.cache[key]
-        }
-    }
-
-    multiRemove(keys: Array) {
-        return AsyncStorage.multiRemove(
-            keys.map((item) => {
-                return this._prefix + item
-            })
-        )
-    }
-
-    clear() {
-        return this.getAllKeys().then(keys => {
-            return this.multiRemove(keys)
+    static get(key, callback) {
+        AsyncStorage.getItem(key, (error, object) => {
+            callback(error, JSON.parse(object));
         })
     }
 
+
     /**
-     * 获取所有key，返回keys数组
+     * 保存
+     * @param key
+     * @param value
      * @returns {*}
      */
-    getAllKeys() {
-        return AsyncStorage.getAllKeys().then(keys => {
-            //只获取本地应用中的keys
-            keys.forEach((item, i) => {
-                if (keys[i].indexOf(this._prefix) > -1) {
-                    keys[i] = keys[i].substring(this._prefix.length)
-                }
-            });
-            return keys
-        })
+    static set(key, value, callback) {
+        return AsyncStorage.setItem(key, JSON.stringify(value), callback);
     }
 
-    multiGet() {
-        return this.getAllKeys()
-            .then(keys => {
-                keys.forEach((item, i) => {
-                    keys[i] = this._prefix + item
-                });
-                return AsyncStorage.multiGet(keys)
-            })
+
+    /**
+     * 更新
+     * @param key
+     * @param value
+     * @returns {Promise<T>|Promise.<TResult>}
+     */
+    static update(key, value) {
+        StorageUtil.set(key, value);
     }
 
-    _getCache(key: string) {
-        return this.cache[this._prefix + key]
+
+    /**
+     * 删除
+     * @param key
+     * @returns {*}
+     */
+    static delete(key) {
+        return AsyncStorage.removeItem(key);
     }
 
-    _setCache(key: string, data: Object) {
-        this.cache[this._prefix + key] = data
+    /**
+     * 清除所有Storage
+     */
+    static clear() {
+        AsyncStorage.clear();
     }
-
 }

@@ -83,12 +83,10 @@ export default class HomeScreen extends Component {
                             </Left>
 
                             <Body>
-
-                            <Text style={{...marginTB(30, 5), color: Color.white}}>年龄：32</Text>
-                            <Text style={{...paddingTB(5, 5), color: Color.white}}>性别：女性</Text>
-                            <Text style={{...paddingTB(5, 5), color: Color.white}}>地址：Hong Kong TK</Text>
-
-                            </Body>
+                                 <Text style={{...marginTB(30, 5), color: Color.white}}>年龄：32</Text>
+                                 <Text style={{...paddingTB(5, 5), color: Color.white}}>性别：女性</Text>
+                                 <Text style={{...paddingTB(5, 5), color: Color.white}}>地址：Hong Kong TK</Text>
+                           </Body>
                         </ListItem>
                     </List>
                     <List style={{backgroundColor: Color.gray, height: 80}}>
@@ -158,7 +156,7 @@ export default class HomeScreen extends Component {
                             this.setState({ slideAnimationDialog: false });
                         }}
                         visible={this.state.slideAnimationDialog}
-                        dialogAnimation={new SlideAnimation({ slideFrom: 'bottom' })}
+                        dialogAnimation={new SlideAnimation({ slideFrom: 'bottom'})}
                     >
                         <DialogContent>
                             <Column style={{height:370,backgroundColor:Color.white}}>

@@ -133,7 +133,6 @@ export default class ShoppingScreen  extends Component {
                         <Row verticalCenter style={{paddingLeft: 30}}>
                             <Text>1000</Text>
                             <Entypo name="flower" style={{color: Color.red,marginRight: 10}} size={15}/>
-
                         </Row>
                         <Right>
                             <Row  style={{borderRadius:10,backgroundColor:Color.orange,height:30,marginRight:30}}>
@@ -161,7 +160,6 @@ export default class ShoppingScreen  extends Component {
                         <Row verticalCenter style={{paddingLeft: 30}}>
                             <Text>100</Text>
                             <Entypo name="flower" style={{color: Color.red,marginRight: 10}} size={15}/>
-
                         </Row>
                         <Right>
                             <Row  style={{borderRadius:10,backgroundColor:Color.blue,height:30,marginRight:30}}>

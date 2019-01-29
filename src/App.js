@@ -33,9 +33,13 @@ import HelpScreen from "./screens/me/HelpScreen";
 import TestScreen from "./screens/home/TestScreen";
 import SettingView from './screens/setting/SettingScreen'
  
-import { storageUtil } from "./commonComponents/CommonUtil";
 
-global.storageUtil = storageUtil;
+import common from "./common/common";
+
+
+import WebIM from './Lib/WebIM'
+
+import StorageUtil from "./common/Storage";
  
 
 const HomeTab = createStackNavigator({
@@ -58,6 +62,7 @@ const MeTab = createStackNavigator({
         },
     }, {
         initialRouteName: "Me",
+    
         headerMode: "none"
     }
 );
@@ -208,7 +213,6 @@ export class StartAndTabRoot extends PureComponent {
         super()
         this.state = {
             isLogin: false,
-
         }
         StatusBar.setBarStyle('light-content')
     }
@@ -232,21 +236,18 @@ export class StartAndTabRoot extends PureComponent {
     }
 
     componentDidMount() {
-        // service.getUserFromCache()
-        //     .then((user) => {
-        //
-        //         if (user.id == 0) {
-        //             this.setState({
-        //                 isLogin: false
-        //             });
-        //
-        //         } else {
-        //             this.setState({
-        //                 isLogin: true
-        //             });
-        //
-        //         }
-        //     });
+        StorageUtil.get('hasLogin', (error, object) => {
+            if (!error && object != null && object.hasLogin) {
+                // if (this._isMount) {
+                    this.setState({isLogin: object.hasLogin});
+                // }
+                // 已登录，直接登录聊天服务器
+                common.toast('自动登录中...');
+                this.autoLogin();
+            } else {
+                common.toast('未登录');
+            }
+        });
 
 
         DeviceEventEmitter.addListener('jian', (value) => {
@@ -262,6 +263,59 @@ export class StartAndTabRoot extends PureComponent {
             this.setState({isLogin: false}, () => {
                 this.forceUpdate();
             });
+        });
+    }
+    autoLogin() {
+        StorageUtil.get('username', (error, object) => {
+            if (!error && object && object.username) {
+                let username = object.username;
+                let password = '';
+                StorageUtil.get('password', (error, object) => {
+                    if (!error && object && object.password) {
+                        password = object.password;
+                        // 只有在自动登录时才注册环信的监听器
+                        this.registerHXListener();
+                        this.loginToHX(username, password);
+                    } else {
+                        common.toast('数据异常');
+                    }
+                });
+            } else {
+                common.toast('数据异常');
+            }
+        });
+    }
+
+    loginToHX(username, password) {
+        this.isAutoLogin = true;
+        if (WebIM.conn.isOpened()) {
+            WebIM.conn.close('logout');
+        }
+        WebIM.conn.open({
+            apiUrl: WebIM.config.apiURL,
+            user: username,
+            pwd: password,
+            appKey: WebIM.config.appkey
+        });
+    }
+
+
+    registerHXListener() {  // 注册环信的消息监听器，只有在自动登录时才注册
+        WebIM.conn.listen({
+            // xmpp连接成功
+            onOpened: (msg) => {
+                // 登录环信服务器成功后回调这里，关闭当前页面并跳转到HomeScreen
+                this.props.navigation.reset([NavigationActions.navigate({routeName: 'App'})], 0);
+            },
+            // 各种异常
+            onError: (error) => {
+                common.toast('登录聊天服务器出错');
+                console.log('onError: ' + JSON.stringify(error))
+            },
+            // 连接断开
+            onClosed: (msg) => {
+                // Toast.showShortCenter('与聊天服务器连接断开');
+            },
         });
     }
 
