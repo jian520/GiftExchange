@@ -69,29 +69,22 @@ export default class LoginScreen extends Component {
 
     componentWillMount() {
 
-        service.getEmail()
-            .then((email) => {
-                console.log(" email is " + email)
-
-                if (email.length != 0 ) {
-                    this.setState({
-                        email: email
-                    });
-                }
-
-            });
-
-        service.getPassword()
-            .then((password) => {
-
-                if (password.length != 0) {
-
-                    this.setState({
-                        password: password
-                    });
-                }
-
-            });
+        StorageUtil.get('username', (error, object) => {
+            if (!error && object && object.username) {
+                let username = object.username;
+                let password = '';
+                StorageUtil.get('password', (error, object) => {
+                    if (!error && object && object.password) {
+                        this.setState({email: username});
+                        this.setState({password: object.password});
+                    } else {
+                        common.toast('数据异常');
+                    }
+                });
+            } else {
+                common.toast('数据异常');
+            }
+        });
 
     }
 
@@ -146,7 +139,6 @@ export default class LoginScreen extends Component {
 
                     if (!nisEmpty(json)) {
 
-                        console.log(json.code)
                         if (json.code === 1) {
                             // 登录服务器成功，再登录NIM的服务器
                             let data = json.msg;
@@ -164,11 +156,18 @@ export default class LoginScreen extends Component {
                                 this.loginToHX(this.state.email, this.state.password);
                             }
                         } else {
-                            console.log(json.msg)
+                            common.toast(json.msg);
+                            this.setState({
+                                loading: false,
 
+                            });
                         }
                     }else {
                         common.toast('登录失败');
+                        this.setState({
+                            loading: false,
+
+                        });
                    }
 
             }).catch((e) => {

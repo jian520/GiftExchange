@@ -141,8 +141,6 @@ const AppStack = createStackNavigator({
         Tabs: {
             screen: Tabs,
         },
-
-
         WelcomeHome: {screen: WelcomeHome},
         Setting: {screen: SettingScreen},
         Profile: {screen: MeScreen},
