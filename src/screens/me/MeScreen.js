@@ -31,7 +31,7 @@ import ShareUtile from '../../native/ShareUtil'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import common from "../../common/common";
 import { NavigationActions } from "react-navigation";
-import service from "../../common/service";
+import StorageUtil from "../../common/Storage";
 
 var BUTTONS = [
     { text : "確定", icon : "american-football", iconColor : "#2c8ef4" },
@@ -50,6 +50,17 @@ export default class MeScreen extends Component {
         this.state = {
             image:null
         };
+          let key = 'userInfo-jian1';
+          StorageUtil.get(key, (error, object) => {
+              if (!error && object ) {
+                   console.log(object)
+
+              } else {
+                  common.toast('数据异常');
+              }
+          });
+
+
       }
 
 
@@ -61,7 +72,7 @@ export default class MeScreen extends Component {
     editprofile() {
         this.props.navigation.push('Editprofile')
     }
-
+    ///分享
     shareboard(){
         var list = [0,1,2,3,4]
         ShareUtile.shareboard('sssss','http://dev.umeng.com/images/tab2_1.png','http://www.umeng.com/','title',list,(code,message) =>{

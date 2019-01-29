@@ -36,10 +36,7 @@ import TestScreen from "./screens/home/TestScreen";
 import SettingView from './screens/setting/SettingScreen'
 
 import common from "./common/common";
-
-
 import WebIM from './Lib/WebIM'
-
 import StorageUtil from "./common/Storage";
 
 const HomeTab = createStackNavigator({
@@ -47,13 +44,10 @@ const HomeTab = createStackNavigator({
             screen: HomeScreen,
             headerMode: "none"
         },
-
     },
-
     {
         initialRouteName: "Home",
         headerMode: "none"
-
     }
 );
 
@@ -63,11 +57,9 @@ const MeTab = createStackNavigator({
             screen: MeScreen,
             headerMode: "none"
         },
-
     }, {
         initialRouteName: "Me",
         headerMode: "none"
-
     }
 );
 
@@ -227,6 +219,18 @@ export class StartAndTabRoot extends PureComponent {
 
 
     componentWillMount() {
+        StorageUtil.get('hasLogin', (error, object) => {
+            if (!error && object != null && object.hasLogin) {
+                // if (this._isMount) {
+                this.setState({isLogin: object.hasLogin});
+                // }
+                // 已登录，直接登录聊天服务器
+                common.toast('自动登录中...');
+                this.autoLogin();
+            } else {
+                common.toast('未登录');
+            }
+        });
 
         NetInfo.isConnected.addEventListener(
             'connectionChange',
@@ -246,18 +250,6 @@ export class StartAndTabRoot extends PureComponent {
 
 
     componentDidMount() {
-        StorageUtil.get('hasLogin', (error, object) => {
-            if (!error && object != null && object.hasLogin) {
-                // if (this._isMount) {
-                    this.setState({isLogin: object.hasLogin});
-                // }
-                // 已登录，直接登录聊天服务器
-                common.toast('自动登录中...');
-                this.autoLogin();
-            } else {
-                common.toast('未登录');
-            }
-        });
 
 
         DeviceEventEmitter.addListener('jian', (value) => {
@@ -279,6 +271,7 @@ export class StartAndTabRoot extends PureComponent {
         StorageUtil.get('username', (error, object) => {
             if (!error && object && object.username) {
                 let username = object.username;
+                console.log("object" + object.username)
                 let password = '';
                 StorageUtil.get('password', (error, object) => {
                     if (!error && object && object.password) {
@@ -338,7 +331,6 @@ export class StartAndTabRoot extends PureComponent {
             this.handleFirstConnectivityChange
         );
     }
-
 
 
     render() {
