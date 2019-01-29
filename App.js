@@ -3,7 +3,7 @@
 
 
 import React from "react";
-import Setup from "./src/boot/setup";
+import Setup from "./js/boot/setup";
 
 export default class App extends React.Component {
     render() {

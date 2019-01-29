@@ -17,7 +17,7 @@ import StartScreen from "./page/start/";
 import LoginScreen from "./page/login/LoginScreen"
 import RegScreen from "./page/reg/regSetpA"
 
-import HomeScreen from "./page/home/HomeScreen";
+import HomePage from "./page/home/HomePage";
 
 import StartA from "./page/start/StartA";
 import StartB from "./page/start/StartB";
@@ -32,7 +32,7 @@ import SettingScreen from './page/setting'
 
 const HomeTab = createStackNavigator({
         Home: {
-            screen: HomeScreen,
+            screen: HomePage,
             headerMode: "none"
         },
 
