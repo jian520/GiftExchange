@@ -266,7 +266,7 @@ class Service {
 
     getEmail() {
 
-        return AsyncStorage.getItem("email")
+        return AsyncStorage.getItem("username")
             .then((result) => {
                 if (result) {
 

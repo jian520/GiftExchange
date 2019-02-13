@@ -30,9 +30,10 @@ import Entypo from "react-native-vector-icons/Entypo";
 import ShareUtile from '../../native/ShareUtil'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import common from "../../common/common";
-import { NavigationActions } from "react-navigation";
-import service from "../../common/service";
 
+import StorageUtil from "../../common/Storage";
+import service from "../../common/service";
+import {StackActions,NavigationActions} from "react-navigation";
 var BUTTONS = [
     { text : "確定", icon : "american-football", iconColor : "#2c8ef4" },
 
@@ -50,18 +51,31 @@ export default class MeScreen extends Component {
         this.state = {
             image:null
         };
+          let key = 'userInfo-jian1';
+          StorageUtil.get(key, (error, object) => {
+              if (!error && object ) {
+                   console.log(object)
+
+              } else {
+                  common.toast('数据异常');
+              }
+          });
+
+
       }
 
 
-    logout() {
-        // service.logout()
-        this.props.navigation.reset([ NavigationActions.navigate({ routeName : 'WelcomeHome' }) ], 0);
-    }
+    // logout() {
+    //     // service.logout()
+    //
+    //     this.props.navigation.reset([NavigationActions.navigate({routeName: 'Login'})], 0);
+    //
+    // }
 
     editprofile() {
         this.props.navigation.push('Editprofile')
     }
-
+    ///分享
     shareboard(){
         var list = [0,1,2,3,4]
         ShareUtile.shareboard('sssss','http://dev.umeng.com/images/tab2_1.png','http://www.umeng.com/','title',list,(code,message) =>{
@@ -78,7 +92,6 @@ export default class MeScreen extends Component {
             <Container style={styles.container}>
                 <Header>
                     <Left/>
-
                     <Body>
                     <Title style={gStyles.textAColor}>我</Title>
                     </Body>
@@ -186,33 +199,7 @@ export default class MeScreen extends Component {
                         </ListItem>
                     </List>
 
-                    <View style={{ flex : 1, alignItems : "center", flexWrap : "wrap", marginLeft : 15, marginRight : 15, marginTop : 40 }}>
-                        <Button block style={{ backgroundColor : common.colorA }}
-                                onPress={() =>
-                                    ActionSheet.show(
-                                        {
-                                            options : BUTTONS,
-                                            cancelButtonIndex : CANCEL_INDEX,
-                                            destructiveButtonIndex : DESTRUCTIVE_INDEX,
-                                            title : "確定退出登錄？"
-                                        },
-                                        buttonIndex => {
-                                            if (buttonIndex == 0) {
 
-
-                                                //延迟多久执行(只执行一次)
-                                                // this.timer = setTimeout(()=> {
-                                                this.logout()
-                                                // }, 1000);
-
-                                            }
-                                        }
-                                    )}
-
-                        >
-                            <Text>退出登錄</Text>
-                        </Button>
-                    </View>
                 </Content>
             </Container>
         );
